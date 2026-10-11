@@ -6,6 +6,24 @@
 <meta name="theme-color" content="#332922">
 <title id="pageTitle">AMO | شنط نسائية</title>
 
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'AMO BAGS Pixel');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=AMO BAGS Pixel&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <!-- وسوم معاينة الرابط للواتساب ومواقع التواصل -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="AMO | شنط نسائية أنيقة">
@@ -902,6 +920,17 @@ function openProductDetails(id){
   renderProductDetails();
   document.getElementById("productModal").classList.add("show");
   document.body.classList.add("lock");
+
+  // تتبع فتح المنتج على فيسبوك بكسل
+  if(typeof fbq === 'function') {
+    fbq('track', 'ViewContent', {
+      content_name: p.name,
+      content_ids: [p.id],
+      content_type: 'product',
+      value: Number(p.price),
+      currency: 'JOD'
+    });
+  }
 }
 
 function navigateProduct(direction) {
@@ -999,6 +1028,18 @@ function addProductLine(p, color, size){
       image: color?.image || p.image, colorName, size, quantity:1
     });
   }
+
+  // تتبع إضافة المنتج إلى السلة على فيسبوك بكسل
+  if(typeof fbq === 'function') {
+    fbq('track', 'AddToCart', {
+      content_name: p.name,
+      content_ids: [p.id],
+      content_type: 'product',
+      value: Number(p.price),
+      currency: 'JOD'
+    });
+  }
+
   saveCart(); renderCart(); openCart();
 }
 
@@ -1172,6 +1213,16 @@ function reviewOrder(){
   const total = productsTotal();
   const d = delivery();
   const finalTotal = (total+d).toFixed(2);
+
+  // تتبع عملية الشراء Purchase في فيسبوك بكسل
+  if(typeof fbq === 'function') {
+    fbq('track', 'Purchase', {
+      value: Number(finalTotal),
+      currency: 'JOD',
+      content_type: 'product',
+      contents: cart.map(x => ({ id: x.productId, quantity: x.quantity }))
+    });
+  }
 
   // نص الواتساب
   const itemsText = cart.map(x => `• ${x.name}${x.colorName ? ` [اللون: ${x.colorName}]` : ""} (×${x.quantity}) - ${(x.price*x.quantity).toFixed(2)} د.أ`).join("\n");
