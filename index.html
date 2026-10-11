@@ -16,11 +16,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', 'AMO BAGS Pixel');
+fbq('init', '2844053165988012');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=AMO BAGS Pixel&ev=PageView&noscript=1"
+src="https://www.facebook.com/tr?id=2844053165988012&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
@@ -801,6 +801,9 @@ async function loadProducts(){
 
     renderProducts();
     renderCart();
+
+    // التحقق إذا كان الرابط يحتوي على موديل محدد عند التحميل الأول
+    checkUrlForProduct();
   }catch(error){
     grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;padding:35px">تعذر تحميل المنتجات.</p>`;
   }
@@ -912,7 +915,7 @@ function selectCardColor(id,index){
   if(main){ main.src = p.colors[index].image || p.image; }
 }
 
-function openProductDetails(id){
+function openProductDetails(id, updateHistory = true){
   const p = products.find(x=>x.id===id);
   if(!p) return;
   detailProductId = id;
@@ -921,7 +924,11 @@ function openProductDetails(id){
   document.getElementById("productModal").classList.add("show");
   document.body.classList.add("lock");
 
-  // تتبع فتح المنتج على فيسبوك بكسل
+  // تحديث رابط المتصفح ليكون خاصاً بهذا الموديل فقط
+  if(updateHistory){
+    history.pushState({productId: id}, "", `#product=${id}`);
+  }
+
   if(typeof fbq === 'function') {
     fbq('track', 'ViewContent', {
       content_name: p.name,
@@ -941,13 +948,39 @@ function navigateProduct(direction) {
   let newIndex = currentIndex + direction;
   if(newIndex < 0) newIndex = filtered.length - 1;
   if(newIndex >= filtered.length) newIndex = 0;
-  openProductDetails(filtered[newIndex].id);
+  openProductDetails(filtered[newIndex].id, true);
 }
 
-function closeProductDetails(){
+function closeProductDetails(updateHistory = true){
   document.getElementById("productModal").classList.remove("show");
   document.body.classList.remove("lock");
   detailProductId = null;
+  
+  // إعادة الرابط للوضع الطبيعي بدون موديل عند الإغلاق
+  if(updateHistory && location.hash.startsWith('#product=')){
+    history.pushState({}, "", location.pathname + location.search);
+  }
+}
+
+// الاستماع لزر الرجوع والتقدم في المتصفح
+window.addEventListener('popstate', () => {
+  const hash = location.hash;
+  if (hash.startsWith('#product=')) {
+    const id = hash.replace('#product=', '');
+    if (products.length > 0) {
+      openProductDetails(id, false);
+    }
+  } else {
+    closeProductDetails(false);
+  }
+});
+
+function checkUrlForProduct() {
+  const hash = location.hash;
+  if (hash.startsWith('#product=')) {
+    const id = hash.replace('#product=', '');
+    openProductDetails(id, false);
+  }
 }
 
 function renderProductDetails(){
@@ -958,7 +991,7 @@ function renderProductDetails(){
   const selectedImage = gallery[0] || p.image;
 
   document.getElementById("productBox").innerHTML = `
-    <button class="close" onclick="closeProductDetails()">×</button>
+    <button class="close" onclick="closeProductDetails(true)">×</button>
     <button class="modal-nav-btn modal-nav-prev" onclick="navigateProduct(-1)" title="الموديل السابق">‹</button>
     <button class="modal-nav-btn modal-nav-next" onclick="navigateProduct(1)" title="الموديل التالي">›</button>
 
@@ -1014,7 +1047,7 @@ function addDetailToCart(){
   if(!p) return;
   const color = p.colors?.[detailColorIndex] || null;
   addProductLine(p, color, "");
-  closeProductDetails();
+  closeProductDetails(true);
 }
 
 function addProductLine(p, color, size){
@@ -1029,7 +1062,6 @@ function addProductLine(p, color, size){
     });
   }
 
-  // تتبع إضافة المنتج إلى السلة على فيسبوك بكسل
   if(typeof fbq === 'function') {
     fbq('track', 'AddToCart', {
       content_name: p.name,
@@ -1149,7 +1181,7 @@ function searchProducts(){
   `).join("");
 }
 
-function openSearchProduct(id){ closeSearch(); openProductDetails(id); }
+function openSearchProduct(id){ closeSearch(); openProductDetails(id, true); }
 
 function openPreviousOrders(){ document.getElementById("ordersModal").classList.add("show"); document.body.classList.add("lock"); renderPreviousOrders(); }
 function closePreviousOrders(){ document.getElementById("ordersModal").classList.remove("show"); document.body.classList.remove("lock"); }
@@ -1214,7 +1246,6 @@ function reviewOrder(){
   const d = delivery();
   const finalTotal = (total+d).toFixed(2);
 
-  // تتبع عملية الشراء Purchase في فيسبوك بكسل
   if(typeof fbq === 'function') {
     fbq('track', 'Purchase', {
       value: Number(finalTotal),
@@ -1224,15 +1255,12 @@ function reviewOrder(){
     });
   }
 
-  // نص الواتساب
   const itemsText = cart.map(x => `• ${x.name}${x.colorName ? ` [اللون: ${x.colorName}]` : ""} (×${x.quantity}) - ${(x.price*x.quantity).toFixed(2)} د.أ`).join("\n");
 
   let msg = `🛍️ طلب جديد من متجر AMO\n\n👤 الاسم: ${c.name}\n📱 الهاتف: ${c.phone}\n📍 المحافظة: ${c.city}\n🏠 العنوان: ${c.address}\n📝 ملاحظات: ${c.notes || 'لا يوجد'}\n\nالمنتجات المطلوبة:\n${itemsText}\n\nمجموع المنتجات: ${total.toFixed(2)} د.أ\nالتوصيل: ${d === 0 ? 'مجاني' : d.toFixed(2) + ' د.أ'}\nالمجموع النهائي: ${finalTotal} د.أ`;
 
-  // 1. فتح تطبيق الواتساب برسالة الطلب
   window.open(`https://wa.me/${WHATSAPP}?text=` + encodeURIComponent(msg), '_blank');
   
-  // 2. جدول HTML للمنتجات يضم الصور والتفاصيل للإيميل
   const itemsHtml = cart.map(x => `
     <div style="display: flex; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 10px; font-family: Tajawal, Arial, sans-serif;">
       <img src="${x.image}" alt="${x.name}" style="width: 60px; height: 70px; object-fit: cover; border-radius: 8px; margin-left: 12px; border: 1px solid #ddd;" />
@@ -1256,7 +1284,6 @@ function reviewOrder(){
     total_amount: finalTotal
   };
 
-  // 3. إرسال الإيميل عبر EmailJS
   emailjs.send("service_hc4panu", "template_9a1dmfw", templateParams)
     .then(function(response) {
        console.log("SUCCESS. Email sent to " + TARGET_EMAIL);
