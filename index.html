@@ -924,7 +924,6 @@ function openProductDetails(id, updateHistory = true){
   document.getElementById("productModal").classList.add("show");
   document.body.classList.add("lock");
 
-  // تحديث رابط المتصفح ليكون خاصاً بهذا الموديل فقط
   if(updateHistory){
     history.pushState({productId: id}, "", `#product=${id}`);
   }
@@ -956,13 +955,11 @@ function closeProductDetails(updateHistory = true){
   document.body.classList.remove("lock");
   detailProductId = null;
   
-  // إعادة الرابط للوضع الطبيعي بدون موديل عند الإغلاق
   if(updateHistory && location.hash.startsWith('#product=')){
     history.pushState({}, "", location.pathname + location.search);
   }
 }
 
-// الاستماع لزر الرجوع والتقدم في المتصفح
 window.addEventListener('popstate', () => {
   const hash = location.hash;
   if (hash.startsWith('#product=')) {
@@ -1246,8 +1243,9 @@ function reviewOrder(){
   const d = delivery();
   const finalTotal = (total+d).toFixed(2);
 
+  // تم تحديث الحدث هنا إلى InitiateCheckout ليكون التتبع دقيقاً
   if(typeof fbq === 'function') {
-    fbq('track', 'Purchase', {
+    fbq('track', 'InitiateCheckout', {
       value: Number(finalTotal),
       currency: 'JOD',
       content_type: 'product',
