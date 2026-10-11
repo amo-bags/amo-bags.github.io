@@ -928,6 +928,7 @@ function openProductDetails(id, updateHistory = true){
     history.pushState({productId: id}, "", `#product=${id}`);
   }
 
+  // تتبع مشاهدة المنتج في البيكسل
   if(typeof fbq === 'function') {
     fbq('track', 'ViewContent', {
       content_name: p.name,
@@ -1059,6 +1060,7 @@ function addProductLine(p, color, size){
     });
   }
 
+  // تتبع حدث الإضافة للسلة في البيكسل
   if(typeof fbq === 'function') {
     fbq('track', 'AddToCart', {
       content_name: p.name,
@@ -1243,7 +1245,7 @@ function reviewOrder(){
   const d = delivery();
   const finalTotal = (total+d).toFixed(2);
 
-  // تم تحديث الحدث هنا إلى InitiateCheckout ليكون التتبع دقيقاً
+  // تتبع حدث بدء الشراء / الدفع
   if(typeof fbq === 'function') {
     fbq('track', 'InitiateCheckout', {
       value: Number(finalTotal),
