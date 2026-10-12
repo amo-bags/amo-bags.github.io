@@ -720,7 +720,6 @@ function toggleSidebar() {
 }
 function toggleSublist(id) { document.getElementById(id).classList.toggle("open"); }
 
-// استبدال حلقة الـ 500 العشوائية بقراءة مصفوفة الملفات الموجودة فعلياً من ملف products-list.js
 const productIds = window.EXISTING_PRODUCT_IDS || Array.from({length: 70}, (_, i) => i + 1);
 const DYNAMIC_PRODUCT_FILES = productIds.map(i => `products-new/${i}/product.js`);
 
@@ -836,7 +835,30 @@ async function loadProducts(){
       }catch(error){ return null; }
     }));
 
-    products = loaded.filter(Boolean).sort((a, b) => Number(b.id) - Number(a.id));
+    // ترتيب المنتجات حسب الأولوية المطلوبة: 10 دنانير، ثم 15 دينار، ثم 5 دنانير، ثم المحافظ
+    // داخل كل فئة، يتم الترتيب من الأحدث للأقدم (حسب رقم الموديل ID تنازلياً)
+    products = loaded.filter(Boolean).sort((a, b) => {
+      const getPriority = (p) => {
+        const price = Number(p.price);
+        const isWallet = p.name.includes("محفظ") || p.name.includes("محافظ") || p.name.toLowerCase().includes("wallet");
+        
+        if (isWallet) return 4; // المحافظ في النهاية
+        if (price > 7.5 && price <= 12.5) return 1; // الشنط بسعر 10 دنانير أولاً
+        if (price > 12.5) return 2; // الشنط بسعر 15 دينار ثانياً
+        if (price <= 7.5) return 3; // الشنط بسعر 5 دنانير ثالثاً
+        return 5;
+      };
+
+      const pA = getPriority(a);
+      const pB = getPriority(b);
+      
+      if (pA !== pB) {
+        return pA - pB;
+      }
+      // إذا كانت نفس الفئة، رتب حسب الموديل تنازلياً (الأحدث أولاً)
+      return Number(b.id) - Number(a.id);
+    });
+
     if(!products.length) throw new Error("No products loaded");
 
     renderProducts();
