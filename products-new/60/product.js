@@ -4,11 +4,11 @@ const product = {
   price: 10,
   size: "وسط",
   dimensions: "23 سم عرض × 20 سم ارتفاع",
-  image: "1764848990161.jpg",
+  image: "60black.jpg",
   gallery: [
-    "1764848990161.jpg",
     "60black.jpg",
-    "60green.png"
+    "60green.png",
+    "1764848990161.jpg"
   ],
   colors: [
     {
@@ -23,4 +23,3 @@ const product = {
     }
   ]
 };
-
