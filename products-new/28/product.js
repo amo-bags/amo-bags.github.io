@@ -52,6 +52,7 @@ const product = {
     "https://amo-bags.github.io/products-new/28/285.png",
     "https://amo-bags.github.io/products-new/28/284.png",
     "https://amo-bags.github.io/products-new/28/280.png",
+   "https://amo-bags.github.io/products-new/28/287.png",
     "https://amo-bags.github.io/products-new/28/286.png",
     "https://amo-bags.github.io/products-new/28/28.png"
   ]
