@@ -42,6 +42,9 @@ src="https://www.facebook.com/tr?id=2844053165988012&ev=PageView&noscript=1"
    })();
 </script>
 
+<!-- استدعاء ملف الأرقام الخارجي لتحسين السرعة -->
+<script src="products-list.js"></script>
+
 <style>
 :root {
   --brand-color: #332922; 
@@ -717,8 +720,10 @@ function toggleSidebar() {
 }
 function toggleSublist(id) { document.getElementById(id).classList.toggle("open"); }
 
-const DYNAMIC_PRODUCT_FILES = [];
-for(let i = 1; i <= 500; i++) { DYNAMIC_PRODUCT_FILES.push(`products-new/${i}/product.js`); }
+// استبدال حلقة الـ 500 العشوائية بقراءة مصفوفة الملفات الموجودة فعلياً من ملف products-list.js
+const productIds = window.EXISTING_PRODUCT_IDS || Array.from({length: 70}, (_, i) => i + 1);
+const DYNAMIC_PRODUCT_FILES = productIds.map(i => `products-new/${i}/product.js`);
+
 window.AMO_PRODUCTS = window.AMO_PRODUCTS || [];
 
 const WHATSAPP = "962790780914";
