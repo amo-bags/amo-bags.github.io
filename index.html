@@ -24,7 +24,7 @@ src="https://www.facebook.com/tr?id=2844053165988012&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
-<!-- وسوم معاينة الرابط للواتساب ومواقع التواصل (تشير لصورة الشعار في مجلد logo) -->
+<!-- وسوم معاينة الرابط للواتساب ومواقع التواصل -->
 <meta property="og:type" content="website">
 <meta property="og:title" id="ogTitle" content="AMO | شنط نسائية أنيقة">
 <meta property="og:description" id="ogDesc" content="تشكيلة مميزة من أحدث الحقائب النسائية - توصيل سريع لجميع المحافظات">
@@ -449,11 +449,12 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
     <button class="close" onclick="toggleSidebar()">×</button>
   </div>
   <div class="sidebar-body">
+    <!-- قسم التصنيف حسب الحجم -->
     <div class="menu-category-item">
-      <div class="menu-category-header" onclick="toggleSublist('catList')">
-        <span>SHOP BY SIZE</span> <span>+</span>
+      <div class="menu-category-header" onclick="toggleSublist('sizeList')">
+        <span>SHOP BY SIZE / الأحجام</span> <span>+</span>
       </div>
-      <div class="menu-sublist open" id="catList">
+      <div class="menu-sublist open" id="sizeList">
         <a class="menu-subitem" onclick="changeCategory('all'); toggleSidebar();">جميع الموديلات / All</a>
         <a class="menu-subitem" onclick="changeCategory('small'); toggleSidebar();">صغير / Small</a>
         <a class="menu-subitem" onclick="changeCategory('medium'); toggleSidebar();">وسط / Medium</a>
@@ -461,6 +462,20 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
         <a class="menu-subitem" onclick="changeCategory('between'); toggleSidebar();">بين الوسط والصغير</a>
       </div>
     </div>
+
+    <!-- قسم التصنيف حسب السعر والتوع -->
+    <div class="menu-category-item">
+      <div class="menu-category-header" onclick="toggleSublist('priceList')">
+        <span>SHOP BY PRICE / الأسعار والمحافظ</span> <span>+</span>
+      </div>
+      <div class="menu-sublist" id="priceList">
+        <a class="menu-subitem" onclick="changeCategory('5'); toggleSidebar();">🛍️ حقائب بسعر 5 دنانير</a>
+        <a class="menu-subitem" onclick="changeCategory('10'); toggleSidebar();">🎒 حقائب بسعر 10 دنانير</a>
+        <a class="menu-subitem" onclick="changeCategory('15'); toggleSidebar();">👜 حقائب بسعر 15 دنانير</a>
+        <a class="menu-subitem" onclick="changeCategory('wallets'); toggleSidebar();">👛 محافظ نسائية</a>
+      </div>
+    </div>
+
     <div class="menu-category-item">
       <div class="menu-category-header" onclick="openPreviousOrders(); toggleSidebar();">
         <span>📦 طلباتي السابقة / My Orders</span>
@@ -500,14 +515,22 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   <span class="hero-note" id="heroNote">🚚 التوصيل 2 د.أ — مجاني عند 49 د.أ فأكثر</span>
 </section>
 
-<!-- شريط الأقسام حسب الأحجام -->
+<!-- شريط الأقسام (يشمل الأحجام، الأسعار والمحافظ) -->
 <div class="categories-wrap" id="products">
   <div class="categories-bar">
     <button class="cat-btn active" onclick="changeCategory('all', this)" data-cat="all">✨ جميع الموديلات</button>
+    
+    <!-- الأقسام حسب الحجم -->
     <button class="cat-btn" onclick="changeCategory('small', this)" data-cat="small">🔹 صغير</button>
     <button class="cat-btn" onclick="changeCategory('medium', this)" data-cat="medium">🔸 وسط</button>
     <button class="cat-btn" onclick="changeCategory('large', this)" data-cat="large">🔷 كبير</button>
     <button class="cat-btn" onclick="changeCategory('between', this)" data-cat="between">🔹 بين الوسط والصغير</button>
+    
+    <!-- الأقسام حسب السعر والنوع -->
+    <button class="cat-btn" onclick="changeCategory('5', this)" data-cat="5">🛍️ حقائب بسعر 5 دنانير</button>
+    <button class="cat-btn" onclick="changeCategory('10', this)" data-cat="10">🎒 حقائب بسعر 10 دنانير</button>
+    <button class="cat-btn" onclick="changeCategory('15', this)" data-cat="15">👜 حقائب بسعر 15 دنانير</button>
+    <button class="cat-btn" onclick="changeCategory('wallets', this)" data-cat="wallets">👛 محافظ نسائية</button>
   </div>
 </div>
 
@@ -587,7 +610,7 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   <div class="modal-box">
     <button class="close" onclick="closeSearch()">×</button>
     <div class="modal-title">🔎 البحث عن شنطة</div>
-    <div class="modal-sub">ابحثي برقم الموديل، الاسم، اللون، أو الحجم...</div>
+    <div class="modal-sub">ابحثي برقم الموديل، الاسم، اللون، الحجم، أو السعر...</div>
 
     <div class="color-tags">
       <button class="color-tag-btn" onclick="filterByColorTag('أسود')">⚫ أسود / Black</button>
@@ -599,9 +622,9 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
       <button class="color-tag-btn" onclick="filterByColorTag('')" id="allColorsTag">✨ الكل</button>
     </div>
 
-    <input id="searchInput" class="search-input" type="search" placeholder="اكتبي اللون، الحجم، أو الموديل..." oninput="searchProducts()">
+    <input id="searchInput" class="search-input" type="search" placeholder="اكتبي اللون، السعر، أو الموديل..." oninput="searchProducts()">
     <div id="searchResults" class="search-results">
-      <div class="orders-empty">ابدئي بكتابة اسم، رقم الموديل، اللون، أو الحجم...</div>
+      <div class="orders-empty">ابدئي بكتابة اسم، رقم الموديل، اللون، أو السعر...</div>
     </div>
   </div>
 </div>
@@ -820,13 +843,29 @@ async function loadProducts(){
 
 function getFilteredProducts() {
   if (currentCategory === 'all') return products;
+
   return products.filter(p => {
     const size = (p.size || "").toLowerCase();
+    const isWallet = p.name.includes("محفظ") || p.name.includes("محافظ") || p.name.toLowerCase().includes("wallet");
+    const price = Number(p.price);
+
+    // تصفية حسب الأحجام
     if (currentCategory === 'between') return size.includes('بين');
     if (currentCategory === 'small') return size.includes('صغير') && !size.includes('بين');
     if (currentCategory === 'medium') return size.includes('وسط') && !size.includes('بين');
     if (currentCategory === 'large') return size.includes('كبير');
-    return true;
+
+    // تصفية حسب المحافظ
+    if (currentCategory === 'wallets') return isWallet;
+
+    // تصفية حسب الأسعار (حقائب)
+    if (!isWallet) {
+      if (currentCategory === '5' && price <= 7.5) return true;
+      if (currentCategory === '10' && price > 7.5 && price <= 12.5) return true;
+      if (currentCategory === '15' && price > 12.5) return true;
+    }
+
+    return false;
   });
 }
 
@@ -1158,7 +1197,7 @@ function searchProducts(){
   const rawQuery = input.value.trim().toLowerCase();
 
   if(!rawQuery){ 
-    results.innerHTML = `<div class="orders-empty">ابدئي بكتابة اسم، رقم الموديل، اللون، أو الحجم...</div>`; 
+    results.innerHTML = `<div class="orders-empty">ابدئي بكتابة اسم، رقم الموديل، اللون، أو السعر...</div>`; 
     return; 
   }
 
