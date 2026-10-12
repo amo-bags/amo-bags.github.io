@@ -835,17 +835,15 @@ async function loadProducts(){
       }catch(error){ return null; }
     }));
 
-    // ترتيب المنتجات حسب الأولوية المطلوبة: 10 دنانير، ثم 15 دينار، ثم 5 دنانير، ثم المحافظ
-    // داخل كل فئة، يتم الترتيب من الأحدث للأقدم (حسب رقم الموديل ID تنازلياً)
     products = loaded.filter(Boolean).sort((a, b) => {
       const getPriority = (p) => {
         const price = Number(p.price);
         const isWallet = p.name.includes("محفظ") || p.name.includes("محافظ") || p.name.toLowerCase().includes("wallet");
         
-        if (isWallet) return 4; // المحافظ في النهاية
-        if (price > 7.5 && price <= 12.5) return 1; // الشنط بسعر 10 دنانير أولاً
-        if (price > 12.5) return 2; // الشنط بسعر 15 دينار ثانياً
-        if (price <= 7.5) return 3; // الشنط بسعر 5 دنانير ثالثاً
+        if (isWallet) return 4;
+        if (price > 7.5 && price <= 12.5) return 1;
+        if (price > 12.5) return 2;
+        if (price <= 7.5) return 3;
         return 5;
       };
 
@@ -855,7 +853,6 @@ async function loadProducts(){
       if (pA !== pB) {
         return pA - pB;
       }
-      // إذا كانت نفس الفئة، رتب حسب الموديل تنازلياً (الأحدث أولاً)
       return Number(b.id) - Number(a.id);
     });
 
@@ -863,7 +860,7 @@ async function loadProducts(){
 
     renderProducts();
     renderCart();
-    checkUrlForProduct();
+    checkUrlForCategoryAndProduct();
   }catch(error){
     grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;padding:35px">تعذر تحميل المنتجات.</p>`;
   }
@@ -877,16 +874,13 @@ function getFilteredProducts() {
     const isWallet = p.name.includes("محفظ") || p.name.includes("محافظ") || p.name.toLowerCase().includes("wallet");
     const price = Number(p.price);
 
-    // تصفية حسب الأحجام
     if (currentCategory === 'between') return size.includes('بين');
     if (currentCategory === 'small') return size.includes('صغير') && !size.includes('بين');
     if (currentCategory === 'medium') return size.includes('وسط') && !size.includes('بين');
     if (currentCategory === 'large') return size.includes('كبير');
 
-    // تصفية حسب المحافظ
     if (currentCategory === 'wallets') return isWallet;
 
-    // تصفية حسب الأسعار (حقائب)
     if (!isWallet) {
       if (currentCategory === '5' && price <= 7.5) return true;
       if (currentCategory === '10' && price > 7.5 && price <= 12.5) return true;
@@ -899,12 +893,19 @@ function getFilteredProducts() {
 
 function changeCategory(cat, btnElement) {
   currentCategory = cat;
-  if(btnElement){
+  const targetBtn = btnElement || document.querySelector(`.cat-btn[data-cat="${cat}"]`);
+  if(targetBtn){
     document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-    btnElement.classList.add('active');
+    targetBtn.classList.add('active');
   }
   renderProducts();
   document.getElementById('products').scrollIntoView({behavior:'smooth'});
+
+  if (cat === 'all') {
+    history.pushState({}, "", location.pathname + location.search);
+  } else {
+    history.pushState({category: cat}, "", `#category=${cat}`);
+  }
 }
 
 function getGallery(p,colorIndex=null){
@@ -1051,16 +1052,23 @@ window.addEventListener('popstate', () => {
     if (products.length > 0) {
       openProductDetails(id, false);
     }
+  } else if (hash.startsWith('#category=')) {
+    const cat = hash.replace('#category=', '');
+    changeCategory(cat);
   } else {
     closeProductDetails(false);
+    changeCategory('all');
   }
 });
 
-function checkUrlForProduct() {
+function checkUrlForCategoryAndProduct() {
   const hash = location.hash;
   if (hash.startsWith('#product=')) {
     const id = hash.replace('#product=', '');
     openProductDetails(id, false);
+  } else if (hash.startsWith('#category=')) {
+    const cat = hash.replace('#category=', '');
+    changeCategory(cat);
   }
 }
 
