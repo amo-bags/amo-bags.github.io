@@ -1,34 +1,22 @@
 const product = {
   id: "30",
-  name: "شنطة AMO #30",
+  name: "شنطة نسائية - موديل 30",
   price: 10,
-
   size: "وسط",
-  dimensions: "30 سم عرض × 20 سم ارتفاع",
-
-  image: "https://amo-bags.github.io/products-new/30/camil30.png",
-  
+  dimensions: "",
+  image: "balck30.png",
   colors: [
-    {
-      name: "عسلي",
-      value: "#A96852",
-      image: "https://amo-bags.github.io/products-new/30/camil30.png"
-    },
-    {
-      name: "أسود",
-      value: "#171717",
-      image: "https://amo-bags.github.io/products-new/30/balck30.png"
-    },
-    {
-      name: "أوفوايت",
-      value: "#F5F2EB",
-      image: "https://amo-bags.github.io/products-new/30/offwhite30.png"
-    }
+    { name: "أسود", colorName: "أسود", value: "#000000", image: "balck30.png" },
+    { name: "عسلي", colorName: "عسلي", value: "#c5a059", image: "camil30.png" },
+    { name: "أوف وايت", colorName: "أوف وايت", value: "#fefefa", image: "offwhite30.png" }
   ],
-
   gallery: [
-    "https://amo-bags.github.io/products-new/30/camil30.png",
-    "https://amo-bags.github.io/products-new/30/balck30.png",
-    "https://amo-bags.github.io/products-new/30/offwhite30.png"
+    "balck30.png",
+    "camil30.png",
+    "offwhite30.png",
+    "30inside.jpg"
   ]
 };
+
+window.AMO_PRODUCTS = window.AMO_PRODUCTS || [];
+window.AMO_PRODUCTS.push(product);
