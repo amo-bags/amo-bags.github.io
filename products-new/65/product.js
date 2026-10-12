@@ -1,18 +1,23 @@
 const product = {
-  id: 65,
-  price: 5, // السعر 5 دنانير
+  id: "65",
+  name: "حقيبة نسائية أنيقة - موديل 65",
+  price: 5,
   size: "وسط",
-  dimensions: {
-    width: "28 سم",
-    height: "25 سم"
-  },
-  color: "نهدي",
-  colorCode: "#9b59b6", // كود اللون النهدي (يمكن تعديله حسب الدرجة المطلوبة)
-  images: {
-    inside: "65inside.jpg",
-    main: "65nude.png" // ملاحظة: اسم الملف في مستودعك يحتوي على كلمة nude، تأكد من مطابقته لاسم الصورة الفعلية
-  }
+  dimensions: "28 سم عرض × 25 سم ارتفاع",
+  image: "65nude.png",
+  gallery: [
+    "65nude.png",
+    "65inside.jpg"
+  ],
+  colors: [
+    {
+      name: "نهدي",
+      colorName: "نهدي",
+      value: "#9b59b6",
+      image: "65nude.png"
+    }
+  ]
 };
 
-export default product;
-
+window.AMO_PRODUCTS = window.AMO_PRODUCTS || [];
+window.AMO_PRODUCTS.push(product);
