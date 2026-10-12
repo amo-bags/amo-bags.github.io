@@ -5,7 +5,6 @@ const product = {
   size: "وسط (عرض 30 سم × ارتفاع 20 سم)",
   dimensions: "30 سم × 20 سم",
   image: "31camil.png",
-  video: "31vedio720.mp4",
   colors: [
     { name: "عسلي", colorName: "عسلي", value: "#c5a059", image: "31camil.png" },
     { name: "أسود", colorName: "أسود", value: "#000000", image: "31black.png" },
