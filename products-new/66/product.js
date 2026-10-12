@@ -1,18 +1,23 @@
-
 const product = {
-  id: 66,
-  price: 5, // السعر 5 دنانير
+  id: "66",
+  name: "حقيبة نسائية أنيقة - موديل 66",
+  price: 5,
   size: "وسط",
-  dimensions: {
-    width: "30 سم",
-    height: "20 سم"
-  },
-  color: "أسود",
-  colorCode: "#000000", // كود اللون الأسود
-  images: {
-    inside: "66inside.jpg",
-    main: "66black.png"
-  }
+  dimensions: "30 سم عرض × 20 سم ارتفاع",
+  image: "66black.png",
+  gallery: [
+    "66black.png",
+    "66inside.jpg"
+  ],
+  colors: [
+    {
+      name: "أسود",
+      colorName: "أسود",
+      value: "#000000",
+      image: "66black.png"
+    }
+  ]
 };
 
-export default product;
+window.AMO_PRODUCTS = window.AMO_PRODUCTS || [];
+window.AMO_PRODUCTS.push(product);
