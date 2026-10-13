@@ -420,11 +420,6 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   width:100%;border:0;background:var(--brand-color);color:#fff;padding:14px;
   border-radius:12px;margin-top:12px;font-weight:900;font-size:15px;
 }
-.share-btn{
-  width:100%;border:1px solid var(--brand-color);background:#fff;color:var(--brand-color);padding:12px;
-  border-radius:12px;margin-top:14px;font-weight:700;font-size:13px;transition:all .2s;
-}
-.share-btn:hover{background:#f9f8f6}
 
 .lightbox{
   position:fixed;inset:0;z-index:6000;background:rgba(0,0,0,.95); display:none;align-items:center;justify-content:center;
@@ -701,7 +696,7 @@ const translations = {
     detailsBtn: "التفاصيل",
     addCartBtn: "أضف للسلة 🛒",
     noProductsInSection: "لا توجد منتجات في هذا القسم حالياً.",
-    copyLinkBtn: "📋 نسخ رابط المنتج للواتساب (مع الصورة)"
+    linkBoxTitle: "رابط المنتج (انقر للنسخ والتحديد تلقائياً):"
   },
   en: {
     pageTitle: "AMO | Women's Bags",
@@ -731,7 +726,7 @@ const translations = {
     detailsBtn: "Details",
     addCartBtn: "Add to Cart 🛒",
     noProductsInSection: "No products in this category right now.",
-    copyLinkBtn: "📋 Copy WhatsApp Link (With Image)"
+    linkBoxTitle: "Product Link (Click to select & copy):"
   }
 };
 
@@ -1117,8 +1112,8 @@ function renderProductDetails(){
   const gallery = getGallery(p, colors.length ? detailColorIndex : null);
   const selectedImage = gallery[0] || p.image;
 
-  // رابط المعاينة الثابت المخصص للواتساب لتوليد المعاينة بنجاح
-  const shareUrl = `https://amo-bags.github.io/product/${p.id}/`;
+  // رابط المعاينة المباشر والصحيح المنشور عبر GitHub Pages لتفادي خطأ 404
+  const shareUrl = `https://amo-bags.github.io/product/${p.id}/index.html`;
 
   let videoHtml = "";
   if(p.video) {
@@ -1159,36 +1154,15 @@ function renderProductDetails(){
         </div>
       ` : ""}
 
-      <!-- زر نسخ رابط الواتساب الجاهز مع معاينة الصور -->
-      <button class="share-btn" onclick="copyProductShareLink('${shareUrl}')">
-        ${t("copyLinkBtn")}
-      </button>
+      <!-- مربع نصي مدمج داخل الصفحة لنسخ الرابط مباشرة دون أزرار معقدة -->
+      <div style="margin-top:14px;">
+        <div class="option-title">${t("linkBoxTitle")}</div>
+        <input type="text" readonly value="${shareUrl}" onclick="this.select(); document.execCommand('copy'); alert(currentLang==='ar'?'تم نسخ الرابط تلقائياً!':'Link copied automatically!');" style="width:100%; padding:10px 12px; border:1px solid var(--border-color); border-radius:10px; background:#f9f8f6; font-size:12px; color:var(--text-main); text-align:left; direction:ltr; cursor:pointer;" title="انقر لنسخ الرابط">
+      </div>
 
       <button class="detail-add" onclick="addDetailToCart()">${t("addDetailCart")}</button>
     </div>
   `;
-}
-
-function copyProductShareLink(url) {
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(url).then(() => {
-      alert(currentLang === 'ar' ? "تم نسخ رابط المنتج الجاهز للواتساب!" : "Product WhatsApp link copied!");
-    }).catch(() => {
-      fallbackCopy(url);
-    });
-  } else {
-    fallbackCopy(url);
-  }
-}
-
-function fallbackCopy(url) {
-  const tempInput = document.createElement("input");
-  tempInput.value = url;
-  document.body.appendChild(tempInput);
-  tempInput.select();
-  document.execCommand("copy");
-  document.body.removeChild(tempInput);
-  alert(currentLang === 'ar' ? "تم نسخ رابط المنتج الجاهز للواتساب!" : "Product WhatsApp link copied!");
 }
 
 function changeDetailImage(index){
