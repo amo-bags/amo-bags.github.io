@@ -75,7 +75,7 @@ button,input,textarea,select{font:inherit}
 button,a{cursor:pointer}
 img{max-width:100%}
 
-/* هيدر مانجو بالكامل مع أيقونات ناعمة ونظيفة */
+/* هيدر مانجو متناسق تماماً */
 header{
   position:sticky;top:0;z-index:1000;
   background:rgba(250,249,246,.98);
@@ -138,7 +138,7 @@ header{
   cursor: pointer;
 }
 
-/* القائمة الجانبية (Sidebar Menu) */
+/* القائمة الجانبية */
 .sidebar-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 4000;
   opacity: 0; visibility: hidden; transition: all 0.3s ease; backdrop-filter: blur(3px);
@@ -235,7 +235,7 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
 
 .categories-wrap {
   position: sticky; top: 57px; z-index: 900; background: var(--bg-color);
-  padding: 14px 0; border-bottom: 1px solid var(--border-color); margin-bottom: 20px;
+  padding: 14px 0; border-bottom: 1px solid var(--border-color); margin-bottom: 0;
 }
 .categories-bar {
   display: flex; gap: 12px; overflow-x: auto; padding: 0 20px; max-width: 1200px; margin: 0 auto; scrollbar-width: none;
@@ -250,11 +250,25 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
   background: var(--brand-color); color: #fff; border-color: var(--brand-color); box-shadow: 0 4px 14px rgba(51,41,34,.15);
 }
 
-/* شريط التبديل بين أشكال العرض */
+/* جعل شريط تبديل العرض ثابتاً (Sticky) تحت الأقسام مباشرة */
 .view-switcher-bar {
+  position: sticky;
+  top: 115px;
+  z-index: 890;
+  background: rgba(250,249,246,0.95);
+  backdrop-filter: blur(8px);
+  max-width: 100%;
+  margin: 0 0 20px 0;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.view-switcher-inner {
   max-width: 1200px;
-  margin: 0 auto 18px;
-  padding: 0 20px;
+  margin: 0 auto;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -299,7 +313,7 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
 .grid.cols-2 .card-image { height: 320px; }
 .grid.cols-4 .card-image { height: 160px; border-radius: 12px; }
 
-/* تخصيص الـ 4 أعمدة في الشاشات الصغيرة لنظافة العرض كالماركات العالمية */
+/* عرض 4 أعمدة (صور فقط بدون تفاصيل مزعجة) */
 .grid.cols-4 .thumbs, 
 .grid.cols-4 .info, 
 .grid.cols-4 .image-badge {
@@ -512,7 +526,7 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </svg>
 </a>
 
-<!-- القائمة الجانبية (Sidebar) -->
+<!-- القائمة الجانبية -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 <aside class="sidebar" id="sidebarMenu">
   <div class="sidebar-header">
@@ -558,27 +572,23 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </aside>
 
-<!-- الهيدر العلوي بأيقونات متناسقة وناعمة بستايل مانجو -->
+<!-- الهيدر العلوي -->
 <header>
   <div class="header">
     <div class="header-left">
-      <!-- أيقونة السلة (حقيبة التجميع) -->
       <button class="icon-btn" onclick="openCart()" title="السلة">
         <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
         <span class="cart-badge cart-count">0</span>
       </button>
 
-      <!-- أيقونة فيسبوك -->
       <a href="https://www.facebook.com/share/1atoUpuSsz/" target="_blank" rel="noopener" class="icon-btn" title="فيسبوك">
         <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
       </a>
 
-      <!-- أيقونة طلباتي السابقة (حقيبة التسوق المصغرة/الصندوق) -->
       <button class="icon-btn" onclick="openPreviousOrders()" title="طلباتي">
         <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
       </button>
 
-      <!-- أيقونة البحث -->
       <button class="icon-btn" onclick="openSearch()" title="بحث">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       </button>
@@ -617,13 +627,15 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </div>
 
-<!-- شريط تبديل شكل العرض -->
+<!-- شريط تبديل شكل العرض الثابت (Sticky) -->
 <div class="view-switcher-bar">
-  <span style="font-size:13px; font-weight:700; color:var(--text-muted);" id="viewFormatText">طريقة العرض:</span>
-  <div class="view-switcher-btns">
-    <button class="switch-grid-btn" onclick="setGridColumns(4, this)" title="4 صور فقط">☰ 4</button>
-    <button class="switch-grid-btn active" onclick="setGridColumns(2, this)" title="عمودين">⊞ 2</button>
-    <button class="switch-grid-btn" onclick="setGridColumns(1, this)" title="صورة كبيرة - عمود واحد">🔲 1</button>
+  <div class="view-switcher-inner">
+    <span style="font-size:13px; font-weight:700; color:var(--text-muted);" id="viewFormatText">طريقة العرض:</span>
+    <div class="view-switcher-btns">
+      <button class="switch-grid-btn" onclick="setGridColumns(4, this)" title="4 صور فقط">☰ 4</button>
+      <button class="switch-grid-btn active" onclick="setGridColumns(2, this)" title="عمودين">⊞ 2</button>
+      <button class="switch-grid-btn" onclick="setGridColumns(1, this)" title="صورة كبيرة - عمود واحد">🔲 1</button>
+    </div>
   </div>
 </div>
 
