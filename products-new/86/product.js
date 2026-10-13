@@ -7,7 +7,7 @@ const product = {
   image: "86black.png",
   gallery: [
     "86black.png",
-    "86bagiwithcamil.png",
+    "86bagi.png",
     "862.png",
     "86inside.png"
   ],
@@ -22,7 +22,7 @@ const product = {
       name: "بيج مع عسلي",
       colorName: "بيج مع عسلي",
       value: "#c5a059",
-      image: "86bagiwithcamil.png"
+      image: "86bagi.png"
     }
   ]
 };
