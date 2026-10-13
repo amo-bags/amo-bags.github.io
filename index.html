@@ -294,7 +294,6 @@ footer{
 }
 .footer-fb-link:hover { text-decoration: underline; }
 
-/* تنسيق روابط السياسات في الـ Footer */
 .footer-policies {
   display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 4px 0;
 }
@@ -375,7 +374,6 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 .continue{border:1px solid var(--brand-color);background:#fff;color:var(--brand-color)}
 .review-btn{border:0;background:var(--brand-color);color:#fff}
 
-/* نافذة التفاصيل مع أزرار التنقل السريع ومشغل الفيديو */
 .modal{
   position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.6); backdrop-filter: blur(4px);
   display:none;align-items:center;justify-content:center;padding:15px;
@@ -446,7 +444,6 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 
 <body>
 
-<!-- زر الواتساب العائم شعار فقط بدون نص -->
 <a href="https://wa.me/962790780914" target="_blank" rel="noopener" class="float-whatsapp-icon" aria-label="واتساب">
   <svg viewBox="0 0 32 32">
     <path d="M16 2a13 13 0 0 0-11 20L3 29l7.2-1.9A13 13 0 1 0 16 2zm0 23.8a10.8 10.8 0 0 1-5.5-1.5l-.4-.2-4.1 1.1 1.1-4-.3-.5a10.8 10.8 0 1 1 9.2 5.1zm5.9-8.1c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a9.2 9.2 0 0 1-2.7-1.7 10.1 10.1 0 0 1-1.9-2.3c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6s0-.4 0-.5l-1-2.3c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.7.1-1 .5a4.3 4.3 0 0 0-1.3 3.2 7.5 7.5 0 0 0 1.6 4 17.2 17.2 0 0 0 6.6 5.8c2.4 1 2.9.8 3.4.8a2.9 2.9 0 0 0 1.9-1.3 2.4 2.4 0 0 0 .2-1.3c-.2-.1-1.8-1-2.1-1.1z"/>
@@ -457,45 +454,43 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 <aside class="sidebar" id="sidebarMenu">
   <div class="sidebar-header">
-    <div class="sidebar-title">Menu</div>
+    <div class="sidebar-title" id="menuTitleLabel">Menu</div>
     <button class="close" onclick="toggleSidebar()">×</button>
   </div>
   <div class="sidebar-body">
-    <!-- قسم التصنيف حسب الحجم -->
     <div class="menu-category-item">
       <div class="menu-category-header" onclick="toggleSublist('sizeList')">
-        <span>SHOP BY SIZE / الأحجام</span> <span>+</span>
+        <span id="menuSizeLabel">SHOP BY SIZE / الأحجام</span> <span>+</span>
       </div>
       <div class="menu-sublist open" id="sizeList">
-        <a class="menu-subitem" onclick="changeCategory('all'); toggleSidebar();">جميع الموديلات / All</a>
-        <a class="menu-subitem" onclick="changeCategory('small'); toggleSidebar();">صغير / Small</a>
-        <a class="menu-subitem" onclick="changeCategory('medium'); toggleSidebar();">وسط / Medium</a>
-        <a class="menu-subitem" onclick="changeCategory('large'); toggleSidebar();">كبير / Large</a>
-        <a class="menu-subitem" onclick="changeCategory('between'); toggleSidebar();">بين الوسط والصغير</a>
+        <a class="menu-subitem" onclick="changeCategory('all'); toggleSidebar();" id="menuAllSizes">جميع الموديلات / All</a>
+        <a class="menu-subitem" onclick="changeCategory('small'); toggleSidebar();" id="menuSmall">صغير / Small</a>
+        <a class="menu-subitem" onclick="changeCategory('medium'); toggleSidebar();" id="menuMedium">وسط / Medium</a>
+        <a class="menu-subitem" onclick="changeCategory('large'); toggleSidebar();" id="menuLarge">كبير / Large</a>
+        <a class="menu-subitem" onclick="changeCategory('between'); toggleSidebar();" id="menuBetween">بين الوسط والصغير</a>
       </div>
     </div>
 
-    <!-- قسم التصنيف حسب السعر والنوع -->
     <div class="menu-category-item">
       <div class="menu-category-header" onclick="toggleSublist('priceList')">
-        <span>SHOP BY PRICE / الأسعار والمحافظ</span> <span>+</span>
+        <span id="menuPriceLabel">SHOP BY PRICE / الأسعار والمحافظ</span> <span>+</span>
       </div>
       <div class="menu-sublist" id="priceList">
-        <a class="menu-subitem" onclick="changeCategory('5'); toggleSidebar();">🛍️ حقائب بسعر 5 دنانير</a>
-        <a class="menu-subitem" onclick="changeCategory('10'); toggleSidebar();">🎒 حقائب بسعر 10 دنانير</a>
-        <a class="menu-subitem" onclick="changeCategory('15'); toggleSidebar();">👜 حقائب بسعر 15 دنانير</a>
-        <a class="menu-subitem" onclick="changeCategory('wallets'); toggleSidebar();">👛 محافظ نسائية</a>
+        <a class="menu-subitem" onclick="changeCategory('5'); toggleSidebar();" id="menuP5">🛍️ حقائب بسعر 5 دنانير</a>
+        <a class="menu-subitem" onclick="changeCategory('10'); toggleSidebar();" id="menuP10">🎒 حقائب بسعر 10 دنانير</a>
+        <a class="menu-subitem" onclick="changeCategory('15'); toggleSidebar();" id="menuP15">👜 حقائب بسعر 15 دنانير</a>
+        <a class="menu-subitem" onclick="changeCategory('wallets'); toggleSidebar();" id="menuWallets">👛 محافظ نسائية</a>
       </div>
     </div>
 
     <div class="menu-category-item">
       <div class="menu-category-header" onclick="openPreviousOrders(); toggleSidebar();">
-        <span>📦 طلباتي السابقة / My Orders</span>
+        <span id="menuOrdersLabel">📦 طلباتي السابقة / My Orders</span>
       </div>
     </div>
     <div class="menu-category-item">
       <div class="menu-category-header" onclick="openSearch(); toggleSidebar();">
-        <span>🔎 بحث عن منتج / Search</span>
+        <span id="menuSearchLabel">🔎 بحث عن منتج / Search</span>
       </div>
     </div>
   </div>
@@ -527,22 +522,17 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   <span class="hero-note" id="heroNote">🚚 التوصيل 2 د.أ — مجاني عند 49 د.أ فأكثر</span>
 </section>
 
-<!-- شريط الأقسام -->
 <div class="categories-wrap" id="products">
   <div class="categories-bar">
-    <button class="cat-btn active" onclick="changeCategory('all', this)" data-cat="all">✨ جميع الموديلات</button>
-    
-    <!-- الأقسام حسب الحجم -->
-    <button class="cat-btn" onclick="changeCategory('small', this)" data-cat="small">🔹 صغير</button>
-    <button class="cat-btn" onclick="changeCategory('medium', this)" data-cat="medium">🔸 وسط</button>
-    <button class="cat-btn" onclick="changeCategory('large', this)" data-cat="large">🔷 كبير</button>
-    <button class="cat-btn" onclick="changeCategory('between', this)" data-cat="between">🔹 بين الوسط والصغير</button>
-    
-    <!-- الأقسام حسب السعر والنوع -->
-    <button class="cat-btn" onclick="changeCategory('5', this)" data-cat="5">🛍️ حقائب بسعر 5 دنانير</button>
-    <button class="cat-btn" onclick="changeCategory('10', this)" data-cat="10">🎒 حقائب بسعر 10 دنانير</button>
-    <button class="cat-btn" onclick="changeCategory('15', this)" data-cat="15">👜 حقائب بسعر 15 دنانير</button>
-    <button class="cat-btn" onclick="changeCategory('wallets', this)" data-cat="wallets">👛 محافظ نسائية</button>
+    <button class="cat-btn active" onclick="changeCategory('all', this)" data-cat="all" id="catAll">✨ جميع الموديلات</button>
+    <button class="cat-btn" onclick="changeCategory('small', this)" data-cat="small" id="catSmall">🔹 صغير</button>
+    <button class="cat-btn" onclick="changeCategory('medium', this)" data-cat="medium" id="catMedium">🔸 وسط</button>
+    <button class="cat-btn" onclick="changeCategory('large', this)" data-cat="large" id="catLarge">🔷 كبير</button>
+    <button class="cat-btn" onclick="changeCategory('between', this)" data-cat="between" id="catBetween">🔹 بين الوسط والصغير</button>
+    <button class="cat-btn" onclick="changeCategory('5', this)" data-cat="5" id="catP5">🛍️ حقائب بسعر 5 دنانير</button>
+    <button class="cat-btn" onclick="changeCategory('10', this)" data-cat="10" id="catP10">🎒 حقائب بسعر 10 دنانير</button>
+    <button class="cat-btn" onclick="changeCategory('15', this)" data-cat="15" id="catP15">👜 حقائب بسعر 15 دنانير</button>
+    <button class="cat-btn" onclick="changeCategory('wallets', this)" data-cat="wallets" id="catWallets">👛 محافظ نسائية</button>
   </div>
 </div>
 
@@ -563,7 +553,6 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
     🔵 <span id="footerFbText">تابعونا على فيسبوك AMO Bags</span>
   </a>
   
-  <!-- روابط السياسات وحقوق الملكية الفكرية -->
   <div class="footer-policies">
     <a href="privacy-policy.html" id="footerPrivacy" class="footer-policy-link">سياسة الخصوصية</a> |
     <a href="terms-and-conditions.html" id="footerTerms" class="footer-policy-link">الشروط والأحكام</a> |
@@ -611,14 +600,14 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
   <div class="cart-footer">
     <div class="summary">
-      <div class="line"><span>مجموع المنتجات</span><strong id="productsTotal">0.00 د.أ</strong></div>
-      <div class="line"><span>التوصيل</span><strong id="deliveryTotal">0.00 د.أ</strong></div>
+      <div class="line"><span id="prodTotalLabel">مجموع المنتجات</span><strong id="productsTotal">0.00 د.أ</strong></div>
+      <div class="line"><span id="deliveryLabel">التوصيل</span><strong id="deliveryTotal">0.00 د.أ</strong></div>
       <div id="deliveryProgress" class="delivery-progress" style="display:none"></div>
-      <div class="line final"><span>المجموع النهائي</span><strong id="finalTotal">0.00 د.أ</strong></div>
+      <div class="line final"><span id="finalTotalLabel">المجموع النهائي</span><strong id="finalTotal">0.00 د.أ</strong></div>
     </div>
     <div class="actions">
-      <button class="continue" onclick="closeCart()">🛍️ متابعة التسوق</button>
-      <button class="review-btn" onclick="reviewOrder()">✅ تأكيد الطلب وإرساله</button>
+      <button class="continue" onclick="closeCart()" id="continueShopBtn">🛍️ متابعة التسوق</button>
+      <button class="review-btn" onclick="reviewOrder()" id="confirmOrderBtn">✅ تأكيد الطلب وإرساله</button>
     </div>
   </div>
 </aside>
@@ -630,8 +619,8 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 <div id="searchModal" class="modal">
   <div class="modal-box">
     <button class="close" onclick="closeSearch()">×</button>
-    <div class="modal-title">🔎 البحث عن شنطة</div>
-    <div class="modal-sub">ابحثي برقم الموديل، الاسم، اللون، الحجم، أو السعر...</div>
+    <div class="modal-title" id="searchModalTitle">🔎 البحث عن شنطة</div>
+    <div class="modal-sub" id="searchModalSub">ابحثي برقم الموديل، الاسم، اللون، الحجم، أو السعر...</div>
 
     <div class="color-tags">
       <button class="color-tag-btn" onclick="filterByColorTag('أسود')">⚫ أسود / Black</button>
@@ -645,7 +634,7 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 
     <input id="searchInput" class="search-input" type="search" placeholder="اكتبي اللون، السعر، أو الموديل..." oninput="searchProducts()">
     <div id="searchResults" class="search-results">
-      <div class="orders-empty">ابدئي بكتابة اسم، رقم الموديل، اللون، أو السعر...</div>
+      <div class="orders-empty" id="searchPlaceholderText">ابدئي بكتابة اسم، رقم الموديل، اللون، أو السعر...</div>
     </div>
   </div>
 </div>
@@ -654,7 +643,7 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 <div id="ordersModal" class="modal">
   <div class="modal-box">
     <button class="close" onclick="closePreviousOrders()">×</button>
-    <div class="modal-title">📦 طلباتي السابقة</div>
+    <div class="modal-title" id="ordersModalTitle">📦 طلباتي السابقة</div>
     <div id="previousOrders"></div>
   </div>
 </div>
@@ -671,13 +660,8 @@ const translations = {
   ar: {
     pageTitle: "AMO | شنط نسائية",
     fbText: "فيسبوك",
-    footerFbText: "تابعونا على فيسبوك AMO Bags",
-    footerPrivacy: "سياسة الخصوصية",
-    footerTerms: "الشروط والأحكام",
-    footerRefund: "سياسة الاستبدال والاسترجاع",
-    footerIp: "حقوق الملكية الفكرية",
-    searchBtn: "🔎 بحث",
-    ordersBtn: "📦 طلباتي",
+    navSearchBtn: "🔎 بحث",
+    navOrdersBtn: "📦 طلباتي",
     cartText: "السلة",
     heroTitle: "اختاري شنطتك بستايلك الخاص",
     heroSub: "شنط AMO بتصاميم أنيقة تناسب كل إطلالة",
@@ -685,6 +669,11 @@ const translations = {
     sectionTitle: "أحدث الحقائب",
     sectionSub: "اضغطي على الصورة أو «التفاصيل» لرؤية كل الصور",
     loadingText: "جاري تحميل المنتجات...",
+    footerFbText: "تابعونا على فيسبوك AMO Bags",
+    footerPrivacy: "سياسة الخصوصية",
+    footerTerms: "الشروط والأحكام",
+    footerRefund: "سياسة الاستبدال والاسترجاع",
+    footerIp: "حقوق الملكية الفكرية",
     footerText: "AMO © جميع الحقوق محفوظة",
     emptyCartText: "🛍️ السلة فارغة<br><small>اختاري أي شنطة وستظهر هنا.</small>",
     freeText: "مجاني",
@@ -696,18 +685,49 @@ const translations = {
     detailsBtn: "التفاصيل",
     addCartBtn: "أضف للسلة 🛒",
     noProductsInSection: "لا توجد منتجات في هذا القسم حالياً.",
-    linkBoxTitle: "رابط المنتج (انقر للنسخ والتحديد تلقائياً):"
+    linkBoxTitle: "رابط المنتج (انقر للنسخ والتحديد تلقائياً):",
+    menuTitleLabel: "Menu",
+    menuSizeLabel: "SHOP BY SIZE / الأحجام",
+    menuAllSizes: "جميع الموديلات / All",
+    menuSmall: "صغير / Small",
+    menuMedium: "وسط / Medium",
+    menuLarge: "كبير / Large",
+    menuBetween: "بين الوسط والصغير",
+    menuPriceLabel: "SHOP BY PRICE / الأسعار والمحافظ",
+    menuP5: "🛍️ حقائب بسعر 5 دنانير",
+    menuP10: "🎒 حقائب بسعر 10 دنانير",
+    menuP15: "👜 حقائب بسعر 15 دنانير",
+    menuWallets: "👛 محافظ نسائية",
+    menuOrdersLabel: "📦 طلباتي السابقة / My Orders",
+    menuSearchLabel: "🔎 بحث عن منتج / Search",
+    catAll: "✨ جميع الموديلات",
+    catSmall: "🔹 صغير",
+    catMedium: "🔸 وسط",
+    catLarge: "🔷 كبير",
+    catBetween: "🔹 بين الوسط والصغير",
+    catP5: "🛍️ حقائب بسعر 5 دنانير",
+    catP10: "🎒 حقائب بسعر 10 دنانير",
+    catP15: "👜 حقائب بسعر 15 دنانير",
+    catWallets: "👛 محافظ نسائية",
+    cartHeaderTitle: "🛒 سلة التسوق",
+    deliveryInfoTitle: "📦 معلومات التوصيل",
+    cityOptDefault: "اختاري المحافظة *",
+    prodTotalLabel: "مجموع المنتجات",
+    deliveryLabel: "التوصيل",
+    finalTotalLabel: "المجموع النهائي",
+    continueShopBtn: "🛍️ متابعة التسوق",
+    confirmOrderBtn: "✅ تأكيد الطلب وإرساله",
+    searchModalTitle: "🔎 البحث عن شنطة",
+    searchModalSub: "ابحثي برقم الموديل، الاسم، اللون، الحجم، أو السعر...",
+    allColorsTag: "✨ الكل",
+    searchPlaceholderText: "ابدئي بكتابة اسم، رقم الموديل، اللون، أو السعر...",
+    ordersModalTitle: "📦 طلباتي السابقة"
   },
   en: {
     pageTitle: "AMO | Women's Bags",
     fbText: "Facebook",
-    footerFbText: "Follow us on Facebook AMO Bags",
-    footerPrivacy: "Privacy Policy",
-    footerTerms: "Terms & Conditions",
-    footerRefund: "Refund Policy",
-    footerIp: "Intellectual Property",
-    searchBtn: "🔎 Search",
-    ordersBtn: "📦 My Orders",
+    navSearchBtn: "🔎 Search",
+    navOrdersBtn: "📦 My Orders",
     cartText: "Cart",
     heroTitle: "Choose Your Bag in Your Own Style",
     heroSub: "AMO bags with elegant designs for every look",
@@ -715,8 +735,13 @@ const translations = {
     sectionTitle: "Latest Bags",
     sectionSub: "Click on image or 'Details' to view photos",
     loadingText: "Loading products...",
+    footerFbText: "Follow us on Facebook AMO Bags",
+    footerPrivacy: "Privacy Policy",
+    footerTerms: "Terms & Conditions",
+    footerRefund: "Refund Policy",
+    footerIp: "Intellectual Property",
     footerText: "AMO © All Rights Reserved",
-    emptyCartText: "🛍️ Cart is empty",
+    emptyCartText: "🛍️ Cart is empty<br><small>Select any bag to show here.</small>",
     freeText: "Free",
     colorLabel: "Color",
     priceLabel: "Price",
@@ -726,20 +751,116 @@ const translations = {
     detailsBtn: "Details",
     addCartBtn: "Add to Cart 🛒",
     noProductsInSection: "No products in this category right now.",
-    linkBoxTitle: "Product Link (Click to select & copy):"
+    linkBoxTitle: "Product Link (Click to select & copy):",
+    menuTitleLabel: "Menu",
+    menuSizeLabel: "SHOP BY SIZE",
+    menuAllSizes: "All Models",
+    menuSmall: "Small",
+    menuMedium: "Medium",
+    menuLarge: "Large",
+    menuBetween: "Between Medium & Small",
+    menuPriceLabel: "SHOP BY PRICE",
+    menuP5: "🛍️ Bags for 5 JOD",
+    menuP10: "🎒 Bags for 10 JOD",
+    menuP15: "👜 Bags for 15 JOD",
+    menuWallets: "👛 Women's Wallets",
+    menuOrdersLabel: "📦 My Orders",
+    menuSearchLabel: "🔎 Search Products",
+    catAll: "✨ All Models",
+    catSmall: "🔹 Small",
+    catMedium: "🔸 Medium",
+    catLarge: "🔷 Large",
+    catBetween: "🔹 Between Medium & Small",
+    catP5: "🛍️ Bags for 5 JOD",
+    catP10: "🎒 Bags for 10 JOD",
+    catP15: "👜 Bags for 15 JOD",
+    catWallets: "👛 Women's Wallets",
+    cartHeaderTitle: "🛒 Shopping Cart",
+    deliveryInfoTitle: "📦 Delivery Information",
+    cityOptDefault: "Select City *",
+    prodTotalLabel: "Products Total",
+    deliveryLabel: "Delivery",
+    finalTotalLabel: "Final Total",
+    continueShopBtn: "🛍️ Continue Shopping",
+    confirmOrderBtn: "✅ Confirm & Send Order",
+    searchModalTitle: "🔎 Search Bags",
+    searchModalSub: "Search by model number, name, color, size, or price...",
+    allColorsTag: "✨ All",
+    searchPlaceholderText: "Start typing name, model, color, or price...",
+    ordersModalTitle: "📦 My Previous Orders"
   }
 };
 
 let currentLang = 'ar';
 function toggleLanguage() {
   currentLang = (currentLang === 'ar') ? 'en' : 'ar';
-  document.getElementById("htmlRoot").setAttribute("lang", currentLang);
-  document.getElementById("htmlRoot").setAttribute("dir", currentLang === 'ar' ? 'rtl' : 'ltr');
+  const root = document.getElementById("htmlRoot");
+  root.setAttribute("lang", currentLang);
+  root.setAttribute("dir", currentLang === 'ar' ? 'rtl' : 'ltr');
   document.getElementById("langToggleBtn").textContent = currentLang === 'ar' ? "🌐 EN" : "🌐 AR";
+
+  // ترجمة العناصر الثابتة
+  document.getElementById("pageTitle").textContent = t("pageTitle");
+  document.getElementById("fbTextLabel").textContent = t("fbText");
+  document.getElementById("navSearchBtn").textContent = t("navSearchBtn");
+  document.getElementById("navOrdersBtn").textContent = t("navOrdersBtn");
+  document.getElementById("cartTextLabel").textContent = t("cartText");
+  document.getElementById("heroTitle").textContent = t("heroTitle");
+  document.getElementById("heroSub").textContent = t("heroSub");
+  document.getElementById("heroNote").textContent = t("heroNote");
+  document.getElementById("sectionTitleDisplay").textContent = t("sectionTitle");
+  document.getElementById("sectionSubDisplay").textContent = t("sectionSub");
+  document.getElementById("loadingText").textContent = t("loadingText");
+  document.getElementById("footerFbText").textContent = t("footerFbText");
   document.getElementById("footerPrivacy").textContent = t("footerPrivacy");
   document.getElementById("footerTerms").textContent = t("footerTerms");
   document.getElementById("footerRefund").textContent = t("footerRefund");
   document.getElementById("footerIp").textContent = t("footerIp");
+  document.getElementById("footerText").textContent = t("footerText");
+
+  // القائمة الجانبية
+  document.getElementById("menuTitleLabel").textContent = t("menuTitleLabel");
+  document.getElementById("menuSizeLabel").textContent = t("menuSizeLabel");
+  document.getElementById("menuAllSizes").textContent = t("menuAllSizes");
+  document.getElementById("menuSmall").textContent = t("menuSmall");
+  document.getElementById("menuMedium").textContent = t("menuMedium");
+  document.getElementById("menuLarge").textContent = t("menuLarge");
+  document.getElementById("menuBetween").textContent = t("menuBetween");
+  document.getElementById("menuPriceLabel").textContent = t("menuPriceLabel");
+  document.getElementById("menuP5").textContent = t("menuP5");
+  document.getElementById("menuP10").textContent = t("menuP10");
+  document.getElementById("menuP15").textContent = t("menuP15");
+  document.getElementById("menuWallets").textContent = t("menuWallets");
+  document.getElementById("menuOrdersLabel").textContent = t("menuOrdersLabel");
+  document.getElementById("menuSearchLabel").textContent = t("menuSearchLabel");
+
+  // أزرار الفئات
+  document.getElementById("catAll").textContent = t("catAll");
+  document.getElementById("catSmall").textContent = t("catSmall");
+  document.getElementById("catMedium").textContent = t("catMedium");
+  document.getElementById("catLarge").textContent = t("catLarge");
+  document.getElementById("catBetween").textContent = t("catBetween");
+  document.getElementById("catP5").textContent = t("catP5");
+  document.getElementById("catP10").textContent = t("catP10");
+  document.getElementById("catP15").textContent = t("catP15");
+  document.getElementById("catWallets").textContent = t("catWallets");
+
+  // السلة والمودالات
+  document.getElementById("cartHeaderTitle").innerHTML = `🛒 ${t("cartHeaderTitle")} <span class="cart-count">${cart.reduce((s,x)=>s+x.quantity,0)}</span>`;
+  document.getElementById("deliveryInfoTitle").textContent = t("deliveryInfoTitle");
+  document.getElementById("cityOptDefault").textContent = t("cityOptDefault");
+  document.getElementById("prodTotalLabel").textContent = t("prodTotalLabel");
+  document.getElementById("deliveryLabel").textContent = t("deliveryLabel");
+  document.getElementById("finalTotalLabel").textContent = t("finalTotalLabel");
+  document.getElementById("continueShopBtn").textContent = t("continueShopBtn");
+  document.getElementById("confirmOrderBtn").textContent = t("confirmOrderBtn");
+
+  document.getElementById("searchModalTitle").textContent = t("searchModalTitle");
+  document.getElementById("searchModalSub").textContent = t("searchModalSub");
+  document.getElementById("allColorsTag").textContent = t("allColorsTag");
+  document.getElementById("searchPlaceholderText").textContent = t("searchPlaceholderText");
+  document.getElementById("ordersModalTitle").textContent = t("ordersModalTitle");
+
   renderProducts();
   renderCart();
   if(detailProductId) renderProductDetails();
@@ -1111,18 +1232,15 @@ function renderProductDetails(){
   const colors = p.colors || [];
   const gallery = getGallery(p, colors.length ? detailColorIndex : null);
   const selectedImage = gallery[0] || p.image;
-
-  // رابط المعاينة المباشر والصحيح المنشور عبر GitHub Pages لتفادي خطأ 404
   const shareUrl = `https://amo-bags.github.io/product/${p.id}/index.html`;
 
   let videoHtml = "";
   if(p.video) {
     videoHtml = `
       <div style="margin-top:15px;">
-        <div class="option-title">فيديو توضيحي للمنتج</div>
+        <div class="option-title">${currentLang==='ar'?'فيديو توضيحي للمنتج':'Product Video'}</div>
         <video controls style="width:100%; max-height:300px; border-radius:12px; background:#000;">
           <source src="${esc(p.video)}" type="video/mp4">
-          متصفحك لا يدعم عرض الفيديو
         </video>
       </div>
     `;
@@ -1130,8 +1248,8 @@ function renderProductDetails(){
 
   document.getElementById("productBox").innerHTML = `
     <button class="close" onclick="closeProductDetails(true)">×</button>
-    <button class="modal-nav-btn modal-nav-prev" onclick="navigateProduct(-1)" title="الموديل السابق">‹</button>
-    <button class="modal-nav-btn modal-nav-next" onclick="navigateProduct(1)" title="الموديل التالي">›</button>
+    <button class="modal-nav-btn modal-nav-prev" onclick="navigateProduct(-1)">‹</button>
+    <button class="modal-nav-btn modal-nav-next" onclick="navigateProduct(1)">›</button>
 
     <img id="detailMainImage" class="product-detail-main" src="${esc(selectedImage)}" alt="${esc(p.name)}" onclick="openLightbox(${JSON.stringify(gallery).replace(/"/g, '&quot;')},0)">
     <div class="detail-thumbs">
@@ -1154,10 +1272,9 @@ function renderProductDetails(){
         </div>
       ` : ""}
 
-      <!-- مربع نصي مدمج داخل الصفحة لنسخ الرابط مباشرة دون أزرار معقدة -->
       <div style="margin-top:14px;">
         <div class="option-title">${t("linkBoxTitle")}</div>
-        <input type="text" readonly value="${shareUrl}" onclick="this.select(); document.execCommand('copy'); alert(currentLang==='ar'?'تم نسخ الرابط تلقائياً!':'Link copied automatically!');" style="width:100%; padding:10px 12px; border:1px solid var(--border-color); border-radius:10px; background:#f9f8f6; font-size:12px; color:var(--text-main); text-align:left; direction:ltr; cursor:pointer;" title="انقر لنسخ الرابط">
+        <input type="text" readonly value="${shareUrl}" onclick="this.select(); document.execCommand('copy'); alert(currentLang==='ar'?'تم نسخ الرابط تلقائياً!':'Link copied automatically!');" style="width:100%; padding:10px 12px; border:1px solid var(--border-color); border-radius:10px; background:#f9f8f6; font-size:12px; color:var(--text-main); text-align:left; direction:ltr; cursor:pointer;">
       </div>
 
       <button class="detail-add" onclick="addDetailToCart()">${t("addDetailCart")}</button>
@@ -1292,7 +1409,7 @@ function searchProducts(){
   const rawQuery = input.value.trim().toLowerCase();
 
   if(!rawQuery){ 
-    results.innerHTML = `<div class="orders-empty">ابدئي بكتابة اسم، رقم الموديل، اللون، أو السعر...</div>`; 
+    results.innerHTML = `<div class="orders-empty">${t("searchPlaceholderText")}</div>`; 
     return; 
   }
 
@@ -1312,7 +1429,7 @@ function searchProducts(){
   });
 
   if(!found.length){ 
-    results.innerHTML = `<div class="orders-empty">😔 لم نجد أي منتج طابق بحثك "${esc(rawQuery)}"</div>`; 
+    results.innerHTML = `<div class="orders-empty">😔 ${currentLang==='ar'?'لم نجد أي منتج طابق بحثك':'No products found matching'} "${esc(rawQuery)}"</div>`; 
     return; 
   }
 
@@ -1337,15 +1454,15 @@ function closePreviousOrders(){ document.getElementById("ordersModal").classList
 function renderPreviousOrders(){
   const box = document.getElementById("previousOrders");
   const saved = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]");
-  if(!saved.length){ box.innerHTML = `<div class="orders-empty">لا توجد طلبات سابقة</div>`; return; }
+  if(!saved.length){ box.innerHTML = `<div class="orders-empty">${currentLang==='ar'?'لا توجد طلبات سابقة':'No previous orders'}</div>`; return; }
   box.innerHTML = saved.map((o,i)=>`
     <div class="previous-order">
-      <div class="previous-order-head"><span>طلب #${saved.length-i}</span><span class="previous-order-date">${new Date(o.date).toLocaleDateString()}</span></div>
+      <div class="previous-order-head"><span>${currentLang==='ar'?'طلب':'Order'} #${saved.length-i}</span><span class="previous-order-date">${new Date(o.date).toLocaleDateString()}</span></div>
       <div class="previous-order-items">
         ${o.items.map(item=>`• ${item.name}${item.colorName ? `(${item.colorName})` : ""} × ${item.quantity}<br>`).join("")}
       </div>
-      <div class="previous-order-total">المجموع: ${o.total} د.أ</div>
-      <button class="detail-add" style="margin-top:10px;padding:10px" onclick="restorePreviousOrder(${i})">🔄 استعادة المنتجات إلى السلة</button>
+      <div class="previous-order-total">${currentLang==='ar'?'المجموع':'Total'}: ${o.total} د.أ</div>
+      <button class="detail-add" style="margin-top:10px;padding:10px" onclick="restorePreviousOrder(${i})">${currentLang==='ar'?'🔄 استعادة المنتجات إلى السلة':'🔄 Restore products to cart'}</button>
     </div>
   `).join("");
 }
@@ -1388,7 +1505,7 @@ function reviewOrder(){
     address: document.getElementById("customerAddress").value.trim(),
     notes: document.getElementById("customerNotes").value.trim()
   };
-  if(!c.name || !c.phone || !c.city || !c.address){ alert("يرجى تعبئة كافة حقول معلومات التوصيل المطلوبة."); return; }
+  if(!c.name || !c.phone || !c.city || !c.address){ alert(currentLang==='ar'?'يرجى تعبئة كافة حقول معلومات التوصيل المطلوبة.':'Please fill in all required delivery information fields.'); return; }
   
   const total = productsTotal();
   const d = delivery();
@@ -1434,10 +1551,9 @@ function reviewOrder(){
 
   emailjs.send("service_hc4panu", "template_9a1dmfw", templateParams)
     .then(function(response) {
-       console.log("SUCCESS. Email sent to " + TARGET_EMAIL);
+       console.log("SUCCESS.");
     }, function(error) {
        console.log("FAILED...", error);
-       alert("تعذر إرسال الإيميل، تأكد من إعدادات القالب.");
     });
 
   const orders = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]");
