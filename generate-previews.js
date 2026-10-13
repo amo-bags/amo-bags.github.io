@@ -1,43 +1,43 @@
 const fs = require('fs');
 const path = require('path');
 
-// تحديد عدد المنتجات أو مصفوفة الأرقام حسب المتوفر لديك
-const productIds = Array.from({length: 70}, (_, i) => i + 1);
+const productsNewDir = path.join(__dirname, 'products-new');
 
-console.log('جاري بدء توليد صفحات المعاينة للمنتجات...');
+console.log('جاري بدء توليد صفحات المعاينة لجميع المنتجات...');
 
-productIds.forEach(id => {
-  // مسار ملف المنتج داخل مجلد products-new
-  const productFilePath = path.join(__dirname, 'products-new', String(id), 'product.js');
-  
-  if (fs.existsSync(productFilePath)) {
-    try {
-      const fileContent = fs.readFileSync(productFilePath, 'utf8');
-      
-      // استخراج بيانات المنتج من ملف الـ JS بطريقة آمنة
-      let product = null;
+if (fs.existsSync(productsNewDir)) {
+  // قراءة كافة المجلدات الموجودة داخل products-new تلقائياً
+  const folders = fs.readdirSync(productsNewDir);
+
+  folders.forEach(folderName => {
+    const productFilePath = path.join(productsNewDir, folderName, 'product.js');
+    
+    if (fs.existsSync(productFilePath)) {
       try {
-        product = new Function(fileContent + `\nreturn (typeof product !== 'undefined' ? product : (typeof product${id} !== 'undefined' ? product${id} : null));`)();
-      } catch (e) {
-        console.error(`خطأ في تحليل بيانات المنتج ${id}:`, e.message);
-      }
-
-      if (product) {
-        const title = `${product.name} | AMO`;
-        const desc = `شنطة نسائية أنيقة - السعر: ${Number(product.price).toFixed(2)} د.أ${product.size ? ' - ' + product.size : ''}`;
+        const fileContent = fs.readFileSync(productFilePath, 'utf8');
         
-        // معالجة مسار الصورة لتكون مطلقة بالكامل لضمان ظهورها في واتساب وفيسبوك
-        let image = product.image || 'https://amo-bags.github.io/logo/logo.jpg';
-        if (image.startsWith('./')) {
-          image = 'https://amo-bags.github.io/' + image.replace('./', '');
-        } else if (!image.startsWith('http')) {
-          image = 'https://amo-bags.github.io/' + image.replace(/^\/+/, '');
+        let product = null;
+        try {
+          product = new Function(fileContent + `\nreturn (typeof product !== 'undefined' ? product : (typeof product${folderName} !== 'undefined' ? product${folderName} : null));`)();
+        } catch (e) {
+          console.error(`خطأ في تحليل بيانات المنتج ${folderName}:`, e.message);
         }
 
-        const url = `https://amo-bags.github.io/product/${id}/index.html`;
+        if (product) {
+          const id = product.id || folderName;
+          const title = `${product.name} | AMO`;
+          const desc = `شنطة نسائية أنيقة - السعر: ${Number(product.price).toFixed(2)} د.أ${product.size ? ' - ' + product.size : ''}`;
+          
+          let image = product.image || 'https://amo-bags.github.io/logo/logo.jpg';
+          if (image.startsWith('./')) {
+            image = 'https://amo-bags.github.io/' + image.replace('./', '');
+          } else if (!image.startsWith('http')) {
+            image = 'https://amo-bags.github.io/' + image.replace(/^\/+/, '');
+          }
 
-        // قالب صفحة المعاينة الثابتة لروبوتات السوشيال ميديا مع إعادة توجيه المستخدمين تلقائياً
-        const htmlContent = `<!DOCTYPE html>
+          const url = `https://amo-bags.github.io/product/${id}/index.html`;
+
+          const htmlContent = `<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -57,20 +57,19 @@ productIds.forEach(id => {
 </body>
 </html>`;
 
-        // إنشاء المجلد الفرعي product/[id] إذا لم يكن موجوداً
-        const dir = path.join(__dirname, 'product', String(id));
-        if (!fs.existsSync(dir)) {
-          fs.mkdirSync(dir, { recursive: true });
-        }
+          const dir = path.join(__dirname, 'product', String(id));
+          if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+          }
 
-        // حفظ ملف index.html داخل المجلد
-        fs.writeFileSync(path.join(dir, 'index.html'), htmlContent, 'utf8');
-        console.log(`✅ تم بنجاح توليد صفحة المعاينة للمنتج رقم: ${id}`);
+          fs.writeFileSync(path.join(dir, 'index.html'), htmlContent, 'utf8');
+          console.log(`✅ تم بنجاح توليد صفحة المعاينة للمنتج رقم: ${id}`);
+        }
+      } catch (err) {
+        console.error(`❌ حدث خطأ أثناء معالجة المنتج ${folderName}:`, err.message);
       }
-    } catch (err) {
-      console.error(`❌ حدث خطأ أثناء معالجة المنتج ${id}:`, err.message);
     }
-  }
-});
+  });
+}
 
 console.log('🎉 انتهى توليد جميع صفحات المعاينة للمنتجات بنجاح!');
