@@ -8,8 +8,6 @@ const product = {
   gallery: [
     "38black.png",
     "38offwhite.png",
-    "38bagi.png",
-    "38nude.png",
     "38details.jpg",
     "38detaols2.jpg",
     "38side.jpg",
@@ -28,16 +26,6 @@ const product = {
       value: "#f5f5ed",
       image: "38offwhite.png"
     },
-    {
-      name: "بيج",
-      value: "#d3b89c",
-      image: "38bagi.png"
-    },
-    {
-      name: "نهدي",
-      value: "#663399",
-      image: "38nude.png"
-    }
   ]
 };
 
