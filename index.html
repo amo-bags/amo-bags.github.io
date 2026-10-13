@@ -296,7 +296,7 @@ footer{
 
 /* تنسيق روابط السياسات في الـ Footer */
 .footer-policies {
-  display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 4px 0;
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 4px 0;
 }
 .footer-policy-link {
   color: var(--text-muted); text-decoration: none; font-size: 12px; transition: color 0.2s;
@@ -563,11 +563,12 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
     🔵 <span id="footerFbText">تابعونا على فيسبوك AMO Bags</span>
   </a>
   
-  <!-- روابط السياسات المطلوبة لإعلانات Meta و Google -->
+  <!-- روابط السياسات وحقوق الملكية الفكرية -->
   <div class="footer-policies">
     <a href="privacy-policy.html" id="footerPrivacy" class="footer-policy-link">سياسة الخصوصية</a> |
     <a href="terms-and-conditions.html" id="footerTerms" class="footer-policy-link">الشروط والأحكام</a> |
-    <a href="refund-policy.html" id="footerRefund" class="footer-policy-link">سياسة الاستبدال والاسترجاع</a>
+    <a href="refund-policy.html" id="footerRefund" class="footer-policy-link">سياسة الاستبدال والاسترجاع</a> |
+    <a href="intellectual-property.html" id="footerIp" class="footer-policy-link">حقوق الملكية الفكرية</a>
   </div>
 
   <div id="footerText">AMO © جميع الحقوق محفوظة</div>
@@ -674,6 +675,7 @@ const translations = {
     footerPrivacy: "سياسة الخصوصية",
     footerTerms: "الشروط والأحكام",
     footerRefund: "سياسة الاستبدال والاسترجاع",
+    footerIp: "حقوق الملكية الفكرية",
     searchBtn: "🔎 بحث",
     ordersBtn: "📦 طلباتي",
     cartText: "السلة",
@@ -702,6 +704,7 @@ const translations = {
     footerPrivacy: "Privacy Policy",
     footerTerms: "Terms & Conditions",
     footerRefund: "Refund Policy",
+    footerIp: "Intellectual Property",
     searchBtn: "🔎 Search",
     ordersBtn: "📦 My Orders",
     cartText: "Cart",
@@ -734,6 +737,7 @@ function toggleLanguage() {
   document.getElementById("footerPrivacy").textContent = t("footerPrivacy");
   document.getElementById("footerTerms").textContent = t("footerTerms");
   document.getElementById("footerRefund").textContent = t("footerRefund");
+  document.getElementById("footerIp").textContent = t("footerIp");
   renderProducts();
   renderCart();
 }
