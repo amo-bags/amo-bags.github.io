@@ -1,59 +1,76 @@
 const fs = require('fs');
 const path = require('path');
 
-const productsDir = path.join(__dirname, 'products-new');
-if (!fs.existsSync(productsDir)) {
-    console.log("Products directory not found!");
-    process.exit(0);
-}
+// تحديد عدد المنتجات أو مصفوفة الأرقام حسب المتوفر لديك
+const productIds = Array.from({length: 70}, (_, i) => i + 1);
 
-const productFolders = fs.readdirSync(productsDir);
+console.log('جاري بدء توليد صفحات المعاينة للمنتجات...');
 
-productFolders.forEach(folderId => {
-    const productFilePath = path.join(productsDir, folderId, 'product.js');
-    if (fs.existsSync(productFilePath)) {
-        try {
-            const content = fs.readFileSync(productFilePath, 'utf8');
-            let productData = null;
-            try {
-                productData = new Function(content + "\nreturn (typeof product !== 'undefined' ? product : (typeof product" + folderId + " !== 'undefined' ? product" + folderId + " : null));")();
-            } catch (e) {}
+productIds.forEach(id => {
+  // مسار ملف المنتج داخل مجلد products-new
+  const productFilePath = path.join(__dirname, 'products-new', String(id), 'product.js');
+  
+  if (fs.existsSync(productFilePath)) {
+    try {
+      const fileContent = fs.readFileSync(productFilePath, 'utf8');
+      
+      // استخراج بيانات المنتج من ملف الـ JS بطريقة آمنة
+      let product = null;
+      try {
+        product = new Function(fileContent + `\nreturn (typeof product !== 'undefined' ? product : (typeof product${id} !== 'undefined' ? product${id} : null));`)();
+      } catch (e) {
+        console.error(`خطأ في تحليل بيانات المنتج ${id}:`, e.message);
+      }
 
-            if (productData) {
-                const name = productData.name || `حقيبة AMO #${folderId}`;
-                const price = productData.price ? `${productData.price} د.أ` : '';
-                let image = productData.image || '';
-                
-                if (image && !image.startsWith('http')) {
-                    image = `https://amo-bags.github.io/products-new/${folderId}/${image.replace(/^\/+/, '')}`;
-                } else if (!image) {
-                    image = 'https://amo-bags.github.io/logo/logo.jpg';
-                }
+      if (product) {
+        const title = `${product.name} | AMO`;
+        const desc = `شنطة نسائية أنيقة - السعر: ${Number(product.price).toFixed(2)} د.أ${product.size ? ' - ' + product.size : ''}`;
+        
+        // معالجة مسار الصورة لتكون مطلقة بالكامل لضمان ظهورها في واتساب وفيسبوك
+        let image = product.image || 'https://amo-bags.github.io/logo/logo.jpg';
+        if (image.startsWith('./')) {
+          image = 'https://amo-bags.github.io/' + image.replace('./', '');
+        } else if (!image.startsWith('http')) {
+          image = 'https://amo-bags.github.io/' + image.replace(/^\/+/, '');
+        }
 
-                const outDir = path.join(__dirname, 'product', folderId);
-                fs.mkdirSync(outDir, { recursive: true });
+        const url = `https://amo-bags.github.io/product/${id}/index.html`;
 
-                const htmlContent = `<!DOCTYPE html>
+        // قالب صفحة المعاينة الثابتة لروبوتات السوشيال ميديا مع إعادة توجيه المستخدمين تلقائياً
+        const htmlContent = `<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>${name} | AMO</title>
-    <meta property="og:title" content="${name} - ${price}">
-    <meta property="og:description" content="تشكيلة مميزة من أحدث الحقائب النسائية - توصيل سريع لجميع المحافظات">
-    <meta property="og:image" content="${image}">
-    <meta property="og:url" content="https://amo-bags.github.io/product/${folderId}/">
-    <meta http-equiv="refresh" content="0;url=https://amo-bags.github.io/#product=${folderId}">
+<meta charset="UTF-8">
+<title>${title}</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${desc}">
+<meta property="og:image" content="${image}">
+<meta property="og:url" content="${url}">
+<meta http-equiv="refresh" content="0;url=https://amo-bags.github.io/#product=${id}">
 </head>
 <body>
-    <p>جاري تحويلك إلى تفاصيل المنتج...</p>
+<p>جاري تحويلك إلى تفاصيل المنتج في متجر AMO... <a href="https://amo-bags.github.io/#product=${id}">اضغط هنا إذا لم يتم التحويل تلقائياً</a></p>
+<script>
+  window.location.replace("https://amo-bags.github.io/#product=${id}");
+</script>
 </body>
 </html>`;
 
-                fs.writeFileSync(path.join(outDir, 'index.html'), htmlContent);
-                console.log(`Generated preview page for product ID: ${folderId}`);
-            }
-        } catch (err) {
-            console.error(`Error processing product ${folderId}:`, err);
+        // إنشاء المجلد الفرعي product/[id] إذا لم يكن موجوداً
+        const dir = path.join(__dirname, 'product', String(id));
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true });
         }
+
+        // حفظ ملف index.html داخل المجلد
+        fs.writeFileSync(path.join(dir, 'index.html'), htmlContent, 'utf8');
+        console.log(`✅ تم بنجاح توليد صفحة المعاينة للمنتج رقم: ${id}`);
+      }
+    } catch (err) {
+      console.error(`❌ حدث خطأ أثناء معالجة المنتج ${id}:`, err.message);
     }
+  }
 });
+
+console.log('🎉 انتهى توليد جميع صفحات المعاينة للمنتجات بنجاح!');
