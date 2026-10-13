@@ -138,7 +138,7 @@ header{
   cursor: pointer;
 }
 
-/* القائمة الجانبية */
+/* القائمة الجانبية المحدثة بنفس ستايل الهيدر */
 .sidebar-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 4000;
   opacity: 0; visibility: hidden; transition: all 0.3s ease; backdrop-filter: blur(3px);
@@ -150,29 +150,36 @@ header{
   background: #fff; z-index: 4100; transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,0.1);
 }
-html[dir="ltr"] .sidebar { right: auto; left: -360px; }
+html[dir="ltr"] .sidebar { right: auto; left: -360px; box-shadow: 10px 0 30px rgba(0,0,0,0.1); }
 .sidebar.show { right: 0; left: auto; }
 html[dir="ltr"] .sidebar.show { left: 0; right: auto; }
 
 .sidebar-header {
-  padding: 20px; display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 1px solid var(--border-color);
+  padding: 18px 20px; display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border-color); background: var(--bg-color);
 }
-.sidebar-title { font-size: 18px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+.sidebar-title { font-size: 18px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-color); }
 .sidebar-body { flex: 1; overflow-y: auto; padding: 10px 0; }
 
 .menu-category-item { border-bottom: 1px solid #f0f0f0; }
 .menu-category-header {
-  padding: 16px 20px; font-weight: 700; font-size: 15px; display: flex;
-  justify-content: space-between; align-items: center; cursor: pointer; color: var(--text-main);
+  padding: 16px 20px; font-weight: 700; font-size: 14px; display: flex;
+  justify-content: space-between; align-items: center; cursor: pointer; color: var(--text-main); transition: background 0.2s;
 }
 .menu-category-header:hover { background: #fafafa; }
 .menu-sublist { display: none; background: #fafafa; padding: 5px 0 10px 0; }
 .menu-sublist.open { display: block; }
 .menu-subitem {
-  padding: 10px 30px; font-size: 14px; color: var(--text-muted); cursor: pointer; display: block; text-decoration: none;
+  padding: 10px 30px; font-size: 13.5px; color: var(--text-muted); cursor: pointer; display: block; text-decoration: none; transition: color 0.2s;
 }
 .menu-subitem:hover { color: var(--brand-color); font-weight: 700; }
+
+.menu-icon-wrap {
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.menu-icon-wrap svg {
+  width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
 
 /* زر الواتساب العائم */
 .float-whatsapp-icon {
@@ -250,7 +257,7 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
   background: var(--brand-color); color: #fff; border-color: var(--brand-color); box-shadow: 0 4px 14px rgba(51,41,34,.15);
 }
 
-/* جعل شريط تبديل العرض ثابتاً (Sticky) تحت الأقسام مباشرة */
+/* شريط تبديل شكل العرض الثابت */
 .view-switcher-bar {
   position: sticky;
   top: 115px;
@@ -313,7 +320,7 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
 .grid.cols-2 .card-image { height: 320px; }
 .grid.cols-4 .card-image { height: 160px; border-radius: 12px; }
 
-/* عرض 4 أعمدة (صور فقط بدون تفاصيل مزعجة) */
+/* عرض 4 أعمدة (صور فقط بدون تفاصيل) */
 .grid.cols-4 .thumbs, 
 .grid.cols-4 .info, 
 .grid.cols-4 .image-badge {
@@ -526,47 +533,53 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </svg>
 </a>
 
-<!-- القائمة الجانبية -->
+<!-- القائمة الجانبية بنمط ناعم وبدون إيموجيات عادية -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 <aside class="sidebar" id="sidebarMenu">
   <div class="sidebar-header">
-    <div class="sidebar-title">Menu</div>
+    <div class="sidebar-title">MENU</div>
     <button class="close" onclick="toggleSidebar()">×</button>
   </div>
   <div class="sidebar-body">
     <div class="menu-category-item">
       <div class="menu-category-header" onclick="toggleSublist('sizeList')">
-        <span>SHOP BY SIZE / الأحجام</span> <span>+</span>
+        <span id="menuSizeHeader">SHOP BY SIZE / الأحجام</span> <span>+</span>
       </div>
       <div class="menu-sublist open" id="sizeList">
-        <a class="menu-subitem" onclick="changeCategory('all'); toggleSidebar();">جميع الموديلات / All</a>
-        <a class="menu-subitem" onclick="changeCategory('small'); toggleSidebar();">صغير / Small</a>
-        <a class="menu-subitem" onclick="changeCategory('medium'); toggleSidebar();">وسط / Medium</a>
-        <a class="menu-subitem" onclick="changeCategory('large'); toggleSidebar();">كبير / Large</a>
-        <a class="menu-subitem" onclick="changeCategory('between'); toggleSidebar();">بين الوسط والصغير</a>
+        <a class="menu-subitem" id="menuSubAll" onclick="changeCategory('all'); toggleSidebar();">جميع الموديلات / All</a>
+        <a class="menu-subitem" id="menuSubSmall" onclick="changeCategory('small'); toggleSidebar();">صغير / Small</a>
+        <a class="menu-subitem" id="menuSubMedium" onclick="changeCategory('medium'); toggleSidebar();">وسط / Medium</a>
+        <a class="menu-subitem" id="menuSubLarge" onclick="changeCategory('large'); toggleSidebar();">كبير / Large</a>
+        <a class="menu-subitem" id="menuSubBetween" onclick="changeCategory('between'); toggleSidebar();">بين الوسط والصغير</a>
       </div>
     </div>
 
     <div class="menu-category-item">
       <div class="menu-category-header" onclick="toggleSublist('priceList')">
-        <span>SHOP BY PRICE / الأسعار والمحافظ</span> <span>+</span>
+        <span id="menuPriceHeader">SHOP BY PRICE / الأسعار والمحافظ</span> <span>+</span>
       </div>
       <div class="menu-sublist" id="priceList">
-        <a class="menu-subitem" onclick="changeCategory('5'); toggleSidebar();">🛍️ حقائب بسعر 5 دنانير</a>
-        <a class="menu-subitem" onclick="changeCategory('10'); toggleSidebar();">🎒 حقائب بسعر 10 دنانير</a>
-        <a class="menu-subitem" onclick="changeCategory('15'); toggleSidebar();">👜 حقائب بسعر 15 دنانير</a>
-        <a class="menu-subitem" onclick="changeCategory('wallets'); toggleSidebar();">👛 محافظ نسائية</a>
+        <a class="menu-subitem" id="menuSub5" onclick="changeCategory('5'); toggleSidebar();">حقائب بسعر 5 دنانير</a>
+        <a class="menu-subitem" id="menuSub10" onclick="changeCategory('10'); toggleSidebar();">حقائب بسعر 10 دنانير</a>
+        <a class="menu-subitem" id="menuSub15" onclick="changeCategory('15'); toggleSidebar();">حقائب بسعر 15 دنانير</a>
+        <a class="menu-subitem" id="menuSubWallets" onclick="changeCategory('wallets'); toggleSidebar();">محافظ نسائية</a>
       </div>
     </div>
 
     <div class="menu-category-item">
       <div class="menu-category-header" onclick="openPreviousOrders(); toggleSidebar();">
-        <span>📦 طلباتي السابقة / My Orders</span>
+        <span class="menu-icon-wrap" id="menuMyOrders">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          طلباتي السابقة / My Orders
+        </span>
       </div>
     </div>
     <div class="menu-category-item">
       <div class="menu-category-header" onclick="openSearch(); toggleSidebar();">
-        <span>🔎 بحث عن منتج / Search</span>
+        <span class="menu-icon-wrap" id="menuSearch">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          بحث عن منتج / Search
+        </span>
       </div>
     </div>
   </div>
@@ -627,7 +640,7 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </div>
 
-<!-- شريط تبديل شكل العرض الثابت (Sticky) -->
+<!-- شريط تبديل شكل العرض الثابت -->
 <div class="view-switcher-bar">
   <div class="view-switcher-inner">
     <span style="font-size:13px; font-weight:700; color:var(--text-muted);" id="viewFormatText">طريقة العرض:</span>
@@ -785,7 +798,29 @@ const translations = {
     addCartBtn: "أضف للسلة 🛒",
     noProductsInSection: "لا توجد منتجات في هذا القسم حالياً.",
     linkBoxTitle: "رابط المنتج (انقر للنسخ والتحديد تلقائياً):",
-    viewFormatText: "طريقة العرض:"
+    viewFormatText: "طريقة العرض:",
+    catAll: "✨ جميع الموديلات",
+    catSmall: "🔹 صغير",
+    catMedium: "🔸 وسط",
+    catLarge: "🔷 كبير",
+    catBetween: "🔹 بين الوسط والصغير",
+    cat5: "🛍️ حقائب بسعر 5 دنانير",
+    cat10: "🎒 حقائب بسعر 10 دنانير",
+    cat15: "👜 حقائب بسعر 15 دنانير",
+    catWallets: "👛 محافظ نسائية",
+    menuSizeHeader: "SHOP BY SIZE / الأحجام",
+    menuPriceHeader: "SHOP BY PRICE / الأسعار والمحافظ",
+    menuSubAll: "جميع الموديلات / All",
+    menuSubSmall: "صغير / Small",
+    menuSubMedium: "وسط / Medium",
+    menuSubLarge: "كبير / Large",
+    menuSubBetween: "بين الوسط والصغير",
+    menuSub5: "حقائب بسعر 5 دنانير",
+    menuSub10: "حقائب بسعر 10 دنانير",
+    menuSub15: "حقائب بسعر 15 دنانير",
+    menuSubWallets: "محافظ نسائية",
+    menuMyOrders: '<svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> طلباتي السابقة / My Orders',
+    menuSearch: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> بحث عن منتج / Search'
   },
   en: {
     pageTitle: "AMO | Women's Bags",
@@ -812,7 +847,29 @@ const translations = {
     addCartBtn: "Add to Cart 🛒",
     noProductsInSection: "No products in this category right now.",
     linkBoxTitle: "Product Link (Click to select & copy):",
-    viewFormatText: "View Layout:"
+    viewFormatText: "View Layout:",
+    catAll: "✨ All Models",
+    catSmall: "🔹 Small",
+    catMedium: "🔸 Medium",
+    catLarge: "🔷 Large",
+    catBetween: "🔹 Small-Medium",
+    cat5: "🛍️ Bags at 5 JOD",
+    cat10: "🎒 Bags at 10 JOD",
+    cat15: "👜 Bags at 15 JOD",
+    catWallets: "👛 Wallets",
+    menuSizeHeader: "SHOP BY SIZE",
+    menuPriceHeader: "SHOP BY PRICE",
+    menuSubAll: "All Models",
+    menuSubSmall: "Small",
+    menuSubMedium: "Medium",
+    menuSubLarge: "Large",
+    menuSubBetween: "Small-Medium",
+    menuSub5: "Bags at 5 JOD",
+    menuSub10: "Bags at 10 JOD",
+    menuSub15: "Bags at 15 JOD",
+    menuSubWallets: "Wallets",
+    menuMyOrders: '<svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> My Orders',
+    menuSearch: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search'
   }
 };
 
@@ -822,11 +879,52 @@ function toggleLanguage() {
   document.getElementById("htmlRoot").setAttribute("lang", currentLang);
   document.getElementById("htmlRoot").setAttribute("dir", currentLang === 'ar' ? 'rtl' : 'ltr');
   document.getElementById("langToggleBtn").textContent = currentLang === 'ar' ? "EN" : "AR";
+  
+  // تحديث نصوص الهيرو والمكان
+  document.getElementById("heroTitle").textContent = t("heroTitle");
+  document.getElementById("heroSub").textContent = t("heroSub");
+  document.getElementById("heroNote").textContent = t("heroNote");
+  document.getElementById("sectionTitleDisplay").textContent = t("sectionTitle");
+  document.getElementById("sectionSubDisplay").textContent = t("sectionSub");
+  
+  // تحديث الفوتر
   document.getElementById("footerPrivacy").textContent = t("footerPrivacy");
   document.getElementById("footerTerms").textContent = t("footerTerms");
   document.getElementById("footerRefund").textContent = t("footerRefund");
   document.getElementById("footerIp").textContent = t("footerIp");
+  document.getElementById("footerFbText").textContent = t("footerFbText");
+  document.getElementById("footerText").textContent = t("footerText");
   document.getElementById("viewFormatText").textContent = t("viewFormatText");
+
+  // تحديث أزرار الأقسام الرئيسية
+  const catWrap = document.querySelector('.categories-bar');
+  if(catWrap) {
+    catWrap.querySelector('[data-cat="all"]').textContent = t("catAll");
+    catWrap.querySelector('[data-cat="small"]').textContent = t("catSmall");
+    catWrap.querySelector('[data-cat="medium"]').textContent = t("catMedium");
+    catWrap.querySelector('[data-cat="large"]').textContent = t("catLarge");
+    catWrap.querySelector('[data-cat="between"]').textContent = t("catBetween");
+    catWrap.querySelector('[data-cat="5"]').textContent = t("cat5");
+    catWrap.querySelector('[data-cat="10"]').textContent = t("cat10");
+    catWrap.querySelector('[data-cat="15"]').textContent = t("cat15");
+    catWrap.querySelector('[data-cat="wallets"]').textContent = t("catWallets");
+  }
+
+  // تحديث المنيو الجانبي
+  document.getElementById("menuSizeHeader").textContent = t("menuSizeHeader");
+  document.getElementById("menuPriceHeader").textContent = t("menuPriceHeader");
+  document.getElementById("menuSubAll").textContent = t("menuSubAll");
+  document.getElementById("menuSubSmall").textContent = t("menuSubSmall");
+  document.getElementById("menuSubMedium").textContent = t("menuSubMedium");
+  document.getElementById("menuSubLarge").textContent = t("menuSubLarge");
+  document.getElementById("menuSubBetween").textContent = t("menuSubBetween");
+  document.getElementById("menuSub5").textContent = t("menuSub5");
+  document.getElementById("menuSub10").textContent = t("menuSub10");
+  document.getElementById("menuSub15").textContent = t("menuSub15");
+  document.getElementById("menuSubWallets").textContent = t("menuSubWallets");
+  document.getElementById("menuMyOrders").innerHTML = t("menuMyOrders");
+  document.getElementById("menuSearch").innerHTML = t("menuSearch");
+
   renderProducts();
   renderCart();
   if(detailProductId) renderProductDetails();
