@@ -310,15 +310,15 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
 .section-title{font-size:26px;font-weight:900;color:var(--brand-color)}
 .section-sub{color:var(--text-muted);font-size:13px;margin-top:4px}
 
-/* التنسيق الشبكي */
-.grid { display: grid; gap: 20px; transition: all 0.3s ease; }
+/* التنسيق الشبكي وستايل مانجو النظيف */
+.grid { display: grid; gap: 24px; transition: all 0.3s ease; }
 .grid.cols-1 { grid-template-columns: 1fr; }
 .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 
-.grid.cols-1 .card-image { height: 480px; }
-.grid.cols-2 .card-image { height: 320px; }
-.grid.cols-4 .card-image { height: 160px; border-radius: 12px; }
+.grid.cols-1 .card-image { height: 500px; }
+.grid.cols-2 .card-image { height: 350px; }
+.grid.cols-4 .card-image { height: 180px; }
 
 /* عرض 4 أعمدة (صور فقط بدون تفاصيل) */
 .grid.cols-4 .thumbs, 
@@ -331,49 +331,152 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
   background: transparent;
   box-shadow: none;
 }
-.grid.cols-4 .card:hover {
+
+.card{
+  background: transparent;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s ease;
+}
+.card:hover { transform: none; }
+
+.card-image-wrap{
+  position: relative;
+  background: #f4f4f4; /* خلفية رمادية ناعمة ونظيفة مطابقة تماماً لمانجو */
+  cursor: pointer;
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-image{ 
+  width: 100%;
+  display: block;
+  object-fit: cover; 
+  transition: transform 0.4s ease; 
+}
+.card-image-wrap:hover .card-image {
   transform: scale(1.02);
 }
 
-.card{
-  background:var(--card-bg);border-radius:18px;overflow:hidden;
-  box-shadow:0 4px 20px rgba(0,0,0,.03); border:1px solid var(--border-color);
-  display:flex;flex-direction:column; transition:transform .3s ease, box-shadow .3s ease;
-}
-.card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,.06); }
-.card-image-wrap{position:relative;background:#f5f3ef;cursor:pointer}
-.card-image{ width:100%;display:block;object-fit:cover; transition: height 0.3s; }
 .image-badge{
-  position:absolute;top:12px;right:12px; background:rgba(255,255,255,.95);border-radius:999px;
-  padding:6px 12px;font-size:11px;font-weight:700; color: var(--brand-color); box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-main);
+  box-shadow: none;
 }
-html[dir="ltr"] .image-badge { right: auto; left: 12px; }
+html[dir="ltr"] .image-badge { right: auto; left: 10px; }
 
-.thumbs{ display:flex;gap:6px;overflow-x:auto;padding:10px;background:#fff; scrollbar-width:none;border-bottom:1px solid var(--border-color); }
+.thumbs{ 
+  display: flex; 
+  gap: 4px; 
+  overflow-x: auto; 
+  padding: 8px 0; 
+  background: transparent; 
+  scrollbar-width: none; 
+  border-bottom: none; 
+}
 .thumbs::-webkit-scrollbar{display:none}
-.thumbs img{ width:48px;height:48px;object-fit:cover;border:2px solid transparent; border-radius:8px;flex:0 0 auto;cursor:pointer;transition:border-color .2s; }
-.thumbs img.active{border-color:var(--brand-color)}
-
-.info{padding:16px;display:flex;flex-direction:column;flex:1}
-.name{font-size:16px;font-weight:700;margin-bottom:6px;cursor:pointer;color:var(--text-main)}
-.name:hover{color:var(--accent-gold)}
-.price{font-size:18px;font-weight:900;margin-bottom:8px;color:var(--brand-color)}
-.details{color:var(--text-muted);font-size:12px;line-height:1.7;min-height:22px;margin-bottom:8px}
-
-.color-row{ display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;margin-bottom:12px; }
-.color-dot{
-  width:22px;height:22px;border-radius:50%;border:2px solid #fff;
-  box-shadow:0 0 0 1px var(--border-color);cursor:pointer; transition:transform .2s;
+.thumbs img{ 
+  width: 38px; 
+  height: 38px; 
+  object-fit: cover; 
+  border: 1px solid transparent; 
+  border-radius: 4px; 
+  flex: 0 0 auto; 
+  cursor: pointer; 
+  transition: border-color .2s; 
 }
-.color-dot:hover{transform: scale(1.1);}
-.color-dot.selected{box-shadow:0 0 0 2px var(--brand-color)}
+.thumbs img.active{ border-color: var(--text-main); }
 
-.card-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto;padding-top:12px;border-top:1px solid var(--border-color)}
-.details-btn,.add-btn{ border-radius:10px;padding:10px 6px;font-weight:700;font-size:13px;transition:all .2s; }
-.details-btn{border:1px solid var(--border-color);background:#fff;color:var(--text-main)}
-.details-btn:hover{background:#f9f8f6;border-color:var(--text-muted)}
-.add-btn{border:0;background:var(--brand-color);color:#fff}
-.add-btn:hover{background:var(--brand-hover)}
+.info{
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: transparent;
+}
+.name{
+  font-size: 13.5px;
+  font-weight: 400; /* خط أرق وأنيق كلاسيكي مطابق لمانجو */
+  margin-bottom: 6px;
+  cursor: pointer;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+.name:hover{ color: var(--brand-color); }
+
+.price{
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+.details{
+  color: var(--text-muted);
+  font-size: 11.5px;
+  line-height: 1.5;
+  min-height: 18px;
+  margin-bottom: 6px;
+}
+
+.color-row{ 
+  display: flex; 
+  gap: 6px; 
+  flex-wrap: wrap; 
+  margin-top: 4px; 
+  margin-bottom: 10px; 
+}
+.color-dot{
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: none;
+  cursor: pointer; 
+  transition: transform .2s; 
+}
+.color-dot:hover{ transform: scale(1.15); }
+.color-dot.selected{ box-shadow: 0 0 0 1.5px var(--text-main); }
+
+.card-actions{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: none;
+}
+.details-btn, .add-btn{ 
+  border-radius: 4px; 
+  padding: 8px 4px; 
+  font-weight: 500; 
+  font-size: 12px; 
+  transition: all .2s; 
+}
+.details-btn{
+  border: 1px solid var(--border-color);
+  background: #fff;
+  color: var(--text-main);
+}
+.details-btn:hover{ background: #f9f8f6; }
+.add-btn{
+  border: 0;
+  background: var(--text-main);
+  color: #fff;
+}
+.add-btn:hover{ background: var(--brand-hover); }
 
 /* قسم آراء ومشاركات العملاء السلايدر */
 .reviews-section {
