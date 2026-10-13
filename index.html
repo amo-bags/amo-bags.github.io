@@ -375,7 +375,7 @@ html[dir="ltr"] .image-badge { right: auto; left: 12px; }
 .add-btn{border:0;background:var(--brand-color);color:#fff}
 .add-btn:hover{background:var(--brand-hover)}
 
-/* قسم آراء ومشاركات العملاء (Customer Reviews Section) */
+/* قسم آراء ومشاركات العملاء السلايدر */
 .reviews-section {
   max-width: 1200px;
   margin: 50px auto 40px;
@@ -759,22 +759,7 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   <div class="reviews-slider-wrap">
     <button class="review-nav-btn review-nav-prev" onclick="scrollReviews(-300)">‹</button>
     <div class="reviews-slider" id="reviewsSlider">
-      <!-- أضف صور تجارب الزبائن هنا أو استبدل المسارات بصلاتك -->
-      <div class="review-card" onclick="openLightbox(['reviews/1.jpg', 'reviews/2.jpg', 'reviews/3.jpg', 'reviews/4.jpg', 'reviews/5.jpg'], 0)">
-        <img src="reviews/1.jpg" onerror="this.src='https://amo-bags.github.io/logo/logo.jpg'" alt="مشاركة زبونة">
-      </div>
-      <div class="review-card" onclick="openLightbox(['reviews/1.jpg', 'reviews/2.jpg', 'reviews/3.jpg', 'reviews/4.jpg', 'reviews/5.jpg'], 1)">
-        <img src="reviews/2.jpg" onerror="this.src='https://amo-bags.github.io/logo/logo.jpg'" alt="مشاركة زبونة">
-      </div>
-      <div class="review-card" onclick="openLightbox(['reviews/1.jpg', 'reviews/2.jpg', 'reviews/3.jpg', 'reviews/4.jpg', 'reviews/5.jpg'], 2)">
-        <img src="reviews/3.jpg" onerror="this.src='https://amo-bags.github.io/logo/logo.jpg'" alt="مشاركة زبونة">
-      </div>
-      <div class="review-card" onclick="openLightbox(['reviews/1.jpg', 'reviews/2.jpg', 'reviews/3.jpg', 'reviews/4.jpg', 'reviews/5.jpg'], 3)">
-        <img src="reviews/4.jpg" onerror="this.src='https://amo-bags.github.io/logo/logo.jpg'" alt="مشاركة زبونة">
-      </div>
-      <div class="review-card" onclick="openLightbox(['reviews/1.jpg', 'reviews/2.jpg', 'reviews/3.jpg', 'reviews/4.jpg', 'reviews/5.jpg'], 4)">
-        <img src="reviews/5.jpg" onerror="this.src='https://amo-bags.github.io/logo/logo.jpg'" alt="مشاركة زبونة">
-      </div>
+      <!-- سيتم تعبئة الصور ديناميكياً بأمان هنا -->
     </div>
     <button class="review-nav-btn review-nav-next" onclick="scrollReviews(300)">›</button>
   </div>
@@ -921,7 +906,8 @@ const translations = {
     catLarge: "🔷 كبير",
     catBetween: "🔹 بين الوسط والصغير",
     cat5: "🛍️ حقائب بسعر 5 دنانير",
-    cat10: "    cat15: "👜 حقائب بسعر 15 دنانير",
+    cat10: "🎒 حقائب بسعر 10 دنانير",
+    cat15: "👜 حقائب بسعر 15 دنانير",
     catWallets: "👛 محافظ نسائية",
     reviewsTitle: "❤️ مُشاركات زبائننا",
     menuSizeHeader: "SHOP BY SIZE / الأحجام",
@@ -997,7 +983,6 @@ function toggleLanguage() {
   document.getElementById("htmlRoot").setAttribute("dir", currentLang === 'ar' ? 'rtl' : 'ltr');
   document.getElementById("langToggleBtn").textContent = currentLang === 'ar' ? "EN" : "AR";
   
-  // تحديث نصوص الهيرو والمكان
   document.getElementById("heroTitle").textContent = t("heroTitle");
   document.getElementById("heroSub").textContent = t("heroSub");
   document.getElementById("heroNote").textContent = t("heroNote");
@@ -1005,7 +990,6 @@ function toggleLanguage() {
   document.getElementById("sectionSubDisplay").textContent = t("sectionSub");
   document.getElementById("reviewsTitle").textContent = t("reviewsTitle");
   
-  // تحديث الفوتر
   document.getElementById("footerPrivacy").textContent = t("footerPrivacy");
   document.getElementById("footerTerms").textContent = t("footerTerms");
   document.getElementById("footerRefund").textContent = t("footerRefund");
@@ -1014,7 +998,6 @@ function toggleLanguage() {
   document.getElementById("footerText").textContent = t("footerText");
   document.getElementById("viewFormatText").textContent = t("viewFormatText");
 
-  // تحديث أزرار الأقسام الرئيسية
   const catWrap = document.querySelector('.categories-bar');
   if(catWrap) {
     catWrap.querySelector('[data-cat="all"]').textContent = t("catAll");
@@ -1028,7 +1011,6 @@ function toggleLanguage() {
     catWrap.querySelector('[data-cat="wallets"]').textContent = t("catWallets");
   }
 
-  // تحديث المنيو الجانبي
   document.getElementById("menuSizeHeader").textContent = t("menuSizeHeader");
   document.getElementById("menuPriceHeader").textContent = t("menuPriceHeader");
   document.getElementById("menuSubAll").textContent = t("menuSubAll");
@@ -1048,6 +1030,26 @@ function toggleLanguage() {
   if(detailProductId) renderProductDetails();
 }
 function t(key) { return translations[currentLang][key] || key; }
+
+/* تحميل وتهيئة الـ 30 صورة لآراء الزبائن تلقائياً بأمان */
+function initReviewsSlider() {
+  const slider = document.getElementById('reviewsSlider');
+  if(!slider) return;
+  let reviewsHtml = '';
+  const totalReviews = 30;
+  let imagesArray = [];
+  for(let i=1; i<=totalReviews; i++) {
+    imagesArray.push(`reviews/${i}.jpg`);
+  }
+  for(let i=1; i<=totalReviews; i++) {
+    reviewsHtml += `
+      <div class="review-card" onclick="openLightbox(${JSON.stringify(imagesArray).replace(/"/g, '&quot;')}, ${i-1})">
+        <img src="reviews/${i}.jpg" onerror="this.style.display='none'" alt="مشاركة زبونة" loading="lazy">
+      </div>
+    `;
+  }
+  slider.innerHTML = reviewsHtml;
+}
 
 /* دالة التمرير لقسم آراء العملاء */
 function scrollReviews(amount) {
@@ -1772,6 +1774,7 @@ function closeLightbox(){ document.getElementById("lightbox").classList.remove("
 loadCart();
 renderCart();
 loadProducts();
+initReviewsSlider();
 </script>
 </body>
 </html>
