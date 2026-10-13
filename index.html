@@ -418,8 +418,13 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 .swatch{width:16px;height:16px;border-radius:50%;border:1px solid #ccc}
 .detail-add{
   width:100%;border:0;background:var(--brand-color);color:#fff;padding:14px;
-  border-radius:12px;margin-top:18px;font-weight:900;font-size:15px;
+  border-radius:12px;margin-top:12px;font-weight:900;font-size:15px;
 }
+.share-btn{
+  width:100%;border:1px solid var(--brand-color);background:#fff;color:var(--brand-color);padding:12px;
+  border-radius:12px;margin-top:14px;font-weight:700;font-size:13px;transition:all .2s;
+}
+.share-btn:hover{background:#f9f8f6}
 
 .lightbox{
   position:fixed;inset:0;z-index:6000;background:rgba(0,0,0,.95); display:none;align-items:center;justify-content:center;
@@ -695,7 +700,8 @@ const translations = {
     badgeDetails: "اضغطي للتفاصيل",
     detailsBtn: "التفاصيل",
     addCartBtn: "أضف للسلة 🛒",
-    noProductsInSection: "لا توجد منتجات في هذا القسم حالياً."
+    noProductsInSection: "لا توجد منتجات في هذا القسم حالياً.",
+    copyLinkBtn: "📋 نسخ رابط المنتج للواتساب (مع الصورة)"
   },
   en: {
     pageTitle: "AMO | Women's Bags",
@@ -724,7 +730,8 @@ const translations = {
     badgeDetails: "Click for details",
     detailsBtn: "Details",
     addCartBtn: "Add to Cart 🛒",
-    noProductsInSection: "No products in this category right now."
+    noProductsInSection: "No products in this category right now.",
+    copyLinkBtn: "📋 Copy WhatsApp Link (With Image)"
   }
 };
 
@@ -740,6 +747,7 @@ function toggleLanguage() {
   document.getElementById("footerIp").textContent = t("footerIp");
   renderProducts();
   renderCart();
+  if(detailProductId) renderProductDetails();
 }
 function t(key) { return translations[currentLang][key] || key; }
 
@@ -1109,6 +1117,9 @@ function renderProductDetails(){
   const gallery = getGallery(p, colors.length ? detailColorIndex : null);
   const selectedImage = gallery[0] || p.image;
 
+  // رابط المعاينة الثابت المخصص للواتساب لتوليد المعاينة بنجاح
+  const shareUrl = `https://amo-bags.github.io/product/${p.id}/`;
+
   let videoHtml = "";
   if(p.video) {
     videoHtml = `
@@ -1147,9 +1158,37 @@ function renderProductDetails(){
           ${colors.map((c,i)=>`<button class="option ${i===detailColorIndex?'selected':''}" onclick="selectDetailColor(${i})"><span class="swatch" style="background:${esc(c.value||'#ccc')}"></span>${esc(c.name||c.colorName)}</button>`).join("")}
         </div>
       ` : ""}
+
+      <!-- زر نسخ رابط الواتساب الجاهز مع معاينة الصور -->
+      <button class="share-btn" onclick="copyProductShareLink('${shareUrl}')">
+        ${t("copyLinkBtn")}
+      </button>
+
       <button class="detail-add" onclick="addDetailToCart()">${t("addDetailCart")}</button>
     </div>
   `;
+}
+
+function copyProductShareLink(url) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(url).then(() => {
+      alert(currentLang === 'ar' ? "تم نسخ رابط المنتج الجاهز للواتساب!" : "Product WhatsApp link copied!");
+    }).catch(() => {
+      fallbackCopy(url);
+    });
+  } else {
+    fallbackCopy(url);
+  }
+}
+
+function fallbackCopy(url) {
+  const tempInput = document.createElement("input");
+  tempInput.value = url;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
+  alert(currentLang === 'ar' ? "تم نسخ رابط المنتج الجاهز للواتساب!" : "Product WhatsApp link copied!");
 }
 
 function changeDetailImage(index){
