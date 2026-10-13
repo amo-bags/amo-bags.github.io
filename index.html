@@ -138,7 +138,7 @@ header{
   cursor: pointer;
 }
 
-/* القائمة الجانبية المحدثة بنفس ستايل الهيدر */
+/* القائمة الجانبية بنمط ناعم وبدون إيموجيات عادية */
 .sidebar-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 4000;
   opacity: 0; visibility: hidden; transition: all 0.3s ease; backdrop-filter: blur(3px);
@@ -374,6 +374,95 @@ html[dir="ltr"] .image-badge { right: auto; left: 12px; }
 .details-btn:hover{background:#f9f8f6;border-color:var(--text-muted)}
 .add-btn{border:0;background:var(--brand-color);color:#fff}
 .add-btn:hover{background:var(--brand-hover)}
+
+/* قسم آراء ومشاركات العملاء (Customer Reviews Section) */
+.reviews-section {
+  max-width: 1200px;
+  margin: 50px auto 40px;
+  padding: 0 20px;
+  text-align: center;
+}
+.reviews-head-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--brand-color);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.reviews-slider-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.reviews-slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 10px 4px 20px 4px;
+}
+.reviews-slider::-webkit-scrollbar { display: none; }
+
+.review-card {
+  flex: 0 0 260px;
+  height: 380px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  background: #f5f3ef;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+.review-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.review-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-color);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+  color: var(--brand-color);
+  font-size: 22px;
+  font-weight: bold;
+}
+.review-nav-btn:hover {
+  background: var(--brand-color);
+  color: #fff;
+}
+.review-nav-prev { right: -15px; }
+.review-nav-next { left: -15px; }
+
+html[dir="ltr"] .review-nav-prev { right: auto; left: -15px; }
+html[dir="ltr"] .review-nav-next { left: auto; right: -15px; }
+
+@media (max-width: 768px) {
+  .review-card { flex: 0 0 210px; height: 320px; }
+  .review-nav-btn { display: none; }
+}
 
 footer{
   text-align:center; color:var(--text-muted); padding:40px 15px; font-size:13px;
@@ -664,6 +753,33 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </section>
 
+<!-- قسم آراء ومشاركات العملاء السلايدر -->
+<section class="reviews-section">
+  <h2 class="reviews-head-title" id="reviewsTitle">❤️ مُشاركات زبائننا</h2>
+  <div class="reviews-slider-wrap">
+    <button class="review-nav-btn review-nav-prev" onclick="scrollReviews(-300)">‹</button>
+    <div class="reviews-slider" id="reviewsSlider">
+      <!-- أضف صور تجارب الزبائن هنا أو استبدل المسارات بصلاتك -->
+      <div class="review-card" onclick="openLightbox(['reviews/1.jpg', 'reviews/2.jpg', 'reviews/3.jpg', 'reviews/4.jpg', 'reviews/5.jpg'], 0)">
+        <img src="reviews/1.jpg" onerror="this.src='https://amo-bags.github.io/logo/logo.jpg'" alt="مشاركة زبونة">
+      </div>
+      <div class="review-card" onclick="openLightbox(['reviews/1.jpg', 'reviews/2.jpg', 'reviews/3.jpg', 'reviews/4.jpg', 'reviews/5.jpg'], 1)">
+        <img src="reviews/2.jpg" onerror="this.src='https://amo-bags.github.io/logo/logo.jpg'" alt="مشاركة زبونة">
+      </div>
+      <div class="review-card" onclick="openLightbox(['reviews/1.jpg', 'reviews/2.jpg', 'reviews/3.jpg', 'reviews/4.jpg', 'reviews/5.jpg'], 2)">
+        <img src="reviews/3.jpg" onerror="this.src='https://amo-bags.github.io/logo/logo.jpg'" alt="مشاركة زبونة">
+      </div>
+      <div class="review-card" onclick="openLightbox(['reviews/1.jpg', 'reviews/2.jpg', 'reviews/3.jpg', 'reviews/4.jpg', 'reviews/5.jpg'], 3)">
+        <img src="reviews/4.jpg" onerror="this.src='https://amo-bags.github.io/logo/logo.jpg'" alt="مشاركة زبونة">
+      </div>
+      <div class="review-card" onclick="openLightbox(['reviews/1.jpg', 'reviews/2.jpg', 'reviews/3.jpg', 'reviews/4.jpg', 'reviews/5.jpg'], 4)">
+        <img src="reviews/5.jpg" onerror="this.src='https://amo-bags.github.io/logo/logo.jpg'" alt="مشاركة زبونة">
+      </div>
+    </div>
+    <button class="review-nav-btn review-nav-next" onclick="scrollReviews(300)">›</button>
+  </div>
+</section>
+
 <footer>
   <a href="https://www.facebook.com/share/1atoUpuSsz/" target="_blank" rel="noopener" class="footer-fb-link">
     🔵 <span id="footerFbText">تابعونا على فيسبوك AMO Bags</span>
@@ -805,9 +921,9 @@ const translations = {
     catLarge: "🔷 كبير",
     catBetween: "🔹 بين الوسط والصغير",
     cat5: "🛍️ حقائب بسعر 5 دنانير",
-    cat10: "🎒 حقائب بسعر 10 دنانير",
-    cat15: "👜 حقائب بسعر 15 دنانير",
+    cat10: "    cat15: "👜 حقائب بسعر 15 دنانير",
     catWallets: "👛 محافظ نسائية",
+    reviewsTitle: "❤️ مُشاركات زبائننا",
     menuSizeHeader: "SHOP BY SIZE / الأحجام",
     menuPriceHeader: "SHOP BY PRICE / الأسعار والمحافظ",
     menuSubAll: "جميع الموديلات / All",
@@ -857,6 +973,7 @@ const translations = {
     cat10: "🎒 Bags at 10 JOD",
     cat15: "👜 Bags at 15 JOD",
     catWallets: "👛 Wallets",
+    reviewsTitle: "❤️ Customer Reviews",
     menuSizeHeader: "SHOP BY SIZE",
     menuPriceHeader: "SHOP BY PRICE",
     menuSubAll: "All Models",
@@ -886,6 +1003,7 @@ function toggleLanguage() {
   document.getElementById("heroNote").textContent = t("heroNote");
   document.getElementById("sectionTitleDisplay").textContent = t("sectionTitle");
   document.getElementById("sectionSubDisplay").textContent = t("sectionSub");
+  document.getElementById("reviewsTitle").textContent = t("reviewsTitle");
   
   // تحديث الفوتر
   document.getElementById("footerPrivacy").textContent = t("footerPrivacy");
@@ -930,6 +1048,13 @@ function toggleLanguage() {
   if(detailProductId) renderProductDetails();
 }
 function t(key) { return translations[currentLang][key] || key; }
+
+/* دالة التمرير لقسم آراء العملاء */
+function scrollReviews(amount) {
+  const slider = document.getElementById('reviewsSlider');
+  const dir = currentLang === 'ar' ? -1 : 1;
+  slider.scrollBy({ left: amount * dir, behavior: 'smooth' });
+}
 
 /* دالة التحكم في أعداد أعمدة العرض */
 function setGridColumns(cols, btnElement) {
