@@ -6,7 +6,6 @@ const productsNewDir = path.join(__dirname, 'products-new');
 console.log('جاري بدء توليد صفحات المعاينة لجميع المنتجات...');
 
 if (fs.existsSync(productsNewDir)) {
-  // قراءة كافة المجلدات الموجودة داخل products-new تلقائياً
   const folders = fs.readdirSync(productsNewDir);
 
   folders.forEach(folderName => {
@@ -26,13 +25,18 @@ if (fs.existsSync(productsNewDir)) {
         if (product) {
           const id = product.id || folderName;
           const title = `${product.name} | AMO`;
-          const desc = `شنطة نسائية أنيقة - السعر: ${Number(product.price).toFixed(2)} د.أ${product.size ? ' - ' + product.size : ''}`;
+          const desc = `حقيبة نسائية أنيقة - موديل ${id} - السعر: ${Number(product.price).toFixed(2)} د.أ`;
           
-          let image = product.image || 'https://amo-bags.github.io/logo/logo.jpg';
-          if (image.startsWith('./')) {
-            image = 'https://amo-bags.github.io/' + image.replace('./', '');
-          } else if (!image.startsWith('http')) {
-            image = 'https://amo-bags.github.io/' + image.replace(/^\/+/, '');
+          // تحويل مسار الصورة إلى رابط مطلق ومباشر على GitHub Pages
+          let image = product.image || '';
+          if (image) {
+            if (image.startsWith('./')) {
+              image = `https://amo-bags.github.io/products-new/${id}/` + image.replace('./', '');
+            } else if (!image.startsWith('http')) {
+              image = `https://amo-bags.github.io/products-new/${id}/` + image.replace(/^\/+/, '');
+            }
+          } else {
+            image = 'https://amo-bags.github.io/logo/logo.jpg';
           }
 
           const url = `https://amo-bags.github.io/product/${id}/index.html`;
@@ -46,11 +50,13 @@ if (fs.existsSync(productsNewDir)) {
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${desc}">
 <meta property="og:image" content="${image}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="${url}">
 <meta http-equiv="refresh" content="0;url=https://amo-bags.github.io/#product=${id}">
 </head>
 <body>
-<p>جاري تحويلك إلى تفاصيل المنتج في متجر AMO... <a href="https://amo-bags.github.io/#product=${id}">اضغط هنا إذا لم يتم التحويل تلقائياً</a></p>
+<p>جاري تحويلك إلى تفاصيل المنتج في متجر AMO...</p>
 <script>
   window.location.replace("https://amo-bags.github.io/#product=${id}");
 </script>
@@ -63,13 +69,11 @@ if (fs.existsSync(productsNewDir)) {
           }
 
           fs.writeFileSync(path.join(dir, 'index.html'), htmlContent, 'utf8');
-          console.log(`✅ تم بنجاح توليد صفحة المعاينة للمنتج رقم: ${id}`);
+          console.log(`✅ تم توليد المعاينة مع رابط الصورة المطلق للمنتج: ${id}`);
         }
       } catch (err) {
-        console.error(`❌ حدث خطأ أثناء معالجة المنتج ${folderName}:`, err.message);
+        console.error(`❌ خطأ في معالجة ${folderName}:`, err.message);
       }
     }
   });
 }
-
-console.log('🎉 انتهى توليد جميع صفحات المعاينة للمنتجات بنجاح!');
