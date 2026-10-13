@@ -75,7 +75,7 @@ button,input,textarea,select{font:inherit}
 button,a{cursor:pointer}
 img{max-width:100%}
 
-/* هيدر مطابق تماماً لترتيب وستايل مانجو (أيقونات اليسار ثم الشعار ثم القائمة يمين) */
+/* هيدر مانجو بالكامل مع أيقونات ناعمة ونظيفة */
 header{
   position:sticky;top:0;z-index:1000;
   background:rgba(250,249,246,.98);
@@ -86,20 +86,19 @@ header{
   max-width:1200px;margin:auto;padding:12px 16px;
   display:flex;align-items:center;justify-content:space-between;gap:10px;
 }
-.header-left{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
+.header-left{display:flex;align-items:center;gap:10px;flex-wrap:nowrap}
 .header-right{display:flex;align-items:center;gap:12px}
 
 .logo{font-size:24px;font-weight:900;letter-spacing:3px;color:var(--brand-color);text-decoration:none}
 .menu-btn{
-  background:transparent;border:0;font-size:22px;cursor:pointer;color:var(--text-main);padding:4px;
+  background:transparent;border:0;cursor:pointer;color:var(--text-main);padding:4px;
   display:flex;align-items:center;justify-content:center;
 }
 
 .icon-btn {
   background: transparent;
   border: 0;
-  font-size: 18px;
-  padding: 6px 8px;
+  padding: 4px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -110,17 +109,18 @@ header{
   position: relative;
 }
 .icon-btn:hover { background: rgba(0, 0, 0, 0.05); }
+.icon-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
 .cart-badge {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: -2px;
+  right: -2px;
   background: var(--brand-color);
   color: #fff;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 900;
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -131,7 +131,7 @@ header{
   border: 1px solid var(--border-color);
   background: #fff;
   border-radius: 999px;
-  padding: 4px 10px;
+  padding: 3px 8px;
   font-size: 11px;
   font-weight: 700;
   color: var(--text-main);
@@ -177,12 +177,12 @@ html[dir="ltr"] .sidebar.show { left: 0; right: auto; }
 /* زر الواتساب العائم */
 .float-whatsapp-icon {
   position: fixed; bottom: 24px; left: 24px; background: var(--whatsapp-color); color: #fff;
-  width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
   box-shadow: 0 6px 25px rgba(37, 211, 102, 0.45); z-index: 2500; text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
-.float-whatsapp-icon:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6); }
-.float-whatsapp-icon svg { width: 30px; height: 30px; fill: #ffffff; }
+.float-whatsapp-icon:hover { transform: scale(1.1); }
+.float-whatsapp-icon svg { width: 28px; height: 28px; fill: #ffffff; }
 html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
 
 .search-input{
@@ -250,7 +250,7 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
   background: var(--brand-color); color: #fff; border-color: var(--brand-color); box-shadow: 0 4px 14px rgba(51,41,34,.15);
 }
 
-/* شريط تبديل شكل العرض (Grid Switcher Bar) */
+/* شريط التبديل بين أشكال العرض */
 .view-switcher-bar {
   max-width: 1200px;
   margin: 0 auto 18px;
@@ -268,8 +268,9 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
   background: #fff;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 6px 10px;
-  font-size: 14px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -288,15 +289,30 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
 .section-title{font-size:26px;font-weight:900;color:var(--brand-color)}
 .section-sub{color:var(--text-muted);font-size:13px;margin-top:4px}
 
-/* التنسيق الشبكي ودعم الـ 4 أعمدة والموبايل بشكل تام */
+/* التنسيق الشبكي */
 .grid { display: grid; gap: 20px; transition: all 0.3s ease; }
 .grid.cols-1 { grid-template-columns: 1fr; }
 .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
 
 .grid.cols-1 .card-image { height: 480px; }
 .grid.cols-2 .card-image { height: 320px; }
-.grid.cols-4 .card-image { height: 180px; }
+.grid.cols-4 .card-image { height: 160px; border-radius: 12px; }
+
+/* تخصيص الـ 4 أعمدة في الشاشات الصغيرة لنظافة العرض كالماركات العالمية */
+.grid.cols-4 .thumbs, 
+.grid.cols-4 .info, 
+.grid.cols-4 .image-badge {
+  display: none !important;
+}
+.grid.cols-4 .card {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.grid.cols-4 .card:hover {
+  transform: scale(1.02);
+}
 
 .card{
   background:var(--card-bg);border-radius:18px;overflow:hidden;
@@ -542,21 +558,40 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </aside>
 
-<!-- الهيدر العلوي بترتيب مانجو (يسار: السلة، المفضلة، البحث | الوسط: الشعار | اليمين: القائمة) -->
+<!-- الهيدر العلوي بأيقونات متناسقة وناعمة بستايل مانجو -->
 <header>
   <div class="header">
     <div class="header-left">
+      <!-- أيقونة السلة (حقيبة التجميع) -->
       <button class="icon-btn" onclick="openCart()" title="السلة">
-        🛒 <span class="cart-badge cart-count">0</span>
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        <span class="cart-badge cart-count">0</span>
       </button>
-      <a href="https://www.facebook.com/share/1atoUpuSsz/" target="_blank" rel="noopener" class="icon-btn" title="فيسبوك">🔵</a>
-      <button class="icon-btn" onclick="openPreviousOrders()" title="طلباتي">📦</button>
-      <button class="icon-btn" onclick="openSearch()" title="بحث">🔎</button>
+
+      <!-- أيقونة فيسبوك -->
+      <a href="https://www.facebook.com/share/1atoUpuSsz/" target="_blank" rel="noopener" class="icon-btn" title="فيسبوك">
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+      </a>
+
+      <!-- أيقونة طلباتي السابقة (حقيبة التسوق المصغرة/الصندوق) -->
+      <button class="icon-btn" onclick="openPreviousOrders()" title="طلباتي">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+      </button>
+
+      <!-- أيقونة البحث -->
+      <button class="icon-btn" onclick="openSearch()" title="بحث">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+
       <button class="lang-btn-sm" id="langToggleBtn" onclick="toggleLanguage()">EN</button>
     </div>
+
     <a href="#" class="logo">AMO</a>
+
     <div class="header-right">
-      <button class="menu-btn" onclick="toggleSidebar()" aria-label="القائمة">☰</button>
+      <button class="menu-btn" onclick="toggleSidebar()" aria-label="القائمة">
+        <svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
     </div>
   </div>
 </header>
@@ -582,13 +617,13 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </div>
 
-<!-- شريط تبديل شكل العرض (Grid Switcher Bar) -->
+<!-- شريط تبديل شكل العرض -->
 <div class="view-switcher-bar">
   <span style="font-size:13px; font-weight:700; color:var(--text-muted);" id="viewFormatText">طريقة العرض:</span>
   <div class="view-switcher-btns">
-    <button class="switch-grid-btn" onclick="setGridColumns(4)" title="4 أعمدة">☰ 4</button>
-    <button class="switch-grid-btn active" onclick="setGridColumns(2)" title="عمودين">⊞ 2</button>
-    <button class="switch-grid-btn" onclick="setGridColumns(1)" title="صورة كبيرة - عمود واحد">🔲 1</button>
+    <button class="switch-grid-btn" onclick="setGridColumns(4, this)" title="4 صور فقط">☰ 4</button>
+    <button class="switch-grid-btn active" onclick="setGridColumns(2, this)" title="عمودين">⊞ 2</button>
+    <button class="switch-grid-btn" onclick="setGridColumns(1, this)" title="صورة كبيرة - عمود واحد">🔲 1</button>
   </div>
 </div>
 
@@ -596,7 +631,7 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   <div class="section-head">
     <div>
       <h2 id="sectionTitleDisplay" class="section-title">أحدث الحقائب</h2>
-      <div id="sectionSubDisplay" class="section-sub">اضغطي على الصورة أو «التفاصيل» لرؤية كل الصور</div>
+      <div id="sectionSubDisplay" class="section-sub">اضغطي على الصورة لرؤية التفاصيل الكاملة</div>
     </div>
   </div>
   <div id="productsGrid" class="grid cols-2">
@@ -724,7 +759,7 @@ const translations = {
     heroSub: "شنط AMO بتصاميم أنيقة تناسب كل إطلالة",
     heroNote: "🚚 التوصيل 2 د.أ — مجاني عند 49 د.أ فأكثر",
     sectionTitle: "أحدث الحقائب",
-    sectionSub: "اضغطي على الصورة أو «التفاصيل» لرؤية كل الصور",
+    sectionSub: "اضغطي على الصورة لرؤية التفاصيل الكاملة",
     loadingText: "جاري تحميل المنتجات...",
     footerText: "AMO © جميع الحقوق محفوظة",
     emptyCartText: "🛍️ السلة فارغة<br><small>اختاري أي شنطة وستظهر هنا.</small>",
@@ -751,7 +786,7 @@ const translations = {
     heroSub: "AMO bags with elegant designs for every look",
     heroNote: "🚚 Delivery 2 JOD — Free on orders over 49 JOD",
     sectionTitle: "Latest Bags",
-    sectionSub: "Click on image or 'Details' to view photos",
+    sectionSub: "Click on image to view full details",
     loadingText: "Loading products...",
     footerText: "AMO © All Rights Reserved",
     emptyCartText: "🛍️ Cart is empty",
@@ -786,12 +821,12 @@ function toggleLanguage() {
 }
 function t(key) { return translations[currentLang][key] || key; }
 
-/* دالة التحكم في أعداد أعمدة العرض (Grid Switcher) */
-function setGridColumns(cols) {
+/* دالة التحكم في أعداد أعمدة العرض */
+function setGridColumns(cols, btnElement) {
   const grid = document.getElementById("productsGrid");
   grid.className = `grid cols-${cols}`;
   document.querySelectorAll('.switch-grid-btn').forEach(btn => btn.classList.remove('active'));
-  event.currentTarget.classList.add('active');
+  if(btnElement) btnElement.classList.add('active');
 }
 
 function toggleSidebar() {
