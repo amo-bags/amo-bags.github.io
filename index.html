@@ -294,6 +294,15 @@ footer{
 }
 .footer-fb-link:hover { text-decoration: underline; }
 
+/* تنسيق روابط السياسات في الـ Footer */
+.footer-policies {
+  display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 4px 0;
+}
+.footer-policy-link {
+  color: var(--text-muted); text-decoration: none; font-size: 12px; transition: color 0.2s;
+}
+.footer-policy-link:hover { color: var(--brand-color); text-decoration: underline; }
+
 .overlay{ position:fixed;inset:0;background:rgba(0,0,0,.5); backdrop-filter: blur(4px); z-index:3000;display:none; }
 .overlay.show{display:block}
 
@@ -553,6 +562,14 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   <a href="https://www.facebook.com/share/1atoUpuSsz/" target="_blank" rel="noopener" class="footer-fb-link">
     🔵 <span id="footerFbText">تابعونا على فيسبوك AMO Bags</span>
   </a>
+  
+  <!-- روابط السياسات المطلوبة لإعلانات Meta و Google -->
+  <div class="footer-policies">
+    <a href="privacy-policy.html" id="footerPrivacy" class="footer-policy-link">سياسة الخصوصية</a> |
+    <a href="terms-and-conditions.html" id="footerTerms" class="footer-policy-link">الشروط والأحكام</a> |
+    <a href="refund-policy.html" id="footerRefund" class="footer-policy-link">سياسة الاستبدال والاسترجاع</a>
+  </div>
+
   <div id="footerText">AMO © جميع الحقوق محفوظة</div>
 </footer>
 
@@ -654,6 +671,9 @@ const translations = {
     pageTitle: "AMO | شنط نسائية",
     fbText: "فيسبوك",
     footerFbText: "تابعونا على فيسبوك AMO Bags",
+    footerPrivacy: "سياسة الخصوصية",
+    footerTerms: "الشروط والأحكام",
+    footerRefund: "سياسة الاستبدال والاسترجاع",
     searchBtn: "🔎 بحث",
     ordersBtn: "📦 طلباتي",
     cartText: "السلة",
@@ -679,6 +699,9 @@ const translations = {
     pageTitle: "AMO | Women's Bags",
     fbText: "Facebook",
     footerFbText: "Follow us on Facebook AMO Bags",
+    footerPrivacy: "Privacy Policy",
+    footerTerms: "Terms & Conditions",
+    footerRefund: "Refund Policy",
     searchBtn: "🔎 Search",
     ordersBtn: "📦 My Orders",
     cartText: "Cart",
@@ -708,6 +731,9 @@ function toggleLanguage() {
   document.getElementById("htmlRoot").setAttribute("lang", currentLang);
   document.getElementById("htmlRoot").setAttribute("dir", currentLang === 'ar' ? 'rtl' : 'ltr');
   document.getElementById("langToggleBtn").textContent = currentLang === 'ar' ? "🌐 EN" : "🌐 AR";
+  document.getElementById("footerPrivacy").textContent = t("footerPrivacy");
+  document.getElementById("footerTerms").textContent = t("footerTerms");
+  document.getElementById("footerRefund").textContent = t("footerRefund");
   renderProducts();
   renderCart();
 }
