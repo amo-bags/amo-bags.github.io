@@ -8,8 +8,8 @@ const product = {
   gallery: [
     "86black.png",
     "86bagiwithcamil.png",
-    "86inside.png",
-    "862.png"
+    "862.png",
+    "86inside.png"
   ],
   colors: [
     {
