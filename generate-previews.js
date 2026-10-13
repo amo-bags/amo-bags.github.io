@@ -25,14 +25,17 @@ if (fs.existsSync(productsNewDir)) {
         if (product) {
           const id = product.id || folderName;
           const title = `${product.name} | AMO`;
-          const desc = `حقيبة نسائية أنيقة - موديل ${id} - السعر: ${Number(product.price).toFixed(2)} د.أ`;
+          const desc = `شنطة نسائية أنيقة - موديل ${id} - السعر: ${Number(product.price).toFixed(2)} د.أ${product.size ? ' - ' + product.size : ''}`;
           
-          // تحويل مسار الصورة إلى رابط مطلق ومباشر على GitHub Pages
+          // معالجة ذكية لرابط الصورة لتتحول دائماً إلى رابط مطلق وصحيح 100%
           let image = product.image || '';
           if (image) {
-            if (image.startsWith('./')) {
+            if (image.startsWith('http')) {
+              // جاهزة كما هي
+            } else if (image.startsWith('./')) {
               image = `https://amo-bags.github.io/products-new/${id}/` + image.replace('./', '');
-            } else if (!image.startsWith('http')) {
+            } else {
+              // إذا كان اسم الصورة مجرداً (بدون ./ أو http) سيقوم بربطه بالمجلد تلقائياً
               image = `https://amo-bags.github.io/products-new/${id}/` + image.replace(/^\/+/, '');
             }
           } else {
@@ -56,7 +59,7 @@ if (fs.existsSync(productsNewDir)) {
 <meta http-equiv="refresh" content="0;url=https://amo-bags.github.io/#product=${id}">
 </head>
 <body>
-<p>جاري تحويلك إلى تفاصيل المنتج في متجر AMO...</p>
+<p>جاري تحويلك إلى تفاصيل المنتج في متجر AMO... <a href="https://amo-bags.github.io/#product=${id}">اضغط هنا</a></p>
 <script>
   window.location.replace("https://amo-bags.github.io/#product=${id}");
 </script>
@@ -69,11 +72,13 @@ if (fs.existsSync(productsNewDir)) {
           }
 
           fs.writeFileSync(path.join(dir, 'index.html'), htmlContent, 'utf8');
-          console.log(`✅ تم توليد المعاينة مع رابط الصورة المطلق للمنتج: ${id}`);
+          console.log(`✅ تم بنجاح توليد المعاينة للمنتج: ${id} مع الصورة: ${image}`);
         }
       } catch (err) {
-        console.error(`❌ خطأ في معالجة ${folderName}:`, err.message);
+        console.error(`❌ خطأ في معالجة المنتج ${folderName}:`, err.message);
       }
     }
   });
 }
+
+console.log('🎉 انتهى توليد جميع صفحات المعاينة بنجاح!');
