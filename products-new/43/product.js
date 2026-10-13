@@ -1,21 +1,37 @@
 const product = {
   id: "43",
-  name: "شنطة نسائية - موديل 43",
+  name: "حقيبة نسائية أنيقة - موديل 43",
   price: 15,
-  size: "وسط (عرض 30 سم × ارتفاع 20 سم)",
-  dimensions: "30 سم × 20 سم",
-  image: "43blue.jpg",
-  colors: [
-    { name: "أزرق", colorName: "أزرق", value: "#1e3a8a", image: "43blue.jpg" },
-    { name: "خمري", colorName: "خمري", value: "#6E1C24", image: "43darkred.jpg" }
-  ],
+  size: "وسط",
+  dimensions: "29 سم عرض × 22 سم ارتفاع",
+  image: "43darkred.jpg",
   gallery: [
-    "43inside.png",
+    "43darkred.jpg",
     "43blue.jpg",
-    "43darkred.jpg"
+    "43pink.jpg",
+    "43inside.png"
+  ],
+  colors: [
+    {
+      name: "خمري",
+      colorName: "خمري",
+      value: "#800020",
+      image: "43darkred.jpg"
+    },
+    {
+      name: "ازرق",
+      colorName: "ازرق",
+      value: "#1b263b",
+      image: "43blue.jpg"
+    },
+    {
+      name: "زهر",
+      colorName: "زهر",
+      value: "#ffc0cb",
+      image: "43pink.jpg"
+    }
   ]
 };
 
 window.AMO_PRODUCTS = window.AMO_PRODUCTS || [];
 window.AMO_PRODUCTS.push(product);
-
