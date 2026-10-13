@@ -50,14 +50,15 @@ folders.forEach(folderName => {
         let image = product.image || '';
         if (image) {
           if (image.startsWith('http')) {
-            // رابط مباشر جاهز
-          } else if (image.startsWith('./')) {
-            image = `https://amo-bags.github.io/products-new/${folderName}/` + image.replace('./', '');
+            // رابط مباشر جاهز مسبقاً
           } else {
-            image = `https://amo-bags.github.io/products-new/${folderName}/` + image.replace(/^\/+/, '');
+            // تنظيف مسار الصورة ليصبح اسم الملف فقط (مثال: 81black.png)
+            const cleanImageName = image.replace('./', '').replace(/^\/+/, '');
+            // استخدام رابط GitHub Raw المباشر لمنع أخطاء المسارات
+            image = `https://raw.githubusercontent.com/amo-bags/amo-bags.github.io/main/products-new/${folderName}/${cleanImageName}`;
           }
         } else {
-          image = 'https://amo-bags.github.io/logo/logo.jpg';
+          image = 'https://raw.githubusercontent.com/amo-bags/amo-bags.github.io/main/logo/logo.jpg';
         }
 
         const url = `https://amo-bags.github.io/product/${id}/index.html`;
