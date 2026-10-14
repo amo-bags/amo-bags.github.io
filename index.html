@@ -1172,6 +1172,13 @@ function setGridColumns(cols, btnElement) {
   grid.className = `grid cols-${cols}`;
   document.querySelectorAll('.switch-grid-btn').forEach(btn => btn.classList.remove('active'));
   if(btnElement) btnElement.classList.add('active');
+
+  // التمرير تلقائياً لشبكة المنتجات عند تبديل شكل العرض
+  if (grid) {
+    const yOffset = -180;
+    const y = grid.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
 }
 
 function toggleSidebar() {
@@ -1365,7 +1372,7 @@ function changeCategory(cat, btnElement) {
   }
   renderProducts();
 
-  // التمرير مباشرة إلى شبكة المنتجات بدلاً من الهيدر أو شريط الأقسام
+  // التمرير تلقائياً لشبكة المنتجات عند تغيير الفئة
   const gridElement = document.getElementById('productsGrid');
   if (gridElement) {
     const yOffset = -180; 
