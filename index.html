@@ -1364,7 +1364,14 @@ function changeCategory(cat, btnElement) {
     targetBtn.classList.add('active');
   }
   renderProducts();
-  document.getElementById('products').scrollIntoView({behavior:'smooth'});
+
+  // التمرير مباشرة إلى شبكة المنتجات بدلاً من الهيدر أو شريط الأقسام
+  const gridElement = document.getElementById('productsGrid');
+  if (gridElement) {
+    const yOffset = -180; 
+    const y = gridElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
 
   if (cat === 'all') {
     history.pushState({}, "", location.pathname + location.search);
