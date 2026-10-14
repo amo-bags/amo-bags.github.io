@@ -31,23 +31,19 @@ src="https://www.facebook.com/tr?id=2844053165988012&ev=PageView&noscript=1"
 <meta property="og:image" id="ogImage" content="https://amo-bags.github.io/logo/logo.jpg">
 <meta property="og:url" id="ogUrl" content="https://amo-bags.github.io/">
 
-<!-- خط عربي كلاسيكي راقي (Tajawal) مع التحميل المسبق -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- خط عربي كلاسيكي راقي (Tajawal) -->
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 
 <!-- مكتبة EmailJS لإرسال الإيميلات -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script type="text/javascript">
-   window.addEventListener('DOMContentLoaded', function(){
-      if(typeof emailjs !== 'undefined') {
-         emailjs.init("le9c2FsncVWc456D6");
-      }
-   });
+   (function(){
+      emailjs.init("le9c2FsncVWc456D6");
+   })();
 </script>
 
 <!-- استدعاء ملف الأرقام الخارجي لتحسين السرعة -->
-<script src="products-list.js" defer></script>
+<script src="products-list.js"></script>
 
 <style>
 :root {
@@ -79,7 +75,6 @@ button,input,textarea,select{font:inherit}
 button,a{cursor:pointer}
 img{max-width:100%}
 
-/* هيدر مانجو متناسق تماماً */
 header{
   position:sticky;top:0;z-index:1000;
   background:rgba(250,249,246,.98);
@@ -142,7 +137,6 @@ header{
   cursor: pointer;
 }
 
-/* القائمة الجانبية بنمط ناعم وبدون إيموجيات عادية */
 .sidebar-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 4000;
   opacity: 0; visibility: hidden; transition: all 0.3s ease; backdrop-filter: blur(3px);
@@ -185,7 +179,6 @@ html[dir="ltr"] .sidebar.show { left: 0; right: auto; }
   width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
 }
 
-/* زر الواتساب العائم */
 .float-whatsapp-icon {
   position: fixed; bottom: 24px; left: 24px; background: var(--whatsapp-color); color: #fff;
   width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -261,7 +254,6 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
   background: var(--brand-color); color: #fff; border-color: var(--brand-color); box-shadow: 0 4px 14px rgba(51,41,34,.15);
 }
 
-/* شريط تبديل شكل العرض الثابت */
 .view-switcher-bar {
   position: sticky;
   top: 115px;
@@ -314,7 +306,6 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
 .section-title{font-size:26px;font-weight:900;color:var(--brand-color)}
 .section-sub{color:var(--text-muted);font-size:13px;margin-top:4px}
 
-/* التنسيق الشبكي وستايل مانجو النظيف */
 .grid { display: grid; gap: 24px; transition: all 0.3s ease; }
 .grid.cols-1 { grid-template-columns: 1fr; }
 .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -324,7 +315,6 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
 .grid.cols-2 .card-image { height: 350px; }
 .grid.cols-4 .card-image { height: 180px; }
 
-/* عرض 4 أعمدة (صور فقط بدون تفاصيل) */
 .grid.cols-4 .thumbs, 
 .grid.cols-4 .info, 
 .grid.cols-4 .image-badge {
@@ -350,7 +340,7 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
 
 .card-image-wrap{
   position: relative;
-  background: #f4f4f4; /* خلفية رمادية ناعمة ونظيفة مطابقة تماماً لمانجو */
+  background: #f4f4f4;
   cursor: pointer;
   border-radius: 0;
   overflow: hidden;
@@ -413,7 +403,7 @@ html[dir="ltr"] .image-badge { right: auto; left: 10px; }
 }
 .name{
   font-size: 13.5px;
-  font-weight: 400; /* خط أرق وأنيق كلاسيكي مطابق لمانجو */
+  font-weight: 400;
   margin-bottom: 6px;
   cursor: pointer;
   color: var(--text-main);
@@ -482,7 +472,6 @@ html[dir="ltr"] .image-badge { right: auto; left: 10px; }
 }
 .add-btn:hover{ background: var(--brand-hover); }
 
-/* قسم آراء ومشاركات العملاء السلايدر */
 .reviews-section {
   max-width: 1200px;
   margin: 50px auto 40px;
@@ -739,14 +728,12 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 
 <body>
 
-<!-- زر الواتساب العائم -->
 <a href="https://wa.me/962790780914" target="_blank" rel="noopener" class="float-whatsapp-icon" aria-label="واتساب">
   <svg viewBox="0 0 32 32">
     <path d="M16 2a13 13 0 0 0-11 20L3 29l7.2-1.9A13 13 0 1 0 16 2zm0 23.8a10.8 10.8 0 0 1-5.5-1.5l-.4-.2-4.1 1.1 1.1-4-.3-.5a10.8 10.8 0 1 1 9.2 5.1zm5.9-8.1c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a9.2 9.2 0 0 1-2.7-1.7 10.1 10.1 0 0 1-1.9-2.3c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6s0-.4 0-.5l-1-2.3c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.7.1-1 .5a4.3 4.3 0 0 0-1.3 3.2 7.5 7.5 0 0 0 1.6 4 17.2 17.2 0 0 0 6.6 5.8c2.4 1 2.9.8 3.4.8a2.9 2.9 0 0 0 1.9-1.3 2.4 2.4 0 0 0 .2-1.3c-.2-.1-1.8-1-2.1-1.1z"/>
   </svg>
 </a>
 
-<!-- القائمة الجانبية بنمط ناعم وبدون إيموجيات عادية -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 <aside class="sidebar" id="sidebarMenu">
   <div class="sidebar-header">
@@ -799,7 +786,6 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </aside>
 
-<!-- الهيدر العلوي -->
 <header>
   <div class="header">
     <div class="header-left">
@@ -839,7 +825,6 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   <span class="hero-note" id="heroNote">🚚 التوصيل 2 د.أ — مجاني عند 49 د.أ فأكثر</span>
 </section>
 
-<!-- شريط الأقسام -->
 <div class="categories-wrap" id="products">
   <div class="categories-bar">
     <button class="cat-btn active" onclick="changeCategory('all', this)" data-cat="all">✨ جميع الموديلات</button>
@@ -855,7 +840,6 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </div>
 
-<!-- شريط تبديل شكل العرض الثابت -->
 <div class="view-switcher-bar">
   <div class="view-switcher-inner">
     <span style="font-size:13px; font-weight:700; color:var(--text-muted);" id="viewFormatText">طريقة العرض:</span>
@@ -879,14 +863,11 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </section>
 
-<!-- قسم آراء ومشاركات العملاء السلايدر -->
 <section class="reviews-section">
   <h2 class="reviews-head-title" id="reviewsTitle">❤️ مُشاركات زبائننا</h2>
   <div class="reviews-slider-wrap">
     <button class="review-nav-btn review-nav-prev" onclick="scrollReviews(-300)">‹</button>
-    <div class="reviews-slider" id="reviewsSlider">
-      <!-- سيتم تعبئة الصور ديناميكياً بأمان هنا -->
-    </div>
+    <div class="reviews-slider" id="reviewsSlider"></div>
     <button class="review-nav-btn review-nav-next" onclick="scrollReviews(300)">›</button>
   </div>
 </section>
@@ -958,7 +939,6 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 <div id="productModal" class="modal"><div id="productBox" class="modal-box"></div></div>
 <div id="reviewModal" class="modal"><div id="reviewBox" class="modal-box"></div></div>
 
-<!-- مودال البحث -->
 <div id="searchModal" class="modal">
   <div class="modal-box">
     <button class="close" onclick="closeSearch()">×</button>
@@ -982,7 +962,6 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </div>
 
-<!-- الطلبات السابقة -->
 <div id="ordersModal" class="modal">
   <div class="modal-box">
     <button class="close" onclick="closePreviousOrders()">×</button>
@@ -1163,7 +1142,6 @@ function toggleLanguage() {
 }
 function t(key) { return translations[currentLang][key] || key; }
 
-/* تحميل وتهيئة الـ 30 صورة لآراء الزبائن تلقائياً بأمان وبشكل أسرع */
 function initReviewsSlider() {
   const slider = document.getElementById('reviewsSlider');
   if(!slider) return;
@@ -1176,21 +1154,19 @@ function initReviewsSlider() {
   for(let i=1; i<=totalReviews; i++) {
     reviewsHtml += `
       <div class="review-card" onclick="openLightbox(${JSON.stringify(imagesArray).replace(/"/g, '&quot;')}, ${i-1})">
-        <img src="reviews/${i}.jpg" onerror="this.parentElement.style.display='none'" alt="مشاركة زبونة" loading="lazy">
+        <img src="reviews/${i}.jpg" onerror="this.style.display='none'" alt="مشاركة زبونة" loading="lazy">
       </div>
     `;
   }
   slider.innerHTML = reviewsHtml;
 }
 
-/* دالة التمرير لقسم آراء العملاء */
 function scrollReviews(amount) {
   const slider = document.getElementById('reviewsSlider');
   const dir = currentLang === 'ar' ? -1 : 1;
   slider.scrollBy({ left: amount * dir, behavior: 'smooth' });
 }
 
-/* دالة التحكم في أعداد أعمدة العرض */
 function setGridColumns(cols, btnElement) {
   const grid = document.getElementById("productsGrid");
   grid.className = `grid cols-${cols}`;
@@ -1300,32 +1276,25 @@ function saveCart(){ localStorage.setItem(CART_KEY,JSON.stringify(cart)); }
 async function loadProducts(){
   const grid = document.getElementById("productsGrid");
   try{
-    // تحسين السرعة بتحميل الدفعات (Batched Fetching) لتخفيف الضغط على الشبكة والمتصفح
-    const batchSize = 15;
-    let loaded = [];
-    for (let i = 0; i < DYNAMIC_PRODUCT_FILES.length; i += batchSize) {
-      const batchFiles = DYNAMIC_PRODUCT_FILES.slice(i, i + batchSize);
-      const batchResults = await Promise.all(batchFiles.map(async file=>{
+    const loaded = await Promise.all(DYNAMIC_PRODUCT_FILES.map(async file=>{
+      try{
+        const response = await fetch(file,{cache:"no-store"});
+        if(!response.ok) return null;
+        const source = await response.text();
+        let product = null;
         try{
-          const response = await fetch(file,{cache:"default"});
-          if(!response.ok) return null;
-          const source = await response.text();
-          let product = null;
-          try{
-            product = new Function(source + "\nreturn (typeof product !== 'undefined' ? product : null);")();
-          }catch(e){
-            const match = file.match(/products-new\/(\d+)\//);
-            if(match) {
-              const num = match[1];
-              product = new Function(source + `\nreturn (typeof product${num} !== 'undefined' ? product${num} : null);`)();
-            }
+          product = new Function(source + "\nreturn (typeof product !== 'undefined' ? product : null);")();
+        }catch(e){
+          const match = file.match(/products-new\/(\d+)\//);
+          if(match) {
+            const num = match[1];
+            product = new Function(source + `\nreturn (typeof product${num} !== 'undefined' ? product${num} : null);`)();
           }
-          if(product && product.id) return normalizeProduct(product,file);
-          return null;
-        }catch(error){ return null; }
-      }));
-      loaded = loaded.concat(batchResults);
-    }
+        }
+        if(product && product.id) return normalizeProduct(product,file);
+        return null;
+      }catch(error){ return null; }
+    }));
 
     products = loaded.filter(Boolean).sort((a, b) => {
       const getPriority = (p) => {
@@ -1404,7 +1373,6 @@ function changeCategory(cat, btnElement) {
   }
 }
 
-/* دالة تجميع صور المنتجات والألوان بالتفصيل للتنقل بين الألوان كاملة */
 function getAllProductFullImages(p) {
   let list = [];
   if (p.colors && p.colors.length) {
@@ -1724,7 +1692,7 @@ function renderCart(){
   }else{
     body.innerHTML = cart.map((x,i)=>`
       <div class="cart-item">
-        <img src="${esc(x.image)}" alt="${esc(x.name)}">
+        <img src="${esc(x.image)}" alt="${esc(x.name)}" loading="lazy">
         <div class="cart-item-info">
           <div class="cart-item-name">${esc(x.name)}</div>
           <div class="cart-meta">
@@ -1800,7 +1768,7 @@ function searchProducts(){
   const currencySymbol = currentLang === 'ar' ? 'د.أ' : 'JOD';
   results.innerHTML = found.map(p => `
     <div class="search-result" onclick="openSearchProduct('${jsesc(p.id)}')">
-      <img src="${esc(p.image)}" alt="">
+      <img src="${esc(p.image)}" alt="" loading="lazy">
       <div class="search-result-info">
         <div class="search-result-name">${esc(p.name)}</div>
         <div class="search-result-meta">${Number(p.price).toFixed(2)} ${currencySymbol} ${p.size ? ` • ${esc(p.size)}` : ""}</div>
@@ -1928,7 +1896,6 @@ function reviewOrder(){
   cart = []; saveCart(); renderCart(); closeCart();
 }
 
-/* دوال العرض والتنقل الكامل للصور بنجاح */
 function openLightbox(gallery, index){
   if(!gallery || !gallery.length) return;
   lightboxGallery = gallery;
