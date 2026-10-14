@@ -988,7 +988,7 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 </div>
 
 <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
-  <button class="lb lb-close" onclick="closeLightbox()">×</button>
+  <button class="lb lb-close" onclick="closeLightbox(event)">×</button>
   <button class="lb lb-prev" onclick="prevLightbox(event)">‹</button>
   <img id="lightboxImg" src="" alt="">
   <button class="lb lb-next" onclick="nextLightbox(event)">›</button>
@@ -1393,6 +1393,24 @@ function changeCategory(cat, btnElement) {
   }
 }
 
+/* دالة تجميع صور المنتجات والألوان بالتفصيل للتنقل بين الألوان كاملة */
+function getAllProductFullImages(p) {
+  let list = [];
+  if (p.colors && p.colors.length) {
+    p.colors.forEach(c => {
+      if (c.image && !list.includes(c.image)) list.push(c.image);
+      if (c.gallery && Array.isArray(c.gallery)) {
+        c.gallery.forEach(img => { if (!list.includes(img)) list.push(img); });
+      }
+    });
+  }
+  if (p.gallery && Array.isArray(p.gallery)) {
+    p.gallery.forEach(img => { if (!list.includes(img)) list.push(img); });
+  }
+  if (p.image && !list.includes(p.image)) list.push(p.image);
+  return list.length ? list : [p.image];
+}
+
 function getGallery(p,colorIndex=null){
   if(colorIndex !== null && p.colors?.[colorIndex]?.gallery?.length) return p.colors[colorIndex].gallery;
   if(colorIndex !== null && p.colors?.[colorIndex]?.image){
@@ -1562,6 +1580,7 @@ function renderProductDetails(){
   if(!p) return;
   const colors = p.colors || [];
   const gallery = getGallery(p, colors.length ? detailColorIndex : null);
+  const fullImages = getAllProductFullImages(p);
   const selectedImage = gallery[0] || p.image;
   const shareUrl = `https://amo-bags.github.io/product/${p.id}/index.html`;
 
@@ -1583,7 +1602,7 @@ function renderProductDetails(){
     <button class="modal-nav-btn modal-nav-prev" onclick="navigateProduct(-1)" title="الموديل السابق">‹</button>
     <button class="modal-nav-btn modal-nav-next" onclick="navigateProduct(1)" title="الموديل التالي">›</button>
 
-    <img id="detailMainImage" class="product-detail-main" src="${esc(selectedImage)}" alt="${esc(p.name)}" onclick="openLightbox(${JSON.stringify(gallery).replace(/"/g, '&quot;')},0)">
+    <img id="detailMainImage" class="product-detail-main" src="${esc(selectedImage)}" alt="${esc(p.name)}" onclick="openLightbox(${JSON.stringify(fullImages).replace(/"/g, '&quot;')}, ${fullImages.indexOf(selectedImage) >= 0 ? fullImages.indexOf(selectedImage) : 0})">
     <div class="detail-thumbs">
       ${gallery.map((im,i)=>`<img src="${esc(im)}" class="${i===0?'active':''}" onclick="changeDetailImage(${i})" alt="">`).join("")}
     </div>
@@ -1618,10 +1637,12 @@ function changeDetailImage(index){
   const p = products.find(x=>x.id===detailProductId);
   if(!p) return;
   const gallery = getGallery(p, p.colors?.length ? detailColorIndex : null);
+  const fullImages = getAllProductFullImages(p);
   const img = document.getElementById("detailMainImage");
   if(img && gallery[index]){
     img.src = gallery[index];
-    img.onclick = ()=>openLightbox(gallery,index);
+    const fullIdx = fullImages.indexOf(gallery[index]);
+    img.onclick = ()=>openLightbox(fullImages, fullIdx >= 0 ? fullIdx : 0);
   }
   document.querySelectorAll(".detail-thumbs img").forEach((x,i)=>{ x.classList.toggle("active", i===index); });
 }
@@ -1896,12 +1917,33 @@ function reviewOrder(){
   cart = []; saveCart(); renderCart(); closeCart();
 }
 
-function openLightbox(gallery,index){
-  lightboxGallery = gallery; lightboxIndex = index;
-  document.getElementById("lightboxImg").src = gallery[index];
+/* دوال العرض والتنقل الكامل للصور بنجاح */
+function openLightbox(gallery, index){
+  if(!gallery || !gallery.length) return;
+  lightboxGallery = gallery;
+  lightboxIndex = index >= 0 && index < gallery.length ? index : 0;
+  document.getElementById("lightboxImg").src = lightboxGallery[lightboxIndex];
   document.getElementById("lightbox").classList.add("show");
 }
-function closeLightbox(){ document.getElementById("lightbox").classList.remove("show"); }
+
+function prevLightbox(e){
+  if(e) e.stopPropagation();
+  if(!lightboxGallery.length) return;
+  lightboxIndex = (lightboxIndex - 1 + lightboxGallery.length) % lightboxGallery.length;
+  document.getElementById("lightboxImg").src = lightboxGallery[lightboxIndex];
+}
+
+function nextLightbox(e){
+  if(e) e.stopPropagation();
+  if(!lightboxGallery.length) return;
+  lightboxIndex = (lightboxIndex + 1) % lightboxGallery.length;
+  document.getElementById("lightboxImg").src = lightboxGallery[lightboxIndex];
+}
+
+function closeLightbox(e){
+  if(e && e.target.tagName === 'IMG') return;
+  document.getElementById("lightbox").classList.remove("show");
+}
 
 loadCart();
 renderCart();
