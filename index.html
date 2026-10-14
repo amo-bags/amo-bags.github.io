@@ -31,19 +31,23 @@ src="https://www.facebook.com/tr?id=2844053165988012&ev=PageView&noscript=1"
 <meta property="og:image" id="ogImage" content="https://amo-bags.github.io/logo/logo.jpg">
 <meta property="og:url" id="ogUrl" content="https://amo-bags.github.io/">
 
-<!-- خط عربي كلاسيكي راقي (Tajawal) -->
+<!-- خط عربي كلاسيكي راقي (Tajawal) مع التحميل المسبق -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 
 <!-- مكتبة EmailJS لإرسال الإيميلات -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
 <script type="text/javascript">
-   (function(){
-      emailjs.init("le9c2FsncVWc456D6");
-   })();
+   window.addEventListener('DOMContentLoaded', function(){
+      if(typeof emailjs !== 'undefined') {
+         emailjs.init("le9c2FsncVWc456D6");
+      }
+   });
 </script>
 
 <!-- استدعاء ملف الأرقام الخارجي لتحسين السرعة -->
-<script src="products-list.js"></script>
+<script src="products-list.js" defer></script>
 
 <style>
 :root {
@@ -1159,7 +1163,7 @@ function toggleLanguage() {
 }
 function t(key) { return translations[currentLang][key] || key; }
 
-/* تحميل وتهيئة الـ 30 صورة لآراء الزبائن تلقائياً بأمان */
+/* تحميل وتهيئة الـ 30 صورة لآراء الزبائن تلقائياً بأمان وبشكل أسرع */
 function initReviewsSlider() {
   const slider = document.getElementById('reviewsSlider');
   if(!slider) return;
@@ -1172,7 +1176,7 @@ function initReviewsSlider() {
   for(let i=1; i<=totalReviews; i++) {
     reviewsHtml += `
       <div class="review-card" onclick="openLightbox(${JSON.stringify(imagesArray).replace(/"/g, '&quot;')}, ${i-1})">
-        <img src="reviews/${i}.jpg" onerror="this.style.display='none'" alt="مشاركة زبونة" loading="lazy">
+        <img src="reviews/${i}.jpg" onerror="this.parentElement.style.display='none'" alt="مشاركة زبونة" loading="lazy">
       </div>
     `;
   }
@@ -1296,25 +1300,32 @@ function saveCart(){ localStorage.setItem(CART_KEY,JSON.stringify(cart)); }
 async function loadProducts(){
   const grid = document.getElementById("productsGrid");
   try{
-    const loaded = await Promise.all(DYNAMIC_PRODUCT_FILES.map(async file=>{
-      try{
-        const response = await fetch(file,{cache:"no-store"});
-        if(!response.ok) return null;
-        const source = await response.text();
-        let product = null;
+    // تحسين السرعة بتحميل الدفعات (Batched Fetching) لتخفيف الضغط على الشبكة والمتصفح
+    const batchSize = 15;
+    let loaded = [];
+    for (let i = 0; i < DYNAMIC_PRODUCT_FILES.length; i += batchSize) {
+      const batchFiles = DYNAMIC_PRODUCT_FILES.slice(i, i + batchSize);
+      const batchResults = await Promise.all(batchFiles.map(async file=>{
         try{
-          product = new Function(source + "\nreturn (typeof product !== 'undefined' ? product : null);")();
-        }catch(e){
-          const match = file.match(/products-new\/(\d+)\//);
-          if(match) {
-            const num = match[1];
-            product = new Function(source + `\nreturn (typeof product${num} !== 'undefined' ? product${num} : null);`)();
+          const response = await fetch(file,{cache:"default"});
+          if(!response.ok) return null;
+          const source = await response.text();
+          let product = null;
+          try{
+            product = new Function(source + "\nreturn (typeof product !== 'undefined' ? product : null);")();
+          }catch(e){
+            const match = file.match(/products-new\/(\d+)\//);
+            if(match) {
+              const num = match[1];
+              product = new Function(source + `\nreturn (typeof product${num} !== 'undefined' ? product${num} : null);`)();
+            }
           }
-        }
-        if(product && product.id) return normalizeProduct(product,file);
-        return null;
-      }catch(error){ return null; }
-    }));
+          if(product && product.id) return normalizeProduct(product,file);
+          return null;
+        }catch(error){ return null; }
+      }));
+      loaded = loaded.concat(batchResults);
+    }
 
     products = loaded.filter(Boolean).sort((a, b) => {
       const getPriority = (p) => {
