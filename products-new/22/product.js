@@ -20,11 +20,6 @@ name: "أوف وايت",
 value: "#EDE4D6",
 image: "https://amo-bags.github.io/products-new/22/file_00000000e04071f890c0b618453967ba_edit_1439932207248779.png"
 },
-{
-name: "خمري",
-value: "#6B1F2D",
-image: "https://amo-bags.github.io/products-new/22/file_00000000c48071fd919260925e610c31.png"
-}
 ],
 
 gallery: [
