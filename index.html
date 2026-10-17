@@ -42,8 +42,9 @@ src="https://www.facebook.com/tr?id=2844053165988012&ev=PageView&noscript=1"
    })();
 </script>
 
-<!-- استدعاء ملف الأرقام الخارجي لتحسين السرعة -->
+<!-- استدعاء ملف الأرقام الخارجي واستدعاء ملف التقييمات المركزي -->
 <script src="products-list.js"></script>
+<script src="all-reviews.js"></script>
 
 <style>
 :root {
@@ -1358,6 +1359,14 @@ function normalizeProduct(p,filePath){
       gallery: Array.isArray(c.gallery) ? c.gallery.map(x=>absoluteImage(x,base)) : null
     }));
   }
+
+  // ربط التقييمات المركزية تلقائياً من all-reviews.js بناءً على id المنتج
+  if (window.AMO_PRODUCT_REVIEWS && window.AMO_PRODUCT_REVIEWS[String(p.id)]) {
+    p.reviews = window.AMO_PRODUCT_REVIEWS[String(p.id)];
+  } else if (!p.reviews) {
+    p.reviews = [];
+  }
+
   return p;
 }
 
