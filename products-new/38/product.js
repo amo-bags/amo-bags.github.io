@@ -6,7 +6,6 @@ const product = {
   dimensions: "25 سم عرض × 17 سم ارتفاع",
   image: "38black.png",
   gallery: [
-    "38black.png",
     "38offwhite.png",
     "38details.jpg",
     "38detaols2.jpg",
@@ -16,11 +15,6 @@ const product = {
     "size38.jpg"
   ],
   colors: [
-    {
-      name: "أسود",
-      value: "#000000",
-      image: "38black.png"
-    },
     {
       name: "أوفوايت",
       value: "#f5f5ed",
