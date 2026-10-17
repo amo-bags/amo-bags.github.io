@@ -4,7 +4,7 @@ const product = {
   price: 10,
   size: "وسط",
   dimensions: "25 سم عرض × 17 سم ارتفاع",
-  image: "38black.png",
+  image: "38offwhite.png",
   gallery: [
     "38offwhite.png",
     "38details.jpg",
