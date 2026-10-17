@@ -8,7 +8,6 @@ const product = {
   gallery: [
     "89black.png",
     "89bagi.png",
-    "89darkblue.png",
     "89brown.png",
     "89camil.png",
     "89white.png",
@@ -27,12 +26,6 @@ const product = {
       colorName: "أسود",
       value: "#000000",
       image: "89black.png"
-    },
-    {
-      name: "كحلي",
-      colorName: "كحلي",
-      value: "#1b263b",
-      image: "89darkblue.png"
     },
     {
       name: "بني",
