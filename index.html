@@ -42,9 +42,10 @@ src="https://www.facebook.com/tr?id=2844053165988012&ev=PageView&noscript=1"
    })();
 </script>
 
-<!-- استدعاء ملف الأرقام الخارجي واستدعاء ملف التقييمات المركزي -->
+<!-- استدعاء الملفات الخارجية -->
 <script src="products-list.js"></script>
 <script src="all-reviews.js"></script>
+<script src="categories-data.js"></script>
 
 <style>
 :root {
@@ -966,78 +967,10 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   <span class="hero-note" id="heroNote">🚚 التوصيل 2 د.أ — مجاني عند 49 د.أ فأكثر</span>
 </section>
 
-<!-- شريط الفئات مصمم كبطاقات بأسلوب تطبيق دمية -->
+<!-- شريط الفئات يتم توليده ديناميكياً من الملف الخارجي -->
 <div class="categories-wrap" id="products">
-  <div class="categories-bar">
-    <button class="cat-btn active" onclick="changeCategory('all', this)" data-cat="all">
-      <div class="cat-img-wrap">
-        <img src="products-new/1/1.jpg" alt="جميع الموديلات" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">✨ جميع الموديلات</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('small', this)" data-cat="small">
-      <div class="cat-img-wrap">
-        <img src="products-new/2/1.jpg" alt="صغير" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🔹 صغير</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('medium', this)" data-cat="medium">
-      <div class="cat-img-wrap">
-        <img src="products-new/3/1.jpg" alt="وسط" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🔸 وسط</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('large', this)" data-cat="large">
-      <div class="cat-img-wrap">
-        <img src="products-new/4/1.jpg" alt="كبير" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🔷 كبير</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('between', this)" data-cat="between">
-      <div class="cat-img-wrap">
-        <img src="products-new/5/1.jpg" alt="بين الوسط والصغير" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🔹 بين الوسط والصغير</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('5', this)" data-cat="5">
-      <div class="cat-img-wrap">
-        <img src="products-new/6/1.jpg" alt="حقائب بسعر 5 دنانير" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🛍️ 5 دنانير</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('10', this)" data-cat="10">
-      <div class="cat-img-wrap">
-        <img src="products-new/7/1.jpg" alt="حقائب بسعر 10 دنانير" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🎒 10 دنانير</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('15', this)" data-cat="15">
-      <div class="cat-img-wrap">
-        <img src="products-new/8/1.jpg" alt="حقائب بسعر 15 دنانير" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">👜 15 دنانير</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('wallets', this)" data-cat="wallets">
-      <div class="cat-img-wrap">
-        <img src="products-new/9/1.jpg" alt="محافظ نسائية" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">👛 محافظ نسائية</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('men', this)" data-cat="men">
-      <div class="cat-img-wrap">
-        <img src="products-new/10/1.jpg" alt="شنط رجالي" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">👔 شنط رجالي</span>
-    </button>
+  <div class="categories-bar" id="categoriesBarContainer">
+    <!-- يتم التعبئة تلقائياً عبر دالة renderCategoriesBar() -->
   </div>
 </div>
 
@@ -1081,7 +1014,7 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   <div class="footer-policies">
     <a href="privacy-policy.html" id="footerPrivacy" class="footer-policy-link">سياسة الخصوصية</a> |
     <a href="terms-and-conditions.html" id="footerTerms" class="footer-policy-link">الشروط والأحكام</a> |
-    <a href="refund-policy.html" id="footerRefund" class="footer-policy-link">سياسة الاستبدال واسترجاع</a> |
+    <a href="refund-policy.html" id="footerRefund" class="footer-policy-link">سياسة الاستبدال والاسترجاع</a> |
     <a href="intellectual-property.html" id="footerIp" class="footer-policy-link">حقوق الملكية الفكرية</a>
   </div>
 
@@ -1206,17 +1139,6 @@ const translations = {
     noProductsInSection: "لا توجد منتجات في هذا القسم حالياً.",
     linkBoxTitle: "رابط المنتج (انقر للنسخ والتحديد تلقائياً):",
     viewFormatText: "طريقة العرض:",
-    catAll: "✨ جميع الموديلات",
-    catSmall: "🔹 صغير",
-    catMedium: "🔸 وسط",
-    catLarge: "🔷 كبير",
-    catBetween: "🔹 بين الوسط والصغير",
-    cat5: "🛍️ 5 دنانير",
-    cat10: "🎒 10 دنانير",
-    cat15: "👜 15 دنانير",
-    catWallets: "👛 محافظ نسائية",
-    catMen: "👔 شنط رجالي",
-    reviewsTitle: "❤️ مُشاركات زبائننا",
     menuSizeHeader: "SHOP BY SIZE / الأحجام",
     menuPriceHeader: "SHOP BY PRICE / الأسعار والمحافظ",
     menuSubAll: "جميع الموديلات / All",
@@ -1258,17 +1180,6 @@ const translations = {
     noProductsInSection: "No products in this category right now.",
     linkBoxTitle: "Product Link (Click to select & copy):",
     viewFormatText: "View Layout:",
-    catAll: "✨ All Models",
-    catSmall: "🔹 Small",
-    catMedium: "🔸 Medium",
-    catLarge: "🔷 Large",
-    catBetween: "🔹 Small-Medium",
-    cat5: "🛍️ Bags 5 JOD",
-    cat10: "🎒 Bags 10 JOD",
-    cat15: "👜 Bags 15 JOD",
-    catWallets: "👛 Wallets",
-    catMen: "👔 Men's Bags",
-    reviewsTitle: "❤️ Customer Reviews",
     menuSizeHeader: "SHOP BY SIZE",
     menuPriceHeader: "SHOP BY PRICE",
     menuSubAll: "All Models",
@@ -1308,20 +1219,6 @@ function toggleLanguage() {
   document.getElementById("footerText").textContent = t("footerText");
   document.getElementById("viewFormatText").textContent = t("viewFormatText");
 
-  const catWrap = document.querySelector('.categories-bar');
-  if(catWrap) {
-    catWrap.querySelector('[data-cat="all"] .cat-label').textContent = t("catAll");
-    catWrap.querySelector('[data-cat="small"] .cat-label').textContent = t("catSmall");
-    catWrap.querySelector('[data-cat="medium"] .cat-label').textContent = t("catMedium");
-    catWrap.querySelector('[data-cat="large"] .cat-label').textContent = t("catLarge");
-    catWrap.querySelector('[data-cat="between"] .cat-label').textContent = t("catBetween");
-    catWrap.querySelector('[data-cat="5"] .cat-label').textContent = t("cat5");
-    catWrap.querySelector('[data-cat="10"] .cat-label').textContent = t("cat10");
-    catWrap.querySelector('[data-cat="15"] .cat-label').textContent = t("cat15");
-    catWrap.querySelector('[data-cat="wallets"] .cat-label').textContent = t("catWallets");
-    catWrap.querySelector('[data-cat="men"] .cat-label').textContent = t("catMen");
-  }
-
   document.getElementById("menuSizeHeader").textContent = t("menuSizeHeader");
   document.getElementById("menuPriceHeader").textContent = t("menuPriceHeader");
   document.getElementById("menuSubAll").textContent = t("menuSubAll");
@@ -1337,11 +1234,30 @@ function toggleLanguage() {
   document.getElementById("menuMyOrders").innerHTML = t("menuMyOrders");
   document.getElementById("menuSearch").innerHTML = t("menuSearch");
 
+  renderCategoriesBar();
   renderProducts();
   renderCart();
   if(detailProductId) renderProductDetails();
 }
 function t(key) { return translations[currentLang][key] || key; }
+
+function renderCategoriesBar() {
+  const container = document.getElementById('categoriesBarContainer');
+  if (!container || !window.AMO_CATEGORIES) return;
+
+  container.innerHTML = window.AMO_CATEGORIES.map(cat => {
+    const isActive = currentCategory === cat.id ? 'active' : '';
+    const displayName = currentLang === 'ar' ? cat.nameAr : cat.nameEn;
+    return `
+      <button class="cat-btn ${isActive}" onclick="changeCategory('${cat.id}', this)" data-cat="${cat.id}">
+        <div class="cat-img-wrap">
+          <img src="${cat.img}" alt="${cat.nameAr}" onerror="this.src='logo/logo.jpg'">
+        </div>
+        <span class="cat-label">${displayName}</span>
+      </button>
+    `;
+  }).join("");
+}
 
 function initReviewsSlider() {
   const slider = document.getElementById('reviewsSlider');
@@ -1473,7 +1389,6 @@ function normalizeProduct(p,filePath){
     }));
   }
 
-  // ربط التقييمات المركزية تلقائياً من all-reviews.js بناءً على id المنتج
   if (window.AMO_PRODUCT_REVIEWS && window.AMO_PRODUCT_REVIEWS[String(p.id)]) {
     p.reviews = window.AMO_PRODUCT_REVIEWS[String(p.id)];
   } else if (!p.reviews) {
@@ -1536,6 +1451,7 @@ async function loadProducts(){
 
     if(!products.length) throw new Error("No products loaded");
 
+    renderCategoriesBar();
     renderProducts();
     renderCart();
     checkUrlForCategoryAndProduct();
@@ -2200,7 +2116,7 @@ function prevLightbox(e){
 function nextLightbox(e){
   if(e) e.stopPropagation();
   if(!lightboxGallery.length) return;
-  lightboxIndex = (lightboxIndex + 1) % lightboxGallery.length;
+  lightboxIndex = (lightboxIndex + 1 + lightboxGallery.length) % lightboxGallery.length;
   document.getElementById("lightboxImg").src = lightboxGallery[lightboxIndex];
 }
 
