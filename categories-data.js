@@ -6,7 +6,7 @@ window.AMO_CATEGORIES = [
   { id: 'between', nameAr: 'بين الوسط والصغير', nameEn: 'Small-Medium', img: './products-new/15/1.jpg' },
   { id: 'backpack', nameAr: 'شنط على الظهر', nameEn: 'Backpacks', img: './products-new/11/1.jpg' },
   { id: 'school', nameAr: 'شنط مدرسية وروضة', nameEn: 'School & Kids', img: './products-new/12/1.jpg' },
-  { id: '5', nameAr: '5 دنانير', nameEn: 'Bags 5 JOD', img: './products-new/5/1.jpg' },
+  { id: '5', nameAr: '5 دنانير', nameEn: 'Bags 5 JOD', img: './products-new/90/90black.png' },
   { id: '10', nameAr: '10 دنانير', nameEn: 'Bags 10 JOD', img: './products-new/83/83camil.png' },
   { id: '15', nameAr: '15 دنانير', nameEn: 'Bags 15 JOD', img: './products-new/95/95black.png' },
   { id: 'wallets', nameAr: 'محافظ نسائية', nameEn: 'Wallets', img: './products-new/40/1.jpg' },
