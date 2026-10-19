@@ -1,5 +1,5 @@
 window.AMO_CATEGORIES = [
-  { id: 'all', nameAr: 'جميع الموديلات', nameEn: 'All Models', img: './products-new/1/1.jpg' },
+  { id: 'all', nameAr: 'جميع الموديلات', nameEn: 'All Models', img: './products-new/41/41black.jpg' },
   { id: 'small', nameAr: 'صغير', nameEn: 'Small', img: './products-new/46/46black.jpg' },
   { id: 'medium', nameAr: 'وسط', nameEn: 'Medium', img: './products-new/9/9black.jpg' },
   { id: 'large', nameAr: 'كبير', nameEn: 'Large', img: './products-new/30/1.jpg' },
