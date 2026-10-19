@@ -6,7 +6,7 @@ window.AMO_CATEGORIES = [
   { id: 'between', nameAr: 'بين الوسط والصغير', nameEn: 'Small-Medium', img: './products-new/15/1.jpg' },
   { id: '5', nameAr: '5 دنانير', nameEn: 'Bags 5 JOD', img: './products-new/5/1.jpg' },
   { id: '10', nameAr: '10 دنانير', nameEn: 'Bags 10 JOD', img: './products-new/10/1.jpg' },
-  { id: '15', nameAr: '15 دنانير', nameEn: 'Bags 15 JOD', img: './products-new/18/1.jpg' },
+  { id: '15', nameAr: '15 دنانير', nameEn: 'Bags 15 JOD', img: './products-new/95/95black.png' },
   { id: 'wallets', nameAr: 'محافظ نسائية', nameEn: 'Wallets', img: './products-new/40/1.jpg' },
   { id: 'men', nameAr: 'شنط رجالي', nameEn: "Men's Bags", img: './products-new/50/1.jpg' }
 ];
