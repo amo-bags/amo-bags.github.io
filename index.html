@@ -42,9 +42,10 @@ src="https://www.facebook.com/tr?id=2844053165988012&ev=PageView&noscript=1"
    })();
 </script>
 
-<!-- استدعاء ملف الأرقام الخارجي واستدعاء ملف التقييمات المركزي -->
+<!-- استدعاء ملف الأرقام الخارجي، ملف التقييمات، وملف الفئات المركزي -->
 <script src="products-list.js"></script>
 <script src="all-reviews.js"></script>
+<script src="categories-data.js"></script>
 
 <style>
 :root {
@@ -907,8 +908,8 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
         <a class="menu-subitem" id="menuSub5" onclick="changeCategory('5'); toggleSidebar();">حقائب بسعر 5 دنانير</a>
         <a class="menu-subitem" id="menuSub10" onclick="changeCategory('10'); toggleSidebar();">حقائب بسعر 10 دنانير</a>
         <a class="menu-subitem" id="menuSub15" onclick="changeCategory('15'); toggleSidebar();">حقائب بسعر 15 دنانير</a>
-        <a class="menu-subitem" id="menuSubBackpack" onclick="changeCategory('backpack', this); toggleSidebar();">شنط على الظهر / Backpacks</a>
-        <a class="menu-subitem" id="menuSubSchool" onclick="changeCategory('school', this); toggleSidebar();">شنط مدرسية وروضة / School & Kids</a>
+        <a class="menu-subitem" id="menuSubBackpack" onclick="changeCategory('backpack'); toggleSidebar();">شنط على الظهر / Backpacks</a>
+        <a class="menu-subitem" id="menuSubSchool" onclick="changeCategory('school'); toggleSidebar();">شنط مدرسية وروضة / School & Kids</a>
         <a class="menu-subitem" id="menuSubWallets" onclick="changeCategory('wallets'); toggleSidebar();">محافظ نسائية</a>
         <a class="menu-subitem" id="menuSubMen" onclick="changeCategory('men'); toggleSidebar();">شنط رجالي / Men Bags</a>
       </div>
@@ -972,92 +973,10 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   <span class="hero-note" id="heroNote">🚚 التوصيل 2 د.أ — مجاني عند 49 د.أ فأكثر</span>
 </section>
 
-<!-- شريط الفئات (تمت إضافة أقسام شنط الظهر والشنط المدرسية والروضة) -->
+<!-- شريط الفئات الديناميكي المرتبط بملف categories-data.js -->
 <div class="categories-wrap" id="products">
-  <div class="categories-bar">
-    <button class="cat-btn active" onclick="changeCategory('all', this)" data-cat="all">
-      <div class="cat-img-wrap">
-        <img src="/products-new/1/1.jpg" alt="جميع الموديلات" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">✨ جميع الموديلات</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('small', this)" data-cat="small">
-      <div class="cat-img-wrap">
-        <img src="/products-new/2/1.jpg" alt="صغير" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🔹 صغير</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('medium', this)" data-cat="medium">
-      <div class="cat-img-wrap">
-        <img src="/products-new/3/1.jpg" alt="وسط" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🔸 وسط</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('large', this)" data-cat="large">
-      <div class="cat-img-wrap">
-        <img src="/products-new/4/1.jpg" alt="كبير" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🔷 كبير</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('between', this)" data-cat="between">
-      <div class="cat-img-wrap">
-        <img src="/products-new/5/1.jpg" alt="بين الوسط والصغير" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🔹 بين الوسط والصغير</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('backpack', this)" data-cat="backpack">
-      <div class="cat-img-wrap">
-        <img src="/products-new/11/1.jpg" alt="شنط على الظهر" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🎒 شنط ظهر</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('school', this)" data-cat="school">
-      <div class="cat-img-wrap">
-        <img src="/products-new/12/1.jpg" alt="شنط مدرسية وروضة" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">📚 مدرسية وروضة</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('5', this)" data-cat="5">
-      <div class="cat-img-wrap">
-        <img src="/products-new/6/1.jpg" alt="حقائب بسعر 5 دنانير" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🛍️ 5 دنانير</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('10', this)" data-cat="10">
-      <div class="cat-img-wrap">
-        <img src="/products-new/7/1.jpg" alt="حقائب بسعر 10 دنانير" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">🎒 10 دنانير</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('15', this)" data-cat="15">
-      <div class="cat-img-wrap">
-        <img src="/products-new/8/1.jpg" alt="حقائب بسعر 15 دنانير" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">👜 15 دنانير</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('wallets', this)" data-cat="wallets">
-      <div class="cat-img-wrap">
-        <img src="/products-new/9/1.jpg" alt="محافظ نسائية" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">👛 محافظ نسائية</span>
-    </button>
-
-    <button class="cat-btn" onclick="changeCategory('men', this)" data-cat="men">
-      <div class="cat-img-wrap">
-        <img src="/products-new/10/1.jpg" alt="شنط رجالي" onerror="this.src='logo/logo.jpg'">
-      </div>
-      <span class="cat-label">👔 شنط رجالي</span>
-    </button>
+  <div class="categories-bar" id="categoriesBar">
+    <!-- سيتم تعبئة الأقسام تلقائياً من ملف categories-data.js -->
   </div>
 </div>
 
@@ -1227,33 +1146,9 @@ const translations = {
     noProductsInSection: "لا توجد منتجات في هذا القسم حالياً.",
     linkBoxTitle: "رابط المنتج (انقر للنسخ والتحديد تلقائياً):",
     viewFormatText: "طريقة العرض:",
-    catAll: "✨ جميع الموديلات",
-    catSmall: "🔹 صغير",
-    catMedium: "🔸 وسط",
-    catLarge: "🔷 كبير",
-    catBetween: "🔹 بين الوسط والصغير",
-    catBackpack: "🎒 شنط ظهر",
-    catSchool: "📚 مدرسية وروضة",
-    cat5: "🛍️ 5 دنانير",
-    cat10: "🎒 10 دنانير",
-    cat15: "👜 15 دنانير",
-    catWallets: "👛 محافظ نسائية",
-    catMen: "👔 شنط رجالي",
     reviewsTitle: "❤️ مُشاركات زبائننا",
     menuSizeHeader: "SHOP BY SIZE / الأحجام",
     menuPriceHeader: "SHOP BY PRICE / الأسعار والأقسام",
-    menuSubAll: "جميع الموديلات / All",
-    menuSubSmall: "صغير / Small",
-    menuSubMedium: "وسط / Medium",
-    menuSubLarge: "كبير / Large",
-    menuSubBetween: "بين الوسط والصغير",
-    menuSubBackpack: "شنط على الظهر / Backpacks",
-    menuSubSchool: "شنط مدرسية وروضة / School & Kids",
-    menuSub5: "حقائب بسعر 5 دنانير",
-    menuSub10: "حقائب بسعر 10 دنانير",
-    menuSub15: "حقائب بسعر 15 دنانير",
-    menuSubWallets: "محافظ نسائية",
-    menuSubMen: "شنط رجالي / Men Bags",
     menuMyOrders: '<svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> طلباتي السابقة / My Orders',
     menuSearch: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> بحث عن منتج / Search'
   },
@@ -1283,39 +1178,34 @@ const translations = {
     noProductsInSection: "No products in this category right now.",
     linkBoxTitle: "Product Link (Click to select & copy):",
     viewFormatText: "View Layout:",
-    catAll: "✨ All Models",
-    catSmall: "🔹 Small",
-    catMedium: "🔸 Medium",
-    catLarge: "🔷 Large",
-    catBetween: "🔹 Small-Medium",
-    catBackpack: "🎒 Backpacks",
-    catSchool: "📚 School & Kids",
-    cat5: "🛍️ Bags 5 JOD",
-    cat10: "🎒 Bags 10 JOD",
-    cat15: "👜 Bags 15 JOD",
-    catWallets: "👛 Wallets",
-    catMen: "👔 Men's Bags",
     reviewsTitle: "❤️ Customer Reviews",
     menuSizeHeader: "SHOP BY SIZE",
     menuPriceHeader: "SHOP BY CATEGORY",
-    menuSubAll: "All Models",
-    menuSubSmall: "Small",
-    menuSubMedium: "Medium",
-    menuSubLarge: "Large",
-    menuSubBetween: "Small-Medium",
-    menuSubBackpack: "Backpacks",
-    menuSubSchool: "School & Kids Bags",
-    menuSub5: "Bags at 5 JOD",
-    menuSub10: "Bags at 10 JOD",
-    menuSub15: "Bags at 15 JOD",
-    menuSubWallets: "Wallets",
-    menuSubMen: "Men's Bags",
     menuMyOrders: '<svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> My Orders',
     menuSearch: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search'
   }
 };
 
 let currentLang = 'ar';
+
+function renderCategories() {
+  const bar = document.getElementById("categoriesBar");
+  if(!bar || !window.AMO_CATEGORIES) return;
+  
+  bar.innerHTML = window.AMO_CATEGORIES.map(cat => {
+    const name = currentLang === 'ar' ? cat.nameAr : cat.nameEn;
+    const isActive = currentCategory === cat.id ? 'active' : '';
+    return `
+      <button class="cat-btn ${isActive}" onclick="changeCategory('${cat.id}', this)" data-cat="${cat.id}">
+        <div class="cat-img-wrap">
+          <img src="${cat.img}" alt="${name}" onerror="this.src='logo/logo.jpg'">
+        </div>
+        <span class="cat-label">${name}</span>
+      </button>
+    `;
+  }).join("");
+}
+
 function toggleLanguage() {
   currentLang = (currentLang === 'ar') ? 'en' : 'ar';
   document.getElementById("htmlRoot").setAttribute("lang", currentLang);
@@ -1337,39 +1227,7 @@ function toggleLanguage() {
   document.getElementById("footerText").textContent = t("footerText");
   document.getElementById("viewFormatText").textContent = t("viewFormatText");
 
-  const catWrap = document.querySelector('.categories-bar');
-  if(catWrap) {
-    catWrap.querySelector('[data-cat="all"] .cat-label').textContent = t("catAll");
-    catWrap.querySelector('[data-cat="small"] .cat-label').textContent = t("catSmall");
-    catWrap.querySelector('[data-cat="medium"] .cat-label').textContent = t("catMedium");
-    catWrap.querySelector('[data-cat="large"] .cat-label').textContent = t("catLarge");
-    catWrap.querySelector('[data-cat="between"] .cat-label').textContent = t("catBetween");
-    catWrap.querySelector('[data-cat="backpack"] .cat-label').textContent = t("catBackpack");
-    catWrap.querySelector('[data-cat="school"] .cat-label').textContent = t("catSchool");
-    catWrap.querySelector('[data-cat="5"] .cat-label').textContent = t("cat5");
-    catWrap.querySelector('[data-cat="10"] .cat-label').textContent = t("cat10");
-    catWrap.querySelector('[data-cat="15"] .cat-label').textContent = t("cat15");
-    catWrap.querySelector('[data-cat="wallets"] .cat-label').textContent = t("catWallets");
-    catWrap.querySelector('[data-cat="men"] .cat-label').textContent = t("catMen");
-  }
-
-  document.getElementById("menuSizeHeader").textContent = t("menuSizeHeader");
-  document.getElementById("menuPriceHeader").textContent = t("menuPriceHeader");
-  document.getElementById("menuSubAll").textContent = t("menuSubAll");
-  document.getElementById("menuSubSmall").textContent = t("menuSubSmall");
-  document.getElementById("menuSubMedium").textContent = t("menuSubMedium");
-  document.getElementById("menuSubLarge").textContent = t("menuSubLarge");
-  document.getElementById("menuSubBetween").textContent = t("menuSubBetween");
-  document.getElementById("menuSubBackpack").textContent = t("menuSubBackpack");
-  document.getElementById("menuSubSchool").textContent = t("menuSubSchool");
-  document.getElementById("menuSub5").textContent = t("menuSub5");
-  document.getElementById("menuSub10").textContent = t("menuSub10");
-  document.getElementById("menuSub15").textContent = t("menuSub15");
-  document.getElementById("menuSubWallets").textContent = t("menuSubWallets");
-  document.getElementById("menuSubMen").textContent = t("menuSubMen");
-  document.getElementById("menuMyOrders").innerHTML = t("menuMyOrders");
-  document.getElementById("menuSearch").innerHTML = t("menuSearch");
-
+  renderCategories();
   renderProducts();
   renderCart();
   if(detailProductId) renderProductDetails();
@@ -1610,11 +1468,7 @@ function getFilteredProducts() {
 
 function changeCategory(cat, btnElement) {
   currentCategory = cat;
-  const targetBtn = btnElement || document.querySelector(`.cat-btn[data-cat="${cat}"]`);
-  if(targetBtn){
-    document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-    targetBtn.classList.add('active');
-  }
+  renderCategories();
   renderProducts();
 
   const gridElement = document.getElementById('productsGrid');
@@ -1668,7 +1522,7 @@ function renderProducts(){
   const filteredProducts = getFilteredProducts();
 
   if(filteredProducts.length === 0) {
-    grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;padding:35px;color:var(--text-muted)">${t("noProductsInSection")}</p>`;
+    grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;padding:35px;color:var(--text-muted)">لا توجد منتجات في هذا القسم حالياً.</p>`;
     return;
   }
 
@@ -1681,17 +1535,17 @@ function renderProducts(){
       <article class="card" data-id="${esc(p.id)}">
         <div class="card-image-wrap" onclick="openProductDetails('${jsesc(p.id)}')">
           <img class="card-image" id="main-${esc(p.id)}" src="${esc(first)}" alt="${esc(p.name)}" loading="lazy">
-          <span class="image-badge">${t("badgeDetails")}</span>
+          <span class="image-badge">اضغطي للتفاصيل</span>
         </div>
         <div class="thumbs">
           ${gallery.map((im,i)=>`<img src="${esc(im)}" class="${i===0?'active':''}" loading="lazy" onclick="changeCardImage('${jsesc(p.id)}',${i})" alt="">`).join("")}
         </div>
         <div class="info">
           <div class="name" onclick="openProductDetails('${jsesc(p.id)}')">${esc(p.name)}</div>
-          <div class="price">${Number(p.price).toFixed(2)} ${currentLang==='ar'?'د.أ':'JOD'}</div>
+          <div class="price">${Number(p.price).toFixed(2)} د.أ</div>
           <div class="details">
-            ${p.size ? `${currentLang==='ar'?'الحجم':'Size'}: ${esc(p.size)}<br>` : ""}
-            ${p.dimensions ? `${currentLang==='ar'?'الأبعاد':'Dimensions'}: ${esc(p.dimensions)}` : ""}
+            ${p.size ? `الحجم: ${esc(p.size)}<br>` : ""}
+            ${p.dimensions ? `الأبعاد: ${esc(p.dimensions)}` : ""}
           </div>
           ${colors.length ? `
             <div class="color-row" id="colors-${esc(p.id)}">
@@ -1699,8 +1553,8 @@ function renderProducts(){
             </div>
           ` : ""}
           <div class="card-actions">
-            <button class="details-btn" onclick="openProductDetails('${jsesc(p.id)}')">${t("detailsBtn")}</button>
-            <button class="add-btn" onclick="addCardToCart('${jsesc(p.id)}')">${t("addCartBtn")}</button>
+            <button class="details-btn" onclick="openProductDetails('${jsesc(p.id)}')">التفاصيل</button>
+            <button class="add-btn" onclick="addCardToCart('${jsesc(p.id)}')">أضف للسلة 🛒</button>
           </div>
         </div>
       </article>
@@ -1871,24 +1725,24 @@ function renderProductDetails(){
 
     <div class="detail-info">
       <div class="detail-name">${esc(p.name)}</div>
-      <div class="detail-price">${Number(p.price).toFixed(2)} ${currentLang==='ar'?'د.أ':'JOD'}</div>
+      <div class="detail-price">${Number(p.price).toFixed(2)} د.أ</div>
       <div class="detail-text">
-        ${p.size ? `${currentLang==='ar'?'الحجم':'Size'}: ${esc(p.size)}<br>` : ""}
-        ${p.dimensions ? `${currentLang==='ar'?'الأبعاد':'Dimensions'}: ${esc(p.dimensions)}` : ""}
+        ${p.size ? `الحجم: ${esc(p.size)}<br>` : ""}
+        ${p.dimensions ? `الأبعاد: ${esc(p.dimensions)}` : ""}
       </div>
       ${colors.length ? `
-        <div class="option-title">${t("chooseColor")}</div>
+        <div class="option-title">اختاري اللون:</div>
         <div class="options" id="detailColors">
           ${colors.map((c,i)=>`<button class="option ${i===detailColorIndex?'selected':''}" onclick="selectDetailColor(${i})"><span class="swatch" style="background:${esc(c.value||'#ccc')}"></span>${esc(c.name||c.colorName)}</button>`).join("")}
         </div>
       ` : ""}
 
       <div style="margin-top:10px;">
-        <div class="option-title">${t("linkBoxTitle")}</div>
-        <input type="text" readonly value="${shareUrl}" onclick="this.select(); document.execCommand('copy'); alert(currentLang==='ar'?'تم نسخ الرابط تلقائياً!':'Link copied automatically!');" style="width:100%; padding:8px 10px; border:1px solid var(--border-color); border-radius:8px; background:#f9f8f6; font-size:11px; color:var(--text-main); text-align:left; direction:ltr; cursor:pointer;" title="انقر لنسخ الرابط">
+        <div class="option-title">رابط المنتج (انقر للنسخ والتحديد تلقائياً):</div>
+        <input type="text" readonly value="${shareUrl}" onclick="this.select(); document.execCommand('copy'); alert('تم نسخ الرابط تلقائياً!');" style="width:100%; padding:8px 10px; border:1px solid var(--border-color); border-radius:8px; background:#f9f8f6; font-size:11px; color:var(--text-main); text-align:left; direction:ltr; cursor:pointer;" title="انقر لنسخ الرابط">
       </div>
 
-      <button class="detail-add" onclick="addDetailToCart()">${t("addDetailCart")}</button>
+      <button class="detail-add" onclick="addDetailToCart()">أضف إلى السلة 🛒</button>
 
       ${reviewsHtml}
     </div>
@@ -1976,7 +1830,7 @@ function renderCart(){
   const body = document.getElementById("cartBody");
   const customerBox = document.getElementById("customerBox");
   if(!cart.length){
-    body.innerHTML = `<div class="empty">${t("emptyCartText")}</div>`;
+    body.innerHTML = `<div class="empty">🛍️ السلة فارغة<br><small>اختاري أي شنطة وستظهر هنا.</small></div>`;
     customerBox.style.display="none";
   }else{
     body.innerHTML = cart.map((x,i)=>`
@@ -1985,8 +1839,8 @@ function renderCart(){
         <div class="cart-item-info">
           <div class="cart-item-name">${esc(x.name)}</div>
           <div class="cart-meta">
-            ${x.colorName ? `${t("colorLabel")}: ${esc(x.colorName)}<br>` : ""}
-            ${t("priceLabel")}: ${x.price.toFixed(2)} د.أ
+            ${x.colorName ? `اللون: ${esc(x.colorName)}<br>` : ""}
+            السعر: ${x.price.toFixed(2)} د.أ
           </div>
           <div class="qty-row">
             <button onclick="changeQty(${i},-1)">−</button>
@@ -2004,7 +1858,7 @@ function renderCart(){
   const d = delivery();
   const final = total+d;
   document.getElementById("productsTotal").textContent = total.toFixed(2) + " د.أ";
-  document.getElementById("deliveryTotal").textContent = d===0 ? t("freeText") : d.toFixed(2) + " د.أ";
+  document.getElementById("deliveryTotal").textContent = d===0 ? "مجاني" : d.toFixed(2) + " د.أ";
   document.getElementById("finalTotal").textContent = final.toFixed(2) + " د.أ";
 
   const progressDiv = document.getElementById("deliveryProgress");
@@ -2070,7 +1924,7 @@ function searchProducts(){
     return; 
   }
 
-  const currencySymbol = currentLang === 'ar' ? 'د.أ' : 'JOD';
+  const currencySymbol = 'د.أ';
   results.innerHTML = found.map(p => `
     <div class="search-result" onclick="openSearchProduct('${jsesc(p.id)}')">
       <img src="${esc(p.image)}" alt="" loading="lazy">
@@ -2248,6 +2102,7 @@ function closeLightbox(e){
 
 loadCart();
 renderCart();
+renderCategories();
 loadProducts();
 initReviewsSlider();
 </script>
