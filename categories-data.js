@@ -10,5 +10,5 @@ window.AMO_CATEGORIES = [
   { id: '10', nameAr: '10 دنانير', nameEn: 'Bags 10 JOD', img: './products-new/83/83camil.png' },
   { id: '15', nameAr: '15 دنانير', nameEn: 'Bags 15 JOD', img: './products-new/95/95black.png' },
   { id: 'wallets', nameAr: 'محافظ نسائية', nameEn: 'Wallets', img: './products-new/40/1.jpg' },
-  { id: 'men', nameAr: 'شنط رجالي', nameEn: "Men's Bags", img: './products-new/50/1.jpg' }
+  { id: 'men', nameAr: 'شنط رجالي', nameEn: "Men's Bags", img: './products-new/88/88black.jpg' }
 ];
