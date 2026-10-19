@@ -253,7 +253,7 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
   border:1px solid var(--border-color); box-shadow:0 4px 12px rgba(51,41,34,.06);
 }
 
-/* تنسيق قسم الفئات (تم جعلها تتحرك ولا تثبت عند التمرير) */
+/* تنسيق قسم الفئات */
 .categories-wrap {
   position: relative; 
   background: var(--bg-color);
@@ -326,7 +326,7 @@ html[dir="ltr"] .float-whatsapp-icon { left: auto; right: 24px; }
   color: #ffffff;
 }
 
-/* تنسيق شريط طريقة العرض (مثبت تماماً تحت الهيدر عند التمرير) */
+/* تنسيق شريط طريقة العرض */
 .view-switcher-bar {
   position: sticky;
   top: 57px;
@@ -901,12 +901,14 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 
     <div class="menu-category-item">
       <div class="menu-category-header" onclick="toggleSublist('priceList')">
-        <span id="menuPriceHeader">SHOP BY PRICE / الأسعار والمحافظ</span> <span>+</span>
+        <span id="menuPriceHeader">SHOP BY PRICE / الأسعار والأقسام</span> <span>+</span>
       </div>
       <div class="menu-sublist" id="priceList">
         <a class="menu-subitem" id="menuSub5" onclick="changeCategory('5'); toggleSidebar();">حقائب بسعر 5 دنانير</a>
         <a class="menu-subitem" id="menuSub10" onclick="changeCategory('10'); toggleSidebar();">حقائب بسعر 10 دنانير</a>
         <a class="menu-subitem" id="menuSub15" onclick="changeCategory('15'); toggleSidebar();">حقائب بسعر 15 دنانير</a>
+        <a class="menu-subitem" id="menuSubBackpack" onclick="changeCategory('backpack', this); toggleSidebar();">شنط على الظهر / Backpacks</a>
+        <a class="menu-subitem" id="menuSubSchool" onclick="changeCategory('school', this); toggleSidebar();">شنط مدرسية وروضة / School & Kids</a>
         <a class="menu-subitem" id="menuSubWallets" onclick="changeCategory('wallets'); toggleSidebar();">محافظ نسائية</a>
         <a class="menu-subitem" id="menuSubMen" onclick="changeCategory('men'); toggleSidebar();">شنط رجالي / Men Bags</a>
       </div>
@@ -970,7 +972,7 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   <span class="hero-note" id="heroNote">🚚 التوصيل 2 د.أ — مجاني عند 49 د.أ فأكثر</span>
 </section>
 
-<!-- شريط الفئات (تم تصحيح مسارات الصور لتصبح مطلقة من الجذر) -->
+<!-- شريط الفئات (تمت إضافة أقسام شنط الظهر والشنط المدرسية والروضة) -->
 <div class="categories-wrap" id="products">
   <div class="categories-bar">
     <button class="cat-btn active" onclick="changeCategory('all', this)" data-cat="all">
@@ -1006,6 +1008,20 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
         <img src="/products-new/5/1.jpg" alt="بين الوسط والصغير" onerror="this.src='logo/logo.jpg'">
       </div>
       <span class="cat-label">🔹 بين الوسط والصغير</span>
+    </button>
+
+    <button class="cat-btn" onclick="changeCategory('backpack', this)" data-cat="backpack">
+      <div class="cat-img-wrap">
+        <img src="/products-new/11/1.jpg" alt="شنط على الظهر" onerror="this.src='logo/logo.jpg'">
+      </div>
+      <span class="cat-label">🎒 شنط ظهر</span>
+    </button>
+
+    <button class="cat-btn" onclick="changeCategory('school', this)" data-cat="school">
+      <div class="cat-img-wrap">
+        <img src="/products-new/12/1.jpg" alt="شنط مدرسية وروضة" onerror="this.src='logo/logo.jpg'">
+      </div>
+      <span class="cat-label">📚 مدرسية وروضة</span>
     </button>
 
     <button class="cat-btn" onclick="changeCategory('5', this)" data-cat="5">
@@ -1045,7 +1061,7 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </div>
 
-<!-- شريط طريقة العرض (مثبت باستمرار في الأعلى تحت الهيدر) -->
+<!-- شريط طريقة العرض -->
 <div class="view-switcher-bar">
   <div class="view-switcher-inner">
     <span style="font-size:13px; font-weight:700; color:var(--text-muted);" id="viewFormatText">طريقة العرض:</span>
@@ -1216,6 +1232,8 @@ const translations = {
     catMedium: "🔸 وسط",
     catLarge: "🔷 كبير",
     catBetween: "🔹 بين الوسط والصغير",
+    catBackpack: "🎒 شنط ظهر",
+    catSchool: "📚 مدرسية وروضة",
     cat5: "🛍️ 5 دنانير",
     cat10: "🎒 10 دنانير",
     cat15: "👜 15 دنانير",
@@ -1223,12 +1241,14 @@ const translations = {
     catMen: "👔 شنط رجالي",
     reviewsTitle: "❤️ مُشاركات زبائننا",
     menuSizeHeader: "SHOP BY SIZE / الأحجام",
-    menuPriceHeader: "SHOP BY PRICE / الأسعار والمحافظ",
+    menuPriceHeader: "SHOP BY PRICE / الأسعار والأقسام",
     menuSubAll: "جميع الموديلات / All",
     menuSubSmall: "صغير / Small",
     menuSubMedium: "وسط / Medium",
     menuSubLarge: "كبير / Large",
     menuSubBetween: "بين الوسط والصغير",
+    menuSubBackpack: "شنط على الظهر / Backpacks",
+    menuSubSchool: "شنط مدرسية وروضة / School & Kids",
     menuSub5: "حقائب بسعر 5 دنانير",
     menuSub10: "حقائب بسعر 10 دنانير",
     menuSub15: "حقائب بسعر 15 دنانير",
@@ -1268,6 +1288,8 @@ const translations = {
     catMedium: "🔸 Medium",
     catLarge: "🔷 Large",
     catBetween: "🔹 Small-Medium",
+    catBackpack: "🎒 Backpacks",
+    catSchool: "📚 School & Kids",
     cat5: "🛍️ Bags 5 JOD",
     cat10: "🎒 Bags 10 JOD",
     cat15: "👜 Bags 15 JOD",
@@ -1275,12 +1297,14 @@ const translations = {
     catMen: "👔 Men's Bags",
     reviewsTitle: "❤️ Customer Reviews",
     menuSizeHeader: "SHOP BY SIZE",
-    menuPriceHeader: "SHOP BY PRICE",
+    menuPriceHeader: "SHOP BY CATEGORY",
     menuSubAll: "All Models",
     menuSubSmall: "Small",
     menuSubMedium: "Medium",
     menuSubLarge: "Large",
     menuSubBetween: "Small-Medium",
+    menuSubBackpack: "Backpacks",
+    menuSubSchool: "School & Kids Bags",
     menuSub5: "Bags at 5 JOD",
     menuSub10: "Bags at 10 JOD",
     menuSub15: "Bags at 15 JOD",
@@ -1320,6 +1344,8 @@ function toggleLanguage() {
     catWrap.querySelector('[data-cat="medium"] .cat-label').textContent = t("catMedium");
     catWrap.querySelector('[data-cat="large"] .cat-label').textContent = t("catLarge");
     catWrap.querySelector('[data-cat="between"] .cat-label').textContent = t("catBetween");
+    catWrap.querySelector('[data-cat="backpack"] .cat-label').textContent = t("catBackpack");
+    catWrap.querySelector('[data-cat="school"] .cat-label').textContent = t("catSchool");
     catWrap.querySelector('[data-cat="5"] .cat-label').textContent = t("cat5");
     catWrap.querySelector('[data-cat="10"] .cat-label').textContent = t("cat10");
     catWrap.querySelector('[data-cat="15"] .cat-label').textContent = t("cat15");
@@ -1334,6 +1360,8 @@ function toggleLanguage() {
   document.getElementById("menuSubMedium").textContent = t("menuSubMedium");
   document.getElementById("menuSubLarge").textContent = t("menuSubLarge");
   document.getElementById("menuSubBetween").textContent = t("menuSubBetween");
+  document.getElementById("menuSubBackpack").textContent = t("menuSubBackpack");
+  document.getElementById("menuSubSchool").textContent = t("menuSubSchool");
   document.getElementById("menuSub5").textContent = t("menuSub5");
   document.getElementById("menuSub10").textContent = t("menuSub10");
   document.getElementById("menuSub15").textContent = t("menuSub15");
@@ -1553,10 +1581,15 @@ function getFilteredProducts() {
 
   return products.filter(p => {
     const size = (p.size || "").toLowerCase();
-    const isWallet = p.name.includes("محفظ") || p.name.includes("محافظ") || p.name.toLowerCase().includes("wallet");
-    const isMen = p.name.includes("رجالي") || p.name.toLowerCase().includes("men");
+    const name = (p.name || "").toLowerCase();
+    const isWallet = name.includes("محفظ") || name.includes("محافظ") || name.includes("wallet");
+    const isMen = name.includes("رجالي") || name.includes("men");
+    const isBackpack = name.includes("ظهر") || name.includes("backpack") || name.includes("back pack");
+    const isSchool = name.includes("مدرس") || name.includes("روضة") || name.includes("school") || name.includes("kids") || name.includes("طفل");
     const price = Number(p.price);
 
+    if (currentCategory === 'backpack') return isBackpack;
+    if (currentCategory === 'school') return isSchool;
     if (currentCategory === 'men') return isMen;
     if (currentCategory === 'between') return size.includes('بين');
     if (currentCategory === 'small') return size.includes('صغير') && !size.includes('بين');
@@ -1565,7 +1598,7 @@ function getFilteredProducts() {
 
     if (currentCategory === 'wallets') return isWallet;
 
-    if (!isWallet && !isMen) {
+    if (!isWallet && !isMen && !isBackpack && !isSchool) {
       if (currentCategory === '5' && price <= 7.5) return true;
       if (currentCategory === '10' && price > 7.5 && price <= 12.5) return true;
       if (currentCategory === '15' && price > 12.5) return true;
