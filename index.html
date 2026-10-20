@@ -1065,10 +1065,10 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
   <div class="cart-footer">
     <div class="summary">
-      <div class="line"><span>مجموع المنتجات</span><strong id="productsTotal">0.00 د.أ</strong></div>
-      <div class="line"><span>التوصيل</span><strong id="deliveryTotal">0.00 د.أ</strong></div>
+      <div class="line"><span>مجموع المنتجات</span><strong id="productsTotal">0 د.أ</strong></div>
+      <div class="line"><span>التوصيل</span><strong id="deliveryTotal">0 د.أ</strong></div>
       <div id="deliveryProgress" class="delivery-progress" style="display:none"></div>
-      <div class="line final"><span>المجموع النهائي</span><strong id="finalTotal">0.00 د.أ</strong></div>
+      <div class="line final"><span>المجموع النهائي</span><strong id="finalTotal">0 د.أ</strong></div>
     </div>
     <div class="actions">
       <button class="continue" onclick="closeCart()">🛍️ متابعة التسوق</button>
@@ -1542,7 +1542,7 @@ function renderProducts(){
         </div>
         <div class="info">
           <div class="name" onclick="openProductDetails('${jsesc(p.id)}')">${esc(p.name)}</div>
-          <div class="price">${Number(p.price).toFixed(2)} د.أ</div>
+          <div class="price">${parseFloat(p.price)} د.أ</div>
           <div class="details">
             ${p.size ? `الحجم: ${esc(p.size)}<br>` : ""}
             ${p.dimensions ? `الأبعاد: ${esc(p.dimensions)}` : ""}
@@ -1601,7 +1601,7 @@ function openProductDetails(id, updateHistory = true){
   const selectedImage = gallery[0] || p.image;
   updateMetaTags(
     `${p.name} | AMO`,
-    `حقيبة أنيقة - السعر: ${Number(p.price).toFixed(2)} د.أ${p.size ? ' - ' + p.size : ''}`,
+    `حقيبة أنيقة - السعر: ${parseFloat(p.price)} د.أ${p.size ? ' - ' + p.size : ''}`,
     selectedImage,
     location.href
   );
@@ -1725,7 +1725,7 @@ function renderProductDetails(){
 
     <div class="detail-info">
       <div class="detail-name">${esc(p.name)}</div>
-      <div class="detail-price">${Number(p.price).toFixed(2)} د.أ</div>
+      <div class="detail-price">${parseFloat(p.price)} د.أ</div>
       <div class="detail-text">
         ${p.size ? `الحجم: ${esc(p.size)}<br>` : ""}
         ${p.dimensions ? `الأبعاد: ${esc(p.dimensions)}` : ""}
@@ -1840,7 +1840,7 @@ function renderCart(){
           <div class="cart-item-name">${esc(x.name)}</div>
           <div class="cart-meta">
             ${x.colorName ? `اللون: ${esc(x.colorName)}<br>` : ""}
-            السعر: ${x.price.toFixed(2)} د.أ
+            السعر: ${parseFloat(x.price)} د.أ
           </div>
           <div class="qty-row">
             <button onclick="changeQty(${i},-1)">−</button>
@@ -1857,13 +1857,13 @@ function renderCart(){
   const total = productsTotal();
   const d = delivery();
   const final = total+d;
-  document.getElementById("productsTotal").textContent = total.toFixed(2) + " د.أ";
-  document.getElementById("deliveryTotal").textContent = d===0 ? "مجاني" : d.toFixed(2) + " د.أ";
-  document.getElementById("finalTotal").textContent = final.toFixed(2) + " د.أ";
+  document.getElementById("productsTotal").textContent = parseFloat(total) + " د.أ";
+  document.getElementById("deliveryTotal").textContent = d===0 ? "مجاني" : parseFloat(d) + " د.أ";
+  document.getElementById("finalTotal").textContent = parseFloat(final) + " د.أ";
 
   const progressDiv = document.getElementById("deliveryProgress");
   if(total > 0 && total < 49){
-    const remaining = (49 - total).toFixed(2);
+    const remaining = parseFloat(49 - total);
     const pct = Math.min(100, (total / 49) * 100);
     progressDiv.style.display = "block";
     progressDiv.innerHTML = `
@@ -1930,7 +1930,7 @@ function searchProducts(){
       <img src="${esc(p.image)}" alt="" loading="lazy">
       <div class="search-result-info">
         <div class="search-result-name">${esc(p.name)}</div>
-        <div class="search-result-meta">${Number(p.price).toFixed(2)} ${currencySymbol} ${p.size ? ` • ${esc(p.size)}` : ""}</div>
+        <div class="search-result-meta">${parseFloat(p.price)} ${currencySymbol} ${p.size ? ` • ${esc(p.size)}` : ""}</div>
         <div class="search-result-meta">${(p.colors || []).map(c=>esc(c.name||c.colorName)).join("، ")}</div>
       </div>
     </div>
@@ -2030,9 +2030,9 @@ function reviewOrder(){
     });
   }
 
-  const itemsText = cart.map(x => `• ${x.name}${x.colorName ? ` [اللون: ${x.colorName}]` : ""} (×${x.quantity}) - ${(x.price*x.quantity).toFixed(2)} د.أ`).join("\n");
+  const itemsText = cart.map(x => `• ${x.name}${x.colorName ? ` [اللون: ${x.colorName}]` : ""} (×${x.quantity}) - ${parseFloat(x.price*x.quantity)} د.أ`).join("\n");
 
-  let msg = `🛍️ طلب جديد من متجر AMO\n\n👤 الاسم: ${c.name}\n📱 الهاتف: ${c.phone}\n📍 المحافظة: ${c.city}\n🏠 العنوان: ${c.address}\n📝 ملاحظات: ${c.notes || 'لا يوجد'}\n\nالمنتجات المطلوبة:\n${itemsText}\n\nمجموع المنتجات: ${total.toFixed(2)} د.أ\nالتوصيل: ${d === 0 ? 'مجاني' : d.toFixed(2) + ' د.أ'}\nالمجموع النهائي: ${finalTotal} د.أ`;
+  let msg = `🛍️ طلب جديد من متجر AMO\n\n👤 الاسم: ${c.name}\n📱 الهاتف: ${c.phone}\n📍 المحافظة: ${c.city}\n🏠 العنوان: ${c.address}\n📝 ملاحظات: ${c.notes || 'لا يوجد'}\n\nالمنتجات المطلوبة:\n${itemsText}\n\nمجموع المنتجات: ${parseFloat(total)} د.أ\nالتوصيل: ${d === 0 ? 'مجاني' : parseFloat(d) + ' د.أ'}\nالمجموع النهائي: ${parseFloat(finalTotal)} د.أ`;
 
   window.open(`https://wa.me/${WHATSAPP}?text=` + encodeURIComponent(msg), '_blank');
   
@@ -2042,7 +2042,7 @@ function reviewOrder(){
       <div>
         <strong style="font-size: 14px; color: #332922;">${x.name}</strong><br>
         <span style="font-size: 12px; color: #666;">
-          ${x.colorName ? `اللون: ${x.colorName} | ` : ''}الكمية: ${x.quantity} | السعر: ${(x.price * x.quantity).toFixed(2)} د.أ
+          ${x.colorName ? `اللون: ${x.colorName} | ` : ''}الكمية: ${x.quantity} | السعر: ${parseFloat(x.price * x.quantity)} د.أ
         </span>
       </div>
     </div>
