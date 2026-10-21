@@ -1018,7 +1018,6 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </header>
 
-<!-- قسم الهيرو المحدث حسب طلبك -->
 <section class="hero">
   <h1 id="heroTitle">اختاري شنطتك الفاخرة بستايلك الخاص</h1>
   <p id="heroSub">🚚 التوصيل السريع لجميع محافظات الأردن — الدفع عند الاستلام.</p>
@@ -1718,20 +1717,20 @@ function checkUrlForCategoryAndProduct() {
   }
 }
 
-/* دالة إرسال طلب المنتج مباشرة عبر الواتساب مع الرابط واللون */
+/* دالة إرسال طلب المنتج مباشرة عبر الواتساب باستخدام الرابط المباشر لكل منتج لضمان ظهور الصورة */
 function orderProductDirectlyViaWhatsApp() {
   const p = products.find(x => x.id === detailProductId);
   if (!p) return;
   
   const color = p.colors?.[detailColorIndex] || null;
   const colorName = color?.name || color?.colorName || 'غير محدد';
-  const currentUrl = window.location.href;
+  const directProductUrl = `https://amo-bags.github.io/product/${p.id}/index.html`;
 
   const message = `مرحباً، أرغب في طلب هذا المنتج:\n\n` +
                   `📌 *المنتج:* ${p.name}\n` +
                   `🎨 *اللون المختار:* ${colorName}\n` +
                   `💰 *السعر:* ${parseFloat(p.price)} د.أ\n` +
-                  `🔗 *رابط المنتج:* ${currentUrl}`;
+                  `🔗 *رابط المنتج:* ${directProductUrl}`;
 
   const whatsappUrl = `https://wa.me/${WHATSAPP}?text=` + encodeURIComponent(message);
   window.open(whatsappUrl, '_blank');
