@@ -576,6 +576,28 @@ html[dir="ltr"] .image-badge { right: auto; left: 10px; }
 }
 .add-btn:hover{ background: var(--brand-hover); box-shadow: 0 4px 12px rgba(51,41,34,0.25); }
 
+/* زر الواتساب المباشر داخل تفاصيل المنتج */
+.detail-whatsapp-btn {
+  background-color: #25d366;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 8px;
+  font-weight: 900;
+  font-size: 14px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+.detail-whatsapp-btn:hover {
+  background-color: #1ebd56;
+}
+
 .reviews-section {
   max-width: 1200px;
   margin: 50px auto 40px;
@@ -996,10 +1018,11 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
   </div>
 </header>
 
+<!-- قسم الهيرو المحدث حسب طلبك -->
 <section class="hero">
   <h1 id="heroTitle">اختاري شنطتك الفاخرة بستايلك الخاص</h1>
-  <p id="heroSub">شنط نسائية فاخرة بتصاميم أنيقة تناسب كل إطلالة</p>
-  <span class="hero-note" id="heroNote">🚚 التوصيل 2 د.أ — مجاني عند 49 د.أ فأكثر</span>
+  <p id="heroSub">🚚 التوصيل السريع لجميع محافظات الأردن — الدفع عند الاستلام.</p>
+  <span class="hero-note" id="heroNote">✨ شنط نسائية فاخرة بتصاميم أنيقة تناسب كل إطلالة</span>
 </section>
 
 <!-- شريط الفئات الديناميكي المرتبط بملف categories-data.js -->
@@ -1154,11 +1177,11 @@ const translations = {
     footerFbText: "تابعونا على فيسبوك AMO Bags",
     footerPrivacy: "سياسة الخصوصية",
     footerTerms: "الشروط والأحكام",
-    footerRefund: "سياسة الاستبدال والاسترجاع",
+    footerRefund: "سياسة الاستبدال واسترجاع",
     footerIp: "حقوق الملكية الفكرية",
     heroTitle: "اختاري شنطتك الفاخرة بستايلك الخاص",
-    heroSub: "شنط نسائية فاخرة بتصاميم أنيقة تناسب كل إطلالة",
-    heroNote: "🚚 التوصيل 2 د.أ — مجاني عند 49 د.أ فأكثر",
+    heroSub: "🚚 التوصيل السريع لجميع محافظات الأردن — الدفع عند الاستلام.",
+    heroNote: "✨ شنط نسائية فاخرة بتصاميم أنيقة تناسب كل إطلالة",
     sectionTitle: "أحدث الحقائب النسائية الفاخرة",
     sectionSub: "اضغطي على الصورة لرؤية التفاصيل الكاملة",
     loadingText: "جاري تحميل المنتجات...",
@@ -1189,8 +1212,8 @@ const translations = {
     footerRefund: "Refund Policy",
     footerIp: "Intellectual Property",
     heroTitle: "Choose Your Luxury Bag in Your Own Style",
-    heroSub: "Luxury women's bags with elegant designs for every look",
-    heroNote: "🚚 Delivery 2 JOD — Free on orders over 49 JOD",
+    heroSub: "🚚 Fast Delivery to all Jordan Governorates — Cash on Delivery.",
+    heroNote: "✨ Luxury women's bags with elegant designs for every look",
     sectionTitle: "Latest Luxury Women's Bags",
     sectionSub: "Click on image to view full details",
     loadingText: "Loading products...",
@@ -1695,6 +1718,25 @@ function checkUrlForCategoryAndProduct() {
   }
 }
 
+/* دالة إرسال طلب المنتج مباشرة عبر الواتساب مع الرابط واللون */
+function orderProductDirectlyViaWhatsApp() {
+  const p = products.find(x => x.id === detailProductId);
+  if (!p) return;
+  
+  const color = p.colors?.[detailColorIndex] || null;
+  const colorName = color?.name || color?.colorName || 'غير محدد';
+  const currentUrl = window.location.href;
+
+  const message = `مرحباً، أرغب في طلب هذا المنتج:\n\n` +
+                  `📌 *المنتج:* ${p.name}\n` +
+                  `🎨 *اللون المختار:* ${colorName}\n` +
+                  `💰 *السعر:* ${parseFloat(p.price)} د.أ\n` +
+                  `🔗 *رابط المنتج:* ${currentUrl}`;
+
+  const whatsappUrl = `https://wa.me/${WHATSAPP}?text=` + encodeURIComponent(message);
+  window.open(whatsappUrl, '_blank');
+}
+
 function renderProductDetails(){
   const p = products.find(x=>x.id===detailProductId);
   if(!p) return;
@@ -1772,6 +1814,11 @@ function renderProductDetails(){
       </div>
 
       <button class="detail-add" onclick="addDetailToCart()">أضف إلى السلة 🛒</button>
+      
+      <!-- زر الطلب المباشر عبر الواتساب -->
+      <button class="detail-whatsapp-btn" onclick="orderProductDirectlyViaWhatsApp()">
+        📲 اطلبي عبر الواتساب مباشرة
+      </button>
 
       ${reviewsHtml}
     </div>
