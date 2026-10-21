@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#332922">
-<title id="pageTitle">AMO | شنط نسائية </title>
+<title id="pageTitle">AMO | شنط نسائية فاخرة</title>
 
 <!-- Meta Pixel Code -->
 <script>
@@ -26,8 +26,8 @@ src="https://www.facebook.com/tr?id=2844053165988012&ev=PageView&noscript=1"
 
 <!-- وسوم معاينة الرابط للواتساب ومواقع التواصل -->
 <meta property="og:type" content="website">
-<meta property="og:title" id="ogTitle" content="AMO | حقائب نسائية ورجالية أنيقة">
-<meta property="og:description" id="ogDesc" content="تشكيلة مميزة من أحدث الحقائب النسائية والرجالية - توصيل سريع لجميع المحافظات">
+<meta property="og:title" id="ogTitle" content="AMO | شنط نسائية فاخرة">
+<meta property="og:description" id="ogDesc" content="تشكيلة مميزة من أحدث الحقائب النسائية الفاخرة - توصيل سريع لجميع المحافظات">
 <meta property="og:image" id="ogImage" content="https://amo-bags.github.io/logo/logo.png">
 <meta property="og:url" id="ogUrl" content="https://amo-bags.github.io/">
 
@@ -968,8 +968,8 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 </header>
 
 <section class="hero">
-  <h1 id="heroTitle">اختاري شنطتك بستايلك الخاص</h1>
-  <p id="heroSub">شنط AMO بتصاميم أنيقة تناسب كل إطلالة</p>
+  <h1 id="heroTitle">اختاري شنطتك الفاخرة بستايلك الخاص</h1>
+  <p id="heroSub">شنط نسائية فاخرة بتصاميم أنيقة تناسب كل إطلالة</p>
   <span class="hero-note" id="heroNote">🚚 التوصيل 2 د.أ — مجاني عند 49 د.أ فأكثر</span>
 </section>
 
@@ -995,7 +995,7 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 <section class="section">
   <div class="section-head">
     <div>
-      <h2 id="sectionTitleDisplay" class="section-title">أحدث الحقائب</h2>
+      <h2 id="sectionTitleDisplay" class="section-title">أحدث الحقائب النسائية الفاخرة</h2>
       <div id="sectionSubDisplay" class="section-sub">اضغطي على الصورة لرؤية التفاصيل الكاملة</div>
     </div>
   </div>
@@ -1121,16 +1121,16 @@ html[dir="ltr"] .cart.show { left: 0; right: auto; }
 <script>
 const translations = {
   ar: {
-    pageTitle: "AMO | شنط نسائية ورجالية",
+    pageTitle: "AMO | شنط نسائية فاخرة",
     footerFbText: "تابعونا على فيسبوك AMO Bags",
     footerPrivacy: "سياسة الخصوصية",
     footerTerms: "الشروط والأحكام",
     footerRefund: "سياسة الاستبدال والاسترجاع",
     footerIp: "حقوق الملكية الفكرية",
-    heroTitle: "اختاري شنطتك بستايلك الخاص",
-    heroSub: "شنط AMO بتصاميم أنيقة تناسب كل إطلالة",
+    heroTitle: "اختاري شنطتك الفاخرة بستايلك الخاص",
+    heroSub: "شنط نسائية فاخرة بتصاميم أنيقة تناسب كل إطلالة",
     heroNote: "🚚 التوصيل 2 د.أ — مجاني عند 49 د.أ فأكثر",
-    sectionTitle: "أحدث الحقائب",
+    sectionTitle: "أحدث الحقائب النسائية الفاخرة",
     sectionSub: "اضغطي على الصورة لرؤية التفاصيل الكاملة",
     loadingText: "جاري تحميل المنتجات...",
     footerText: "AMO © جميع الحقوق محفوظة",
@@ -1153,16 +1153,16 @@ const translations = {
     menuSearch: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> بحث عن منتج / Search'
   },
   en: {
-    pageTitle: "AMO | Women's & Men's Bags",
+    pageTitle: "AMO | Luxury Women's Bags",
     footerFbText: "Follow us on Facebook AMO Bags",
     footerPrivacy: "Privacy Policy",
     footerTerms: "Terms & Conditions",
     footerRefund: "Refund Policy",
     footerIp: "Intellectual Property",
-    heroTitle: "Choose Your Bag in Your Own Style",
-    heroSub: "AMO bags with elegant designs for every look",
+    heroTitle: "Choose Your Luxury Bag in Your Own Style",
+    heroSub: "Luxury women's bags with elegant designs for every look",
     heroNote: "🚚 Delivery 2 JOD — Free on orders over 49 JOD",
-    sectionTitle: "Latest Bags",
+    sectionTitle: "Latest Luxury Women's Bags",
     sectionSub: "Click on image to view full details",
     loadingText: "Loading products...",
     footerText: "AMO © All Rights Reserved",
@@ -1198,7 +1198,7 @@ function renderCategories() {
     return `
       <button class="cat-btn ${isActive}" onclick="changeCategory('${cat.id}', this)" data-cat="${cat.id}">
         <div class="cat-img-wrap">
-          <img src="${cat.img}" alt="${name}" onerror="this.src='logo/logo.jpg'">
+          <img src="${cat.img}" alt="${name}" loading="lazy" onerror="this.src='logo/logo.png'">
         </div>
         <span class="cat-label">${name}</span>
       </button>
@@ -1335,9 +1335,9 @@ function updateMetaTags(title, desc, image, url) {
 
 function resetMetaTags() {
   updateMetaTags(
-    "AMO | شنط نسائية ورجالية",
-    "تشكيلة مميزة من أحدث الحقائب النسائية والرجالية - توصيل سريع لجميع المحافظات",
-    "https://amo-bags.github.io/logo/logo.jpg",
+    "AMO | شنط نسائية فاخرة",
+    "تشكيلة مميزة من أحدث الحقائب النسائية الفاخرة - توصيل سريع لجميع المحافظات",
+    "https://amo-bags.github.io/logo/logo.png",
     "https://amo-bags.github.io/"
   );
 }
@@ -1718,7 +1718,7 @@ function renderProductDetails(){
 
     <img id="detailMainImage" class="product-detail-main" src="${esc(selectedImage)}" alt="${esc(p.name)}" onclick="openLightbox(${JSON.stringify(fullImages).replace(/"/g, '&quot;')}, ${fullImages.indexOf(selectedImage) >= 0 ? fullImages.indexOf(selectedImage) : 0})">
     <div class="detail-thumbs">
-      ${gallery.map((im,i)=>`<img src="${esc(im)}" class="${i===0?'active':''}" onclick="changeDetailImage(${i})" alt="">`).join("")}
+      ${gallery.map((im,i)=>`<img src="${esc(im)}" class="${i===0?'active':''}" onclick="changeDetailImage(${i})" alt="" loading="lazy">`).join("")}
     </div>
 
     ${videoHtml}
