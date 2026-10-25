@@ -2,7 +2,7 @@ window.AMO_CATEGORIES = [
   { id: 'all', nameAr: 'جميع الموديلات', nameEn: 'All Models', img: './products-new/41/41black.jpg' },
   { id: 'small', nameAr: 'صغير', nameEn: 'Small', img: './products-new/46/46black.jpg' },
   { id: 'medium', nameAr: 'وسط', nameEn: 'Medium', img: './products-new/9/9black.jpg' },
-  { id: 'large', nameAr: 'كبير', nameEn: 'Large', img: './products-new/10/1688_image_share_303bec7ba326dffca71c4ec70e524663.jpg' },
+  { id: 'large', nameAr: 'كبير', nameEn: 'Large', img: './products-new/10/10brown.jpg' },
   { id: 'between', nameAr: 'بين الوسط والصغير', nameEn: 'Small-Medium', img: './products-new/67/67white.png' },
   { id: 'backpack', nameAr: 'شنط على الظهر', nameEn: 'Backpacks', img: './products-new/11/1.jpg' },
   { id: 'school', nameAr: 'شنط مدرسية وروضة', nameEn: 'School & Kids', img: './products-new/98/98darkblue.jpg' },
