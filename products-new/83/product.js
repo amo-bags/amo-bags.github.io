@@ -1,7 +1,7 @@
 const product = {
   id: "83",
   name: "حقيبة نسائية أنيقة - موديل 83",
-  price: 15,
+  price: 10,
   size: "كبير",
   dimensions: "32 سم عرض × 22 سم ارتفاع",
   image: "83offwhite.png",
