@@ -4,24 +4,16 @@ const product = {
   price: 10,
   size: "صغيرة",
   dimensions: "22 سم عرض × 12 سم ارتفاع",
-  image: "101black.png",
+  image: "101gold.png",
   gallery: [
-    "101black.png",
     "101gold.png",
     "101silver.png",
-    "1011.png",
     "1012.png",
     "1013.png",
     "1014.png",
     "101inside.png"
   ],
   colors: [
-    {
-      name: "اسود",
-      colorName: "اسود",
-      value: "#000000",
-      image: "101black.png"
-    },
     {
       name: "ذهبي",
       colorName: "ذهبي",
@@ -39,4 +31,3 @@ const product = {
 
 window.AMO_PRODUCTS = window.AMO_PRODUCTS || [];
 window.AMO_PRODUCTS.push(product);
-
